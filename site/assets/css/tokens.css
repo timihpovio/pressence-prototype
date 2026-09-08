@@ -1,0 +1,49 @@
+/* tokens.css - mirrors the Elementor global styles one-to-one.
+   Elementor: Site Settings > Global Colors / Global Fonts.
+   The ONLY file allowed to contain literal hex values. */
+
+:root {
+  /* --- Global Colors ------------------------------------------------ */
+  --p-ink:    #1E1F1B;  /* Elementor Primary   | label "Ink"    | headings, logotype */
+  --p-olive:  #3A4032;  /* Elementor Secondary | label "Olive"  | footer, primary button */
+  --p-body:   #4A4C45;  /* Elementor Text      | label "Body"   | body copy */
+  --p-sage:   #D7D6CC;  /* Elementor Accent    | label "Sage"   | accent panels, active */
+  --p-ivory:  #FAF8F5;  /* custom              | label "Ivory"  | page ground, cards */
+  --p-panel:  #EEECE8;  /* custom              | label "Panel"  | secondary panels, rails */
+  --p-muted:  #71736A;  /* custom              | label "Muted"  | meta, labels, captions */
+  --p-line:   #E2DFD8;  /* custom              | label "Line"   | hairlines, field borders */
+
+  /* --- Global Fonts ------------------------------------------------- */
+  /* Elementor "Display" and "Heading" */
+  --p-font-display: "EB Garamond", Georgia, "Times New Roman", serif;
+  /* Elementor "Body" and "Label" */
+  --p-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* --- Type scale --------------------------------------------------- */
+  --p-h1: clamp(40px, 5vw, 64px);
+  --p-h2: clamp(28px, 3.2vw, 40px);
+  --p-h3: clamp(20px, 2vw, 24px);
+  --p-lead: clamp(17px, 1.4vw, 20px);
+  --p-base: 16px;
+  --p-small: 14px;
+  --p-label: 12px;
+
+  --p-lh-tight: 1.15;
+  --p-lh-heading: 1.25;
+  --p-lh-body: 1.75;
+  --p-ls-label: 0.08em;
+  --p-ls-h1: -0.01em;
+
+  /* --- Space and measure ------------------------------------------- */
+  --p-container: 1160px;
+  --p-measure: 62ch;
+  --p-panel-y: clamp(64px, 9vw, 128px);
+  --p-gutter: clamp(20px, 4vw, 40px);
+  --p-gap: clamp(24px, 3vw, 48px);
+  --p-gap-sm: 16px;
+
+  /* --- Other ------------------------------------------------------- */
+  --p-radius: 2px;
+  --p-hairline: 1px solid var(--p-line);
+  --p-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
