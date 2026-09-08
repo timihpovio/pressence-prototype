@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.className += " js";</script>
 </head>
 <body data-page="domov">
 
@@ -35,7 +36,7 @@
 
   <section class="p-panel p-panel--ivory p-panel--deco" data-el="container:statement">
     <img class="p-deco" src="assets/svg/pressence-vejica.svg" alt="" aria-hidden="true" width="320" height="340">
-    <div class="p-container p-narrow">
+    <div class="p-container p-narrow p-reveal p-statement">
       <h2>Kaj bi lahko slišali, če bi si zares dovolili prisluhniti sebi?</h2>
       <p>V vsakdanjem tempu pogosto iščemo odgovore zunaj sebe.</p>
       <p>V nasvetih. Pričakovanjih. V tem, kaj bi morali. V tem, kar smo vedno počeli.</p>
@@ -45,11 +46,11 @@
   </section>
 
   <section class="p-panel p-panel--panel" data-el="container:cards-6">
-    <div class="p-container">
+    <div class="p-container p-reveal">
       <p class="p-label">Morda ste trenutno tukaj</p>
       <h2>Nekaj v vašem življenju se premika.</h2>
       <p class="p-lead">Morda še nima imena. Morda ga že dolgo poznate.</p>
-      <div class="p-grid p-grid--3">
+      <div class="p-grid p-grid--3 p-reveal-group">
         <article class="p-card" data-el="container:card">
           <h3>Pred pomembno odločitvijo</h3>
           <p>Pred vami je več možnosti, nobena pa se ne zdi povsem jasna.</p>
@@ -79,22 +80,26 @@
   </section>
 
   <section class="p-panel p-panel--ivory" data-el="container:text-cta">
-    <div class="p-container p-narrow">
-      <p class="p-label">Kaj je coaching</p>
-      <h2>Ne gre za to, da vam nekdo pove, kaj morate narediti.</h2>
-      <p>Verjamem, da imamo ljudje v sebi pogosto več odgovorov, kot se jih zavedamo.</p>
-      <p>Včasih jih preglasijo strah, stare navade, pričakovanja okolice ali načini delovanja, ki so nam nekoč pomagali, danes pa nas morda omejujejo.</p>
-      <p>Coaching je prostor, kjer lahko to začnete opazovati.</p>
-      <p>S pogovorom, vprašanji, poslušanjem in refleksijo postopoma ustvarjava več jasnosti o tem, kaj se dogaja, kaj vas podpira, kaj vas zadržuje in kam želite naprej.</p>
-      <p><a class="p-link-arrow" href="coaching.html">Več o coachingu →</a></p>
+    <div class="p-container p-narrow p-reveal p-prose-split">
+      <div class="p-prose-split__head">
+        <p class="p-label">Kaj je coaching</p>
+        <h2>Ne gre za to, da vam nekdo pove, kaj morate narediti.</h2>
+      </div>
+      <div class="p-prose-split__body">
+        <p>Verjamem, da imamo ljudje v sebi pogosto več odgovorov, kot se jih zavedamo.</p>
+        <p>Včasih jih preglasijo strah, stare navade, pričakovanja okolice ali načini delovanja, ki so nam nekoč pomagali, danes pa nas morda omejujejo.</p>
+        <p>Coaching je prostor, kjer lahko to začnete opazovati.</p>
+        <p>S pogovorom, vprašanji, poslušanjem in refleksijo postopoma ustvarjava več jasnosti o tem, kaj se dogaja, kaj vas podpira, kaj vas zadržuje in kam želite naprej.</p>
+        <p><a class="p-link-arrow" href="coaching.html">Več o coachingu</a></p>
+      </div>
     </div>
   </section>
 
   <section class="p-panel p-panel--panel" data-el="container:cards-6">
-    <div class="p-container">
+    <div class="p-container p-reveal">
       <p class="p-label">Kaj vam lahko coaching prinese</p>
       <h2>Več zavedanja. Več izbire.</h2>
-      <div class="p-grid p-grid--3">
+      <div class="p-grid p-grid--3 p-reveal-group">
         <article class="p-card" data-el="container:card">
           <h3>Jasnejši pogled</h3>
           <p>Ko stvari izrečemo in jih pogledamo z različnih perspektiv, pogosto dobijo drugačno obliko.</p>
@@ -124,14 +129,17 @@
   </section>
 
   <section class="p-panel p-panel--ivory" data-el="container:text-list">
-    <div class="p-container p-narrow">
-      <p class="p-label">Moj način dela</p>
-      <h2>Miren prostor. Iskren pogovor. Brez potrebe po popolnih odgovorih.</h2>
-      <p>Pri coachingu mi je pomembno, da vas ne vidim samo skozi cilj ali težavo, s katero pridete.</p>
-      <p>Zanima me človek kot celota.</p>
-      <p>Vaše izkušnje. Vrednote. Prepričanja. Čustva. Odnosi. Vzorci. Način, kako sprejemate odločitve in kako ste se do danes naučili delovati v svetu.</p>
-      <p>Pri delu:</p>
-      <ul data-el="icon-list">
+    <div class="p-container p-narrow p-reveal p-prose-split">
+      <div class="p-prose-split__head">
+        <p class="p-label">Moj način dela</p>
+        <h2>Miren prostor. Iskren pogovor. Brez potrebe po popolnih odgovorih.</h2>
+      </div>
+      <div class="p-prose-split__body">
+        <p>Pri coachingu mi je pomembno, da vas ne vidim samo skozi cilj ali težavo, s katero pridete.</p>
+        <p>Zanima me človek kot celota.</p>
+        <p>Vaše izkušnje. Vrednote. Prepričanja. Čustva. Odnosi. Vzorci. Način, kako sprejemate odločitve in kako ste se do danes naučili delovati v svetu.</p>
+        <p>Pri delu:</p>
+        <ul data-el="icon-list">
         <li>poslušam brez presoje in brez hitenja k rešitvi,</li>
         <li>ostajam radovedna tudi tam, kjer odgovor ni takoj jasen,</li>
         <li>postavljam vprašanja, ki odpirajo nove perspektive,</li>
@@ -139,9 +147,10 @@
         <li>spoštujem vaš tempo in vašo edinstvenost,</li>
         <li>ne odločam namesto vas,</li>
         <li>podpiram vas, da do lastnih odgovorov pridete sami.</li>
-      </ul>
-      <p>Ker globina ne pomeni pritiska.</p>
-      <p><a class="p-link-arrow" href="coaching.html">Spoznajte moj pristop →</a></p>
+        </ul>
+        <p>Ker globina ne pomeni pritiska.</p>
+        <p><a class="p-link-arrow" href="coaching.html">Spoznajte moj pristop</a></p>
+      </div>
     </div>
   </section>
 
@@ -160,16 +169,16 @@
         <p>Delo na sebi mi je pokazalo nekaj drugega.</p>
         <p>Da sprememba pogosto ne pomeni postati nekdo drug. Včasih pomeni počasi odložiti tisto, kar nam ne služi več, da lahko pridemo bližje sebi.</p>
         <p>Ta izkušnja danes pomembno oblikuje tudi način, kako delam z ljudmi.</p>
-        <p><a class="p-link-arrow" href="o-meni.html">Več o meni →</a></p>
+        <p><a class="p-link-arrow" href="o-meni.html">Več o meni</a></p>
       </div>
     </div>
   </section>
 
   <section class="p-panel p-panel--ivory" data-el="container:steps-5">
-    <div class="p-container">
+    <div class="p-container p-reveal">
       <p class="p-label">Kako poteka</p>
       <h2>En proces. Vaš tempo.</h2>
-      <div class="p-grid p-grid--3">
+      <div class="p-grid p-grid--3 p-reveal-group">
         <article class="p-card" data-el="container:step">
           <span class="p-card__num">01</span>
           <h3>Spoznava se</h3>
@@ -196,33 +205,37 @@
           <p>Coaching ni linearna pot. Sproti preverjava, kaj potrebujete in kam se proces razvija.</p>
         </article>
       </div>
-      <p><a class="p-link-arrow" href="coaching.html">Kako coaching poteka →</a></p>
+      <p><a class="p-link-arrow" href="coaching.html">Kako coaching poteka</a></p>
     </div>
   </section>
 
   <section class="p-panel p-panel--sage" data-el="container:statement">
-    <div class="p-container p-narrow">
-      <p class="p-label">Zaupanje</p>
-      <h2>Prostor mora biti varen, da je lahko iskren.</h2>
-      <p>Zaupnost, jasni dogovori, profesionalne meje in spoštovanje vaše avtonomije so zame temelj coaching odnosa.</p>
-      <p>Moja naloga ni, da prevzamem odgovornost za vaše odločitve ali vam povem, kako morate živeti.</p>
-      <p>Moja naloga je ustvariti dovolj varen in jasen prostor, da lahko svoje odgovore začnete prepoznavati sami.</p>
-      <p>Coaching prav tako ni nadomestilo za psihoterapijo, zdravstveno obravnavo ali drugo strokovno pomoč. Če presodim, da coaching ni ustrezna oblika podpore za vašo situacijo, bom to z vami odkrito naslovila.</p>
+    <div class="p-container p-narrow p-reveal p-prose-split">
+      <div class="p-prose-split__head">
+        <p class="p-label">Zaupanje</p>
+        <h2>Prostor mora biti varen, da je lahko iskren.</h2>
+      </div>
+      <div class="p-prose-split__body">
+        <p>Zaupnost, jasni dogovori, profesionalne meje in spoštovanje vaše avtonomije so zame temelj coaching odnosa.</p>
+        <p>Moja naloga ni, da prevzamem odgovornost za vaše odločitve ali vam povem, kako morate živeti.</p>
+        <p>Moja naloga je ustvariti dovolj varen in jasen prostor, da lahko svoje odgovore začnete prepoznavati sami.</p>
+        <p>Coaching prav tako ni nadomestilo za psihoterapijo, zdravstveno obravnavo ali drugo strokovno pomoč. Če presodim, da coaching ni ustrezna oblika podpore za vašo situacijo, bom to z vami odkrito naslovila.</p>
+      </div>
     </div>
   </section>
 
   <section class="p-panel p-panel--ivory" data-el="xpro-post-grid:latest-3">
-    <div class="p-container">
+    <div class="p-container p-reveal">
       <p class="p-label">Zapisi</p>
       <h2>Misli za trenutke, ko želite pogledati nekoliko globlje.</h2>
       <p class="p-lead">Pišem o coachingu, spremembah, samozavedanju, notranjih vzorcih, odločitvah in odnosu, ki ga gradimo sami s sabo.</p>
       <p>Ne kot seznam pravil. Bolj kot povabilo k razmisleku.</p>
-      <p><a class="p-link-arrow" href="zapisi.html">Preberite zapise →</a></p>
+      <p><a class="p-link-arrow" href="zapisi.html">Preberite zapise</a></p>
     </div>
   </section>
 
   <section class="p-panel p-panel--olive" data-el="container:cta">
-    <div class="p-container p-narrow">
+    <div class="p-container p-narrow p-reveal p-statement">
       <h2>Morda ne potrebujete odgovora. Morda najprej potrebujete prostor.</h2>
       <p>Prvi pogovor je namenjen temu, da se spoznava in ugotoviva, ali vam moj način dela lahko koristi.</p>
       <p>Brez obveznosti nadaljevanja.</p>

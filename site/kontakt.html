@@ -9,13 +9,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.className += " js";</script>
 </head>
 <body data-page="kontakt">
 
 <main id="main">
 
   <section class="p-panel p-panel--panel" data-el="container:hero-form">
-    <div class="p-container p-split p-split--form">
+    <div class="p-container p-split p-split--form p-reveal">
       <div>
         <h1>Začniva s pogovorom.</h1>
         <p class="p-lead">Ni vam treba že vedeti, kaj točno potrebujete.</p>
@@ -78,17 +79,21 @@
   </section>
 
   <section class="p-panel p-panel--ivory" data-el="container:prose">
-    <div class="p-container p-narrow">
-      <p class="p-label">Uvodni pogovor</p>
-      <h2>Prvi pogovor je namenjen temu, da se spoznava.</h2>
-      <p>Poveste mi lahko, kaj vas je pripeljalo do coachinga, jaz pa vam predstavim svoj način dela.</p>
-      <p>Skupaj preveriva, ali je coaching prava oblika podpore za vas in ali si želiva nadaljevati sodelovanje.</p>
-      <p>Brez pritiska in brez obveznosti nadaljevanja.</p>
+    <div class="p-container p-narrow p-reveal p-prose-split">
+      <div class="p-prose-split__head">
+        <p class="p-label">Uvodni pogovor</p>
+        <h2>Prvi pogovor je namenjen temu, da se spoznava.</h2>
+      </div>
+      <div class="p-prose-split__body">
+        <p>Poveste mi lahko, kaj vas je pripeljalo do coachinga, jaz pa vam predstavim svoj način dela.</p>
+        <p>Skupaj preveriva, ali je coaching prava oblika podpore za vas in ali si želiva nadaljevati sodelovanje.</p>
+        <p>Brez pritiska in brez obveznosti nadaljevanja.</p>
+      </div>
     </div>
   </section>
 
   <section class="p-panel p-panel--olive" data-el="container:cta">
-    <div class="p-container p-narrow">
+    <div class="p-container p-narrow p-reveal p-statement">
       <h2>Ni treba, da je prvi korak velik.</h2>
       <p>Včasih je dovolj en pogovor, da začutite, ali je to prostor za vas.</p>
     </div>

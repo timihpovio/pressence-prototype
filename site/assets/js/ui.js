@@ -20,6 +20,47 @@
     syncNav();
   }
 
+  /* Reveal on scroll. Elements are visible by default; only the .js class,
+     set inline in <head>, hides them, so a script failure cannot blank the
+     page. Each element is unobserved once shown - this never reverses. */
+  var revealed = document.querySelectorAll(".p-reveal, .p-reveal-group");
+  if (revealed.length) {
+    if (!("IntersectionObserver" in window) ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      Array.prototype.forEach.call(revealed, function (el) { el.classList.add("is-in"); });
+    } else {
+      var showAll = function () {
+        Array.prototype.forEach.call(revealed, function (el) { el.classList.add("is-in"); });
+      };
+      var reveal = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) { return; }
+          entry.target.classList.add("is-in");
+          obs.unobserve(entry.target);
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0 });
+      Array.prototype.forEach.call(revealed, function (el) { reveal.observe(el); });
+
+      /* The negative bottom margin leaves a band at the foot of the viewport
+         that never satisfies the observer. Anything still hidden once the page
+         is scrolled out - or that was never scrollable - is shown outright, so
+         no content can end up permanently invisible. */
+      var atBottom = function () {
+        return window.innerHeight + window.pageYOffset >=
+               document.documentElement.scrollHeight - 4;
+      };
+      if (document.documentElement.scrollHeight <= window.innerHeight + 4) {
+        showAll();
+      } else {
+        window.addEventListener("scroll", function onScroll() {
+          if (!atBottom()) { return; }
+          showAll();
+          window.removeEventListener("scroll", onScroll);
+        }, { passive: true });
+      }
+    }
+  }
+
   /* Section rail: mark the entry whose section is currently in view. */
   var rail = document.querySelector("[data-rail]");
   if (rail && "IntersectionObserver" in window) {

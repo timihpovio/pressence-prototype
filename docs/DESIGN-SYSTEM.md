@@ -61,6 +61,8 @@ Advance Accordion.
 | `<section class="p-hero">` | Elementor container, full width, min-height set, background image positioned right with a left-to-right gradient overlay in the band tint |
 | `<section class="p-panel">` | Elementor container, flex, full width |
 | `<div class="p-container">` | Elementor container, boxed, 1160px |
+| `.p-prose-split` | boxed container, **two columns** — heading column then body column |
+| `.p-statement` | boxed container, one column, the larger heading size |
 | `h1`–`h4` | core `heading` |
 | `<p>` | core `text-editor` |
 | `<ul data-el="icon-list">` | core `icon-list` |
@@ -90,6 +92,12 @@ via the widget's Advanced → CSS Classes field.
 | `p-rail-layout` | the tinted rail column that bleeds off the left page edge (`calc(50% - 50vw)`), and `overflow-x: clip` so the bleed is trimmed without breaking `position: sticky` |
 | `p-rail a[aria-current]` | the active rail row, whose lighter band is painted into the bleed with `box-shadow: -100vw` |
 | `p-narrow` | caps the prose measure **inside** the container; it must not re-centre the block, because every panel in the mockup hangs off the same left edge as the hero |
+| `p-prose-split` | the two-column grid and its `860px` collapse |
+| `p-statement` | the enlarged heading and lead-size body of the short beats |
+| `p-label` | the short rule before an eyebrow |
+| `p-card` | the top rule that replaced the box |
+| `p-post__frame` | `overflow: hidden`, so the image can scale inside it on hover |
+| `p-reveal`, `p-reveal-group` | the reveal-on-scroll states and the `nth-child` stagger |
 | `p-todo` | dashed placeholder block, remove before launch |
 | type scale | the `clamp()` values above, if Elementor's own responsive controls prove too coarse |
 
@@ -132,3 +140,63 @@ live in `tokens.css` as `--p-cream-rgb`, `--p-sage-rgb` and `--p-panel-rgb`.
 In Elementor: one full-width container, min-height set, the photo as the container background
 positioned `right center` with `background-size: cover`, and the gradient as a second
 background layer above it.
+
+## Motion and interaction
+
+Two layers, and they are independent. **The static design carries the page on its own** — if
+the motion layer is never built, nothing looks broken or unfinished.
+
+### Layer 1 — hover and state, pure CSS
+
+All of it lives in the global stylesheet and keys off classes that are already on the
+elements. **Nothing has to be set per widget.** Timings come from the `--p-dur` /
+`--p-dur-slow` / `--p-ease` tokens.
+
+| Element | On hover / focus |
+|---|---|
+| `.p-nav a` | underline grows from the left |
+| `.p-link-arrow` | arrow slides 5px right; the arrow itself is a CSS `::after`, so the link's own text stays clean copy |
+| `.p-btn` | background `Olive` → `Ink` |
+| `.p-btn--ghost` | fills to `Ivory` with `Ink` text |
+| `.p-post` | lifts 3px, border → `Muted`, image scales 1.04 inside `.p-post__frame`, title underlines |
+| `.p-filter button` | underline scales in from the left |
+| `.p-faq summary` | one glyph rotates 135° — a plus becoming a cross — rather than swapping `+` for `−` |
+| `.p-field input`, `textarea` | border → `Muted` |
+| `.p-rail a` | colour → `Ink` |
+
+### Layer 2 — reveal on scroll
+
+**Build this with Elementor's own Entrance Animation.** It is in the free tier
+(Advanced → Motion Effects → Entrance Animation; only Scrolling Effects, Mouse Effects and
+Sticky in that panel are Pro). No custom code:
+
+| Prototype | Elementor |
+|---|---|
+| `.p-reveal` on a container | Entrance Animation `Fade In Up`, Duration `Slow` |
+| `.p-reveal-group` on a grid | the same on each child, Animation Delay stepped **80ms** per item — 0, 80, 160, 240… |
+| `.p-hero__text` children | the same, delays 50 / 150 / 250 / 350 / 450ms |
+
+The prototype reproduces this with a class and a short `IntersectionObserver` in `ui.js`,
+because a static file has no Elementor. If you would rather keep that script than use
+Elementor's setting, note two things it does deliberately:
+
+- **The hidden state is scoped to `.js`**, which an inline snippet in `<head>` sets before
+  first paint. Without JavaScript every element is simply visible — a script failure can
+  never blank a page.
+- **Anything still hidden once the reader reaches the foot of the document is shown
+  outright.** The observer's negative bottom margin leaves a band at the bottom of the
+  viewport that never triggers, and without this a short page's last section would stay
+  invisible for good.
+
+### Reduced motion
+
+`@media (prefers-reduced-motion: reduce)` reduces every duration and delay to nothing and
+forces the revealed state on. Elementor does not do this for its own animations, so **keep
+that block in the global stylesheet even if Layer 2 is built with Entrance Animation.**
+
+### One thing to watch
+
+The reveal animates the independent `translate` property, not `transform`. Its resting state
+(`translate: none`) would otherwise out-specify hover rules that use `transform` — such as
+`.p-post`'s lift — and silently cancel them. If you add a hover transform to anything inside
+a `.p-reveal`, use `transform` and leave `translate` to the reveal.

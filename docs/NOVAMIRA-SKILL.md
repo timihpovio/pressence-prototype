@@ -26,7 +26,12 @@ Load this before asking Novamira to build any Pressence page.
 | Analytics | Google Site Kit |
 
 **Forbidden:** any Elementor Pro widget, Xpro's Advance Accordion (Pro), per-element Custom
-CSS (Pro), Elementor sticky and other motion effects (Pro).
+CSS (Pro), Elementor's Sticky, Scrolling Effects and Mouse Effects (all Pro).
+
+**Allowed, and used by the design:** Advanced → Motion Effects → **Entrance Animation** is in
+the free tier, and is how the reveal-on-scroll layer should be built. See *Motion and
+interaction* in `docs/DESIGN-SYSTEM.md`. Everything else — every hover and transition — is
+plain CSS in the global stylesheet and needs no per-widget setting at all.
 
 ## Rules
 
@@ -39,15 +44,17 @@ CSS (Pro), Elementor sticky and other motion effects (Pro).
    and 37 are already wired into Xpro Theme Builder and already carry the sticky header.
 4. **Preserve every existing URL.** The slug table in `docs/DESIGN-SYSTEM.md` is
    authoritative. WordPress must not mint new slugs.
-5. **Hand-written CSS goes in one global stylesheet** (Appearance → Customize → Additional
+5. **Copy carries no decoration.** The arrow on "Več o coachingu" and "Preberi zapis" is
+   drawn by CSS from the `p-link-arrow` class. Do not type `→` into a widget.
+6. **Hand-written CSS goes in one global stylesheet** (Appearance → Customize → Additional
    CSS), with the class applied via each widget's Advanced → CSS Classes field. The classes
    needing CSS are listed in `docs/DESIGN-SYSTEM.md`.
-6. **Never emit a `{{TOKEN}}` placeholder.** Seventeen of them are live on production right
+7. **Never emit a `{{TOKEN}}` placeholder.** Seventeen of them are live on production right
    now. If a real value is unknown, leave the element out and record it in
    `docs/LAUNCH-BLOCKERS.md` — do not ship the token.
-7. **Female verb forms throughout.** `naslovila`, `verjamem`, `pozorna sem`. The live site's
+8. **Female verb forms throughout.** `naslovila`, `verjamem`, `pozorna sem`. The live site's
    neutral underscore forms (`povedal_a`) are wrong and must not be reproduced.
-8. **Copy is final.** Take it verbatim from the prototype HTML. Do not paraphrase,
+9. **Copy is final.** Take it verbatim from the prototype HTML. Do not paraphrase,
    re-order, or "improve" the Slovenian.
 
 ## Build order
@@ -69,17 +76,17 @@ The `data-el` values used across the prototype, and what each means:
 
 | `data-el` | Build as |
 |---|---|
-| `container:hero` | full-width container, two columns, text left, bleeding image right |
-| `container:statement` | boxed container, single narrow column, heading plus paragraphs |
-| `container:prose` | as statement, longer body |
+| `container:hero` | full-width band, min-height set, copy left, photo as a background positioned right with a gradient in the band tint over it. See *Hero bands* in `docs/DESIGN-SYSTEM.md` |
+| `container:statement` | boxed container. **Two columns** (`.p-prose-split`) when the prototype markup has a `__head` and a `__body` div; one column with the enlarged `.p-statement` heading when it does not |
+| `container:prose` | always the two-column `.p-prose-split`: eyebrow and heading left, body right |
 | `container:cards-N` | boxed container, three-column grid of `container:card` |
-| `container:card` | inner container, `Line` border, `Ivory` background |
-| `container:step` | as card, with an `01`-style `Label` number above the heading |
+| `container:card` | inner container, **no border, no background**, a 2px `Line` rule on top only |
+| `container:step` | as card, with the step number above the heading in the `Display` font at `clamp(34px, 3.4vw, 46px)`, coloured `Sage` — not a small `Label` |
 | `container:compare` | two-column grid, each column an `icon-list` with hairline rows |
 | `container:rail-content` | two columns, 220px sticky anchor nav plus body |
-| `container:cta` | full-width container, `Olive` background, `Ivory` text, ghost button |
+| `container:cta` | full-width container, `Olive` background, `Ivory` text, ghost button, `.p-statement` heading size |
 | `container:split-form` | two columns, contact details left, WPForms right |
-| `container:article-hero` | breadcrumb, `h1`, date, then a full-bleed 21:9 image |
+| `container:article-hero` | the same band as `container:hero`, carrying breadcrumb, `h1` and date |
 | `container:article-body` | two columns, body plus a 280px sticky sidebar |
 | `container:legal` | boxed narrow container, prose only |
 | `elementor-core:accordion` | core Accordion, one item per `<details>` |

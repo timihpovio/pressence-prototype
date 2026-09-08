@@ -55,4 +55,12 @@
   --p-radius: 2px;
   --p-hairline: 1px solid var(--p-line);
   --p-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* --- Motion -------------------------------------------------------
+     Elementor free carries Entrance Animation but not the Pro motion
+     effects, so every value here is also reachable from plain CSS. */
+  --p-dur: 0.28s;        /* hover and state changes */
+  --p-dur-slow: 0.72s;   /* entrances */
+  --p-rise: 18px;        /* how far a revealed element travels */
+  --p-stagger: 80ms;     /* delay between siblings in a group */
 }
