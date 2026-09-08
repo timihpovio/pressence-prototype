@@ -74,7 +74,7 @@ Dates for the three cards visible in the mockup (18. maj, 5. maj, 22. april 2024
 - Create: `source/copy.txt`
 - Create: `tests/check_site.py`
 
-- [ ] **Step 1: Extract the copy from the docx**
+- [x] **Step 1: Extract the copy from the docx**
 
 ```bash
 mkdir -p /tmp/pressence-docx && \
@@ -90,13 +90,13 @@ io.open('source/copy.txt', 'w', encoding='utf-8').write(html.unescape(x))
 "
 ```
 
-- [ ] **Step 2: Verify the extraction**
+- [x] **Step 2: Verify the extraction**
 
 Run: `wc -l source/copy.txt && grep -c '^' source/copy.txt && grep -n '^DOMOV$\|^COACHING$\|^O MENI$\|^ZAPISI$\|^KONTAKT$\|^FOOTER$' source/copy.txt`
 
 Expected: 394 lines, and six page headings found at lines 1, 133, 232, 306 and beyond. These headings are the anchors every later task refers to.
 
-- [ ] **Step 3: Write the failing checker**
+- [x] **Step 3: Write the failing checker**
 
 Create `tests/check_site.py`. Python 3.9 — do not use `list[str]` or `match` syntax.
 
@@ -322,12 +322,12 @@ if __name__ == "__main__":
     sys.exit(main())
 ```
 
-- [ ] **Step 4: Run the checker to verify it fails**
+- [x] **Step 4: Run the checker to verify it fails**
 
 Run: `python3 tests/check_site.py`
 Expected: exit 1, printing `FAIL site/ does not exist`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add source/copy.txt tests/check_site.py
@@ -347,7 +347,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 **Files:**
 - Create: `site/assets/css/tokens.css`
 
-- [ ] **Step 1: Write the token file**
+- [x] **Step 1: Write the token file**
 
 Every comment records the Elementor global this value becomes. This file is the read-off for `docs/DESIGN-SYSTEM.md` and the only file permitted to contain a literal hex colour.
 
@@ -403,7 +403,7 @@ Every comment records the Elementor global this value becomes. This file is the 
 }
 ```
 
-- [ ] **Step 2: Verify every token is used at least once later**
+- [x] **Step 2: Verify every token is used at least once later**
 
 This is checked at the end, in Task 14. For now confirm the file parses:
 
@@ -418,7 +418,7 @@ print('ok')
 
 Expected: `31 tokens` then `ok`.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add site/assets/css/tokens.css
@@ -440,7 +440,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 - Create: `site/assets/js/chrome.js`
 - Create: `site/assets/js/ui.js`
 
-- [ ] **Step 1: Write `site.css`**
+- [x] **Step 1: Write `site.css`**
 
 Panels, container, type, buttons, header, footer. No literal colours — the checker enforces this.
 
@@ -598,7 +598,7 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
 }
 ```
 
-- [ ] **Step 2: Write `chrome.js`**
+- [x] **Step 2: Write `chrome.js`**
 
 One nav structure, path-aware through `data-root` on `<html>`. Uses `document.write`-free DOM insertion and runs on `file://` because it is a local `<script src>`, not a `fetch`.
 
@@ -672,7 +672,7 @@ One nav structure, path-aware through `data-root` on `<html>`. Uses `document.wr
 })();
 ```
 
-- [ ] **Step 3: Write `ui.js`**
+- [x] **Step 3: Write `ui.js`**
 
 ```javascript
 /* ui.js - mobile nav toggle and the Zapisi category filter.
@@ -715,12 +715,12 @@ One nav structure, path-aware through `data-root` on `<html>`. Uses `document.wr
 })();
 ```
 
-- [ ] **Step 4: Verify the JS parses**
+- [x] **Step 4: Verify the JS parses**
 
 Run: `node --check site/assets/js/chrome.js && node --check site/assets/js/ui.js && echo "js ok"`
 Expected: `js ok`
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add site/assets/css/site.css site/assets/js/chrome.js site/assets/js/ui.js
@@ -740,7 +740,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 **Files:**
 - Create: `site/index.html`
 
-- [ ] **Step 1: Write the page shell with the hero section**
+- [x] **Step 1: Write the page shell with the hero section**
 
 This shell is the template every later page copies. Note `data-root="./"`, `data-page`, the `#main` target for the skip link, and `data-el` on the section.
 
@@ -790,17 +790,17 @@ Copy source: `source/copy.txt`, section `DOMOV` → `Hero`.
 </html>
 ```
 
-- [ ] **Step 2: Run the checker to see it fail on the missing image and pages**
+- [x] **Step 2: Run the checker to see it fail on the missing image and pages**
 
 Run: `python3 tests/check_site.py`
 Expected: exit 1. Failures include `pages_exist: missing coaching.html` (and the other twelve) plus `links_resolve: index.html -> assets/img/hero-oljka.jpg`. The image arrives in Task 11; the pages in Tasks 5–10.
 
-- [ ] **Step 3: Open the page and confirm the chrome renders**
+- [x] **Step 3: Open the page and confirm the chrome renders**
 
 Run: `open site/index.html`
 Expected: sticky ivory header with the `Pressence` logotype left and five nav links right, `Domov` in a heavier weight; the hero heading in EB Garamond; a broken-image box where the photo will go; the deep olive footer with logotype, nav, legal links and the psychotherapy disclaimer.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add site/index.html
@@ -822,7 +822,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 
 Copy source: `source/copy.txt`, section `DOMOV`, subsections in this order: `Uvodno vprašanje`, `Morda ste trenutno tukaj`, `Kaj je coaching`, `Kaj vam lahko coaching prinese`, `Moj način dela`, `O meni – kratka predstavitev`, `Kako poteka`, `Zaupanje`, `Zapisi`, `Zaključni CTA`. Use the Slovenian text **verbatim** — it is final copy, not a draft.
 
-- [ ] **Step 1: Add the Uvodno vprašanje and Morda ste trenutno tukaj sections**
+- [x] **Step 1: Add the Uvodno vprašanje and Morda ste trenutno tukaj sections**
 
 Insert after the hero `</section>`. The six cards are the six situations in the copy; the first is shown in full, and the remaining five follow the identical pattern with their own heading and paragraph from the copy doc.
 
@@ -857,7 +857,7 @@ Insert after the hero `</section>`. The six cards are the six situations in the 
   </section>
 ```
 
-- [ ] **Step 2: Add Kaj je coaching and Kaj vam lahko coaching prinese**
+- [x] **Step 2: Add Kaj je coaching and Kaj vam lahko coaching prinese**
 
 ```html
   <section class="p-panel p-panel--ivory" data-el="container:text-cta">
@@ -888,7 +888,7 @@ Insert after the hero `</section>`. The six cards are the six situations in the 
   </section>
 ```
 
-- [ ] **Step 3: Add Moj način dela and the short O meni**
+- [x] **Step 3: Add Moj način dela and the short O meni**
 
 The seven working principles are the `icon-list` widget. The O meni panel carries the portrait.
 
@@ -936,7 +936,7 @@ The seven working principles are the `icon-list` widget. The O meni panel carrie
   </section>
 ```
 
-- [ ] **Step 4: Add Kako poteka, Zaupanje, Zapisi and the closing CTA**
+- [x] **Step 4: Add Kako poteka, Zaupanje, Zapisi and the closing CTA**
 
 ```html
   <section class="p-panel p-panel--ivory" data-el="container:steps-5">
@@ -987,12 +987,12 @@ The seven working principles are the `icon-list` widget. The O meni panel carrie
   </section>
 ```
 
-- [ ] **Step 5: Verify heading order and section coverage**
+- [x] **Step 5: Verify heading order and section coverage**
 
 Run: `python3 tests/check_site.py 2>&1 | grep -E "heading_order|sections_have_data_el" || echo "heading order and data-el clean"`
 Expected: `heading order and data-el clean`
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add site/index.html
@@ -1013,7 +1013,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 
 Copy source: `source/copy.txt`, section `COACHING`. The FAQ, Oblike and Praktično sections are **not** in the copy doc — they are rewritten from the live site's `/coaching/` page in the copy doc's warmer voice, per the spec.
 
-- [ ] **Step 1: Create the page with hero and the sticky side-rail layout**
+- [x] **Step 1: Create the page with hero and the sticky side-rail layout**
 
 Add this rule to `site/assets/css/site.css` first — the side-rail cannot use Elementor's Pro sticky effect, so it is `position: sticky` from the global stylesheet:
 
@@ -1101,7 +1101,7 @@ Then the page. Shell identical to `index.html` except `data-page="coaching"`, it
 </html>
 ```
 
-- [ ] **Step 2: Add Moja filozofija, Kaj coaching ni, Kako delam, Prisotnost**
+- [x] **Step 2: Add Moja filozofija, Kaj coaching ni, Kako delam, Prisotnost**
 
 Insert these panels before `</main>`. `Kaj coaching ni` uses the two-column comparison restored from the live site rather than the copy doc's flat list.
 
@@ -1196,7 +1196,7 @@ Add to `site.css`:
   </section>
 ```
 
-- [ ] **Step 3: Add Potek sodelovanja and the restored Oblike sodelovanja**
+- [x] **Step 3: Add Potek sodelovanja and the restored Oblike sodelovanja**
 
 `Potek` is verbatim from the copy doc. `Oblike` is restored, with **no prices** — the copy doc's position is that investment is discussed in the intro call, and the live site's `{{CENA_PLACEHOLDER}}` must not reappear.
 
@@ -1250,7 +1250,7 @@ Add to `site.css`:
   </section>
 ```
 
-- [ ] **Step 4: Add the restored Praktično section**
+- [x] **Step 4: Add the restored Praktično section**
 
 Seven items. Every one carries a real answer — no `{{TRAJANJE}}`-style placeholders, which the checker enforces.
 
@@ -1293,7 +1293,7 @@ Seven items. Every one carries a real answer — no `{{TRAJANJE}}`-style placeho
   </section>
 ```
 
-- [ ] **Step 5: Add the FAQ using native `<details>`**
+- [x] **Step 5: Add the FAQ using native `<details>`**
 
 Native `<details>` is keyboard accessible with zero JavaScript and maps to Elementor's free core Accordion widget. Xpro's Advance Accordion is Pro and must not be used.
 
@@ -1368,7 +1368,7 @@ Add to `site.css`:
   </section>
 ```
 
-- [ ] **Step 6: Add Etičnost in zaupnost and the CTA**
+- [x] **Step 6: Add Etičnost in zaupnost and the CTA**
 
 ```html
   <section class="p-panel p-panel--sage" data-el="container:statement">
@@ -1393,7 +1393,7 @@ Add to `site.css`:
   </section>
 ```
 
-- [ ] **Step 7: Verify the anchor links all resolve**
+- [x] **Step 7: Verify the anchor links all resolve**
 
 Run: `python3 -c "
 import io,re
@@ -1406,7 +1406,7 @@ assert not missing
 "`
 Expected: `missing targets: none`
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add site/coaching.html site/assets/css/site.css
@@ -1432,7 +1432,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 
 Copy source: `source/copy.txt`, section `O MENI`, all subsections verbatim: `Hero`, `Moja zgodba`, `Ko začneš drugače gledati nase`, `Sprememba, ki ni postajanje nekdo drug`, `Zakaj coaching`, `Kako želim biti ob klientu`, `Nekaj, v kar verjamem`, `CTA`.
 
-- [ ] **Step 1: Create the page with hero and portrait**
+- [x] **Step 1: Create the page with hero and portrait**
 
 Shell identical to `index.html`, with `data-page="o-meni"`.
 
@@ -1486,7 +1486,7 @@ Shell identical to `index.html`, with `data-page="o-meni"`.
 </html>
 ```
 
-- [ ] **Step 2: Add the three narrative sections**
+- [x] **Step 2: Add the three narrative sections**
 
 ```html
   <section class="p-panel p-panel--ivory" data-el="container:prose">
@@ -1525,7 +1525,7 @@ Shell identical to `index.html`, with `data-page="o-meni"`.
   </section>
 ```
 
-- [ ] **Step 3: Add Kako želim biti ob klientu and Nekaj, v kar verjamem**
+- [x] **Step 3: Add Kako želim biti ob klientu and Nekaj, v kar verjamem**
 
 The five qualities are cards; the closing belief is a serif statement block.
 
@@ -1581,12 +1581,12 @@ The five qualities are cards; the closing belief is a serif statement block.
   </section>
 ```
 
-- [ ] **Step 4: Verify the page**
+- [x] **Step 4: Verify the page**
 
 Run: `python3 tests/check_site.py 2>&1 | grep "o-meni" || echo "o-meni clean"`
 Expected: only `links_resolve` failures for the two not-yet-downloaded images, or `o-meni clean`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add site/o-meni.html
@@ -1606,7 +1606,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 - Create: `site/zapisi.html`
 - Modify: `site/assets/css/site.css`
 
-- [ ] **Step 1: Add the filter and card CSS**
+- [x] **Step 1: Add the filter and card CSS**
 
 ```css
 .p-filter { display: flex; flex-wrap: wrap; gap: clamp(12px, 2vw, 28px); border-bottom: var(--p-hairline); padding-bottom: 14px; margin-bottom: var(--p-gap); }
@@ -1624,7 +1624,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 .p-post__body .p-link-arrow { margin-top: auto; align-self: flex-start; }
 ```
 
-- [ ] **Step 2: Create the page**
+- [x] **Step 2: Create the page**
 
 Card order matches the mockup: the three visible cards first. Every card carries `data-cat` for the filter, matching the category names in the filter buttons.
 
@@ -1753,7 +1753,7 @@ Card order matches the mockup: the three visible cards first. Every card carries
 
 Note: `Samozavedanje` has no article among the six, so that tab correctly filters to nothing. Record this in Task 14's handoff notes — it is expected, not a bug, and resolves when real posts exist.
 
-- [ ] **Step 3: Verify every filter category is either used or knowingly empty**
+- [x] **Step 3: Verify every filter category is either used or knowingly empty**
 
 Run: `python3 -c "
 import io,re
@@ -1768,7 +1768,7 @@ assert used<=cats, 'a post uses a category with no tab'
 
 Expected: `empty tabs (expected: samozavedanje): ['samozavedanje']` and no assertion error.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add site/zapisi.html site/assets/css/site.css
@@ -1790,7 +1790,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 - Create: `site/zapisi/ni-vam-treba-takoj-vedeti-kaj-sledi.html`
 - Modify: `site/assets/css/site.css`
 
-- [ ] **Step 1: Add article CSS**
+- [x] **Step 1: Add article CSS**
 
 ```css
 .p-article { display: grid; gap: var(--p-gap); grid-template-columns: 1fr 280px; align-items: start; }
@@ -1808,7 +1808,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 @media (max-width: 860px) { .p-article { grid-template-columns: 1fr; } .p-aside { position: static; } }
 ```
 
-- [ ] **Step 2: Create the article**
+- [x] **Step 2: Create the article**
 
 Note `data-root="../"` — this page is one directory deeper, and `chrome.js` reads that attribute to build correct links. The body follows the copy doc's `PREDLOGA POSAMEZNEGA BLOG ZAPISA` structure: teaser, two intermediate headings, a `Nekaj za razmislek` close, and a final reflective question.
 
@@ -1905,17 +1905,17 @@ Note `data-root="../"` — this page is one directory deeper, and `chrome.js` re
 </html>
 ```
 
-- [ ] **Step 3: Verify the deeper path resolves**
+- [x] **Step 3: Verify the deeper path resolves**
 
 Run: `python3 tests/check_site.py 2>&1 | grep -E "chrome_included|head_metadata" | grep zapisi/ || echo "article paths clean"`
 Expected: `article paths clean` — confirming `data-root="../"` is set and `chrome.js` is found at the deeper path.
 
-- [ ] **Step 4: Open and confirm the chrome links work from one level down**
+- [x] **Step 4: Open and confirm the chrome links work from one level down**
 
 Run: `open site/zapisi/ni-vam-treba-takoj-vedeti-kaj-sledi.html`
 Expected: header and footer render identically to the top-level pages, and clicking `Domov` in either navigates up to `index.html` rather than 404ing.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add site/zapisi/ni-vam-treba-takoj-vedeti-kaj-sledi.html site/assets/css/site.css
@@ -1941,7 +1941,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 
 Each stub carries the real title, category, date, hero image and the teaser from the copy doc, then a visibly marked placeholder body. The body is **not** invented — the copy doc gives no body text for these, and inventing her personal reflections would be rewritten anyway.
 
-- [ ] **Step 1: Add placeholder-body CSS**
+- [x] **Step 1: Add placeholder-body CSS**
 
 ```css
 .p-todo {
@@ -1961,7 +1961,7 @@ Each stub carries the real title, category, date, hero image and the teaser from
 }
 ```
 
-- [ ] **Step 2: Create the first stub in full**
+- [x] **Step 2: Create the first stub in full**
 
 ```html
 <!doctype html>
@@ -2031,7 +2031,7 @@ Each stub carries the real title, category, date, hero image and the teaser from
 </html>
 ```
 
-- [ ] **Step 3: Create the remaining four stubs**
+- [x] **Step 3: Create the remaining four stubs**
 
 Identical structure to Step 2. Substitute per article — every value below comes from the copy doc's `Predlagani prvi članki`, verbatim:
 
@@ -2062,12 +2062,12 @@ Identical structure to Step 2. Substitute per article — every value below come
 
 Each keeps the same `p-todo` placeholder block, the same `p-aside` with its own category, and the same closing CTA. Update the `mailto:` subject to the article's own title, URL-encoded.
 
-- [ ] **Step 4: Verify all six articles exist and every index link resolves**
+- [x] **Step 4: Verify all six articles exist and every index link resolves**
 
 Run: `python3 tests/check_site.py 2>&1 | grep -E "pages_exist|links_resolve.*zapisi" || echo "all article links resolve"`
 Expected: only `links_resolve` failures naming files under `assets/img/`, which Task 11 supplies.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add site/zapisi/ site/assets/css/site.css
@@ -2090,7 +2090,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 
 Copy source: `source/copy.txt`, section `KONTAKT`. Per the spec, the form is the mockup's three fields **plus a GDPR consent checkbox**, which is a legal requirement rather than a design choice.
 
-- [ ] **Step 1: Add form CSS**
+- [x] **Step 1: Add form CSS**
 
 ```css
 .p-form { background: var(--p-ivory); border: var(--p-hairline); padding: var(--p-gap); }
@@ -2113,7 +2113,7 @@ Copy source: `source/copy.txt`, section `KONTAKT`. Per the spec, the form is the
 .p-contact-list p { margin: 0; color: var(--p-muted); }
 ```
 
-- [ ] **Step 2: Create the page**
+- [x] **Step 2: Create the page**
 
 The email address is `info@pressence.si`, taken from the mockup. The live site's `hello@pressence.example` and fake phone number must not appear — see `docs/LAUNCH-BLOCKERS.md`. No phone number is shown, because we do not have a real one.
 
@@ -2210,7 +2210,7 @@ The email address is `info@pressence.si`, taken from the mockup. The live site's
 </html>
 ```
 
-- [ ] **Step 3: Verify every form control has a label**
+- [x] **Step 3: Verify every form control has a label**
 
 Run: `python3 -c "
 import io,re
@@ -2223,7 +2223,7 @@ print('every control is labelled')
 "`
 Expected: `every control is labelled`
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add site/kontakt.html site/assets/css/site.css
@@ -2248,7 +2248,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 
 These are prototype scaffolds, not legal advice. Each carries the real structure and headings so the layout is approvable, with body text visibly marked as requiring the client's own legal copy.
 
-- [ ] **Step 1: Create `politika-zasebnosti.html`**
+- [x] **Step 1: Create `politika-zasebnosti.html`**
 
 ```html
 <!doctype html>
@@ -2294,7 +2294,7 @@ These are prototype scaffolds, not legal advice. Each carries the real structure
 </html>
 ```
 
-- [ ] **Step 2: Create `politika-piskotkov.html`**
+- [x] **Step 2: Create `politika-piskotkov.html`**
 
 Identical shell, `<title>Politika piškotkov — Pressence</title>`, meta description `Kateri piškotki se uporabljajo na spletni strani Pressence in kako jih lahko upravljate.`, `<h1>Politika piškotkov</h1>`, lead `Kateri piškotki se uporabljajo na tej strani in kako jih lahko upravljate.`, the same `p-todo` block, and these headings:
 
@@ -2308,7 +2308,7 @@ Identical shell, `<title>Politika piškotkov — Pressence</title>`, meta descri
 
 Note for the build: Google Site Kit is installed on the live site, so analytics cookies are in use and this page cannot stay empty at launch.
 
-- [ ] **Step 3: Create `pravno-obvestilo.html`**
+- [x] **Step 3: Create `pravno-obvestilo.html`**
 
 Identical shell, `<title>Pravno obvestilo — Pressence</title>`, meta description `Pogoji uporabe spletne strani Pressence, omejitev odgovornosti in avtorske pravice.`, `<h1>Pravno obvestilo</h1>`, lead `Pogoji uporabe te spletne strani.`, the same `p-todo` block, and these headings:
 
@@ -2322,12 +2322,12 @@ Identical shell, `<title>Pravno obvestilo — Pressence</title>`, meta descripti
 
 Under `Narava coaching storitve`, include this sentence in the placeholder note, because it repeats the disclaimer already committed to in the footer and the Zaupanje section: `Coaching ni nadomestilo za psihoterapijo, zdravstveno obravnavo ali drugo ustrezno strokovno pomoč.`
 
-- [ ] **Step 4: Verify all fourteen pages now exist**
+- [x] **Step 4: Verify all fourteen pages now exist**
 
 Run: `python3 tests/check_site.py 2>&1 | grep pages_exist || echo "all 14 pages present"`
 Expected: `all 14 pages present`
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add site/politika-zasebnosti.html site/politika-piskotkov.html site/pravno-obvestilo.html
@@ -2349,13 +2349,13 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 - Create: `site/assets/svg/pressence-znak.svg`, `pressence-korenina.svg`, `pressence-korenina-zbir.svg`, `pressence-letnice.svg`
 - Create: `docs/ASSETS.md`
 
-- [ ] **Step 1: List every image slot the pages reference**
+- [x] **Step 1: List every image slot the pages reference**
 
 Run: `grep -rho 'assets/img/[a-z0-9-]*\.jpg' site/ | sed 's|.*/||' | sort -u`
 
 Expected, seventeen filenames: `hero-oljka.jpg`, `portret-hero.jpg`, `portret-o-meni.jpg`, `skodelica-lan.jpg`, `vaza-susene-roze.jpg`, `zapis-01.jpg`, `zapis-01-hero.jpg`, `zapis-02.jpg`, `zapis-02-hero.jpg`, `zapis-03.jpg`, `zapis-03-hero.jpg`, `zapis-04.jpg`, `zapis-04-hero.jpg`, `zapis-05.jpg`, `zapis-05-hero.jpg`, `zapis-06.jpg`, `zapis-06-hero.jpg`. Use this command's actual output as the authoritative list rather than this prose.
 
-- [ ] **Step 2: Source each photo from Unsplash**
+- [x] **Step 2: Source each photo from Unsplash**
 
 For each slot, read its `data-brief` attribute out of the HTML — that attribute is the search brief:
 
@@ -2375,7 +2375,7 @@ Requirements for each download:
 - The Unsplash licence permits free commercial use without attribution; record photographer and photo URL in `docs/ASSETS.md` anyway, so a future swap or licence question is answerable.
 - If a photo cannot be found matching a brief, pick the nearest match from the same search and note the divergence in `docs/ASSETS.md`. Do not leave a slot empty — the checker fails on unresolved links.
 
-- [ ] **Step 3: Verify every slot is filled and sized sanely**
+- [x] **Step 3: Verify every slot is filled and sized sanely**
 
 Run:
 ```bash
@@ -2391,7 +2391,7 @@ file site/assets/img/*.jpg | grep -cv "JPEG image data" || echo "all files are r
 ```
 Expected: the image count matching Step 1's list, `over 400KB: none`, and `all files are real JPEGs`.
 
-- [ ] **Step 4: Recolour the four brand SVGs for the ivory palette**
+- [x] **Step 4: Recolour the four brand SVGs for the ivory palette**
 
 The originals hardcode gold `#C9A54E` and cream at 28% opacity, tuned for the old dark theme. Recolour to the sage and muted tokens. Create `site/assets/svg/pressence-znak.svg`:
 
@@ -2439,7 +2439,7 @@ Expected: `replaced 9 gold strokes`.
 
 These four SVGs are not yet referenced by any page — they are prepared assets for the Elementor build, recorded in `docs/ASSETS.md`. The checker only inspects `img` elements, so unreferenced SVGs do not fail it.
 
-- [ ] **Step 5: Write `docs/ASSETS.md`**
+- [x] **Step 5: Write `docs/ASSETS.md`**
 
 One row per slot. Populate the Unsplash columns from the actual downloads.
 
@@ -2503,14 +2503,14 @@ corporate. One portrait session in daylight covers the two portrait slots and wo
 the studio headshot.
 ```
 
-- [ ] **Step 6: Run the full checker — it should now pass**
+- [x] **Step 6: Run the full checker — it should now pass**
 
 Run: `python3 tests/check_site.py`
 Expected: `All 10 checks passed across 14 pages.`
 
 If `no_hardcoded_hex` fails on `docs/ASSETS.md`, ignore it — the checker only inspects `site/`. If it fails on a `site/` file, move that colour into `tokens.css`.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add site/assets/img site/assets/svg docs/ASSETS.md
@@ -2534,7 +2534,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 - Create: `docs/LAUNCH-BLOCKERS.md`
 - Create: `README.md`
 
-- [ ] **Step 1: Write `docs/DESIGN-SYSTEM.md`**
+- [x] **Step 1: Write `docs/DESIGN-SYSTEM.md`**
 
 Read the values straight out of `site/assets/css/tokens.css` so the two cannot drift. Order the tables the way the Elementor UI asks for them.
 
@@ -2644,7 +2644,7 @@ Every one of these URLs already exists on the live site. Preserve them — do no
 WordPress mint new slugs.
 ```
 
-- [ ] **Step 2: Write `docs/NOVAMIRA-SKILL.md`**
+- [x] **Step 2: Write `docs/NOVAMIRA-SKILL.md`**
 
 ```markdown
 # Novamira skill file — Pressence Elementor build
@@ -2737,7 +2737,7 @@ The `data-el` values used across the prototype, and what each means:
 | `image`, `heading`, `text-editor`, `icon-list` | the corresponding core widget |
 ```
 
-- [ ] **Step 3: Write `docs/LAUNCH-BLOCKERS.md`**
+- [x] **Step 3: Write `docs/LAUNCH-BLOCKERS.md`**
 
 ```markdown
 # Launch blockers
@@ -2796,7 +2796,7 @@ analytics cookies are in use and the cookie policy cannot ship empty.
 her legal adviser. The prototype supplies the required GDPR headings as a checklist.
 ```
 
-- [ ] **Step 4: Write `README.md`**
+- [x] **Step 4: Write `README.md`**
 
 ```markdown
 # Pressence redesign prototype
@@ -2851,7 +2851,7 @@ and chrome inclusion. Python 3 standard library only.
   `docs/NOVAMIRA-SKILL.md`.
 ```
 
-- [ ] **Step 5: Verify the docs agree with the code**
+- [x] **Step 5: Verify the docs agree with the code**
 
 Run:
 ```bash
@@ -2869,7 +2869,7 @@ assert not missing
 ```
 Expected: `tokens.css colours: 8` and `undocumented: none`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add docs/DESIGN-SYSTEM.md docs/NOVAMIRA-SKILL.md docs/LAUNCH-BLOCKERS.md README.md
@@ -2890,12 +2890,12 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 **Files:**
 - Modify: whichever files the pass turns up
 
-- [ ] **Step 1: Run the full checker**
+- [x] **Step 1: Run the full checker**
 
 Run: `python3 tests/check_site.py`
 Expected: `All 10 checks passed across 14 pages.` Fix anything it reports before continuing.
 
-- [ ] **Step 2: Confirm every token is actually used**
+- [x] **Step 2: Confirm every token is actually used**
 
 An unused token is either dead weight or a sign a style was hardcoded.
 
@@ -2914,7 +2914,7 @@ print('unused:',dead or 'none')
 ```
 Expected: `unused: none`. If a token is unused, either apply it or delete it.
 
-- [ ] **Step 3: Check every page at three widths in the browser**
+- [x] **Step 3: Check every page at three widths in the browser**
 
 Run: `open site/index.html site/coaching.html site/o-meni.html site/zapisi.html site/kontakt.html`
 
@@ -2929,7 +2929,7 @@ On `coaching.html` also confirm the side-rail sticks while scrolling at 1440px a
 
 On `zapisi.html` also confirm each category tab filters the cards, `Vsi zapisi` restores all six, and `Samozavedanje` correctly empties the grid.
 
-- [ ] **Step 4: Keyboard-only pass**
+- [x] **Step 4: Keyboard-only pass**
 
 From a fresh load of `site/index.html`, using only Tab, Shift+Tab and Enter:
 - The first Tab reveals the `Preskoči na vsebino` skip link, and Enter on it jumps to `#main`.
@@ -2937,7 +2937,7 @@ From a fresh load of `site/index.html`, using only Tab, Shift+Tab and Enter:
 - On `kontakt.html`, every field is reachable and its label is announced — verified in Task 11 Step 3.
 - On `coaching.html`, each FAQ `<summary>` is focusable and toggles on Enter.
 
-- [ ] **Step 5: Confirm the launch-blocker regressions cannot return**
+- [x] **Step 5: Confirm the launch-blocker regressions cannot return**
 
 ```bash
 grep -rn "{{" site/ && echo "FAIL: placeholder token found" || echo "OK: no {{TOKEN}} anywhere"
@@ -2946,7 +2946,7 @@ grep -rnE "[a-zčšž]_a\b|_na\b" site/*.html site/zapisi/*.html && echo "REVIEW
 ```
 Expected: `OK: no {{TOKEN}} anywhere`, `OK: no fake contact details`, `OK: no neutral underscore forms`.
 
-- [ ] **Step 6: Commit any fixes**
+- [x] **Step 6: Commit any fixes**
 
 ```bash
 git add -A
@@ -2960,7 +2960,7 @@ details or neutral gender forms are present.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 ```
 
-- [ ] **Step 7: Report what needs the client**
+- [x] **Step 7: Report what needs the client**
 
 Summarise for the user, drawing on `docs/LAUNCH-BLOCKERS.md`:
 - Two items need her input: confirmed contact details, and legal copy for three pages.
