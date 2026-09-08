@@ -16,9 +16,18 @@ Elementor → Site Settings → Global Colors. Rename the four system colours, t
 | 4 | Accent | `Sage` | `#D7D6CC` | accent panels, active states |
 | 5 | custom | `Ivory` | `#FAF8F5` | page ground, cards |
 | 6 | custom | `Panel` | `#EEECE8` | secondary panels, side rails |
-| 7 | custom | `Muted` | `#71736A` | meta, labels, captions |
+| 7 | custom | `Muted` | `#5C5E56` | meta, labels, captions |
 | 8 | custom | `Line` | `#E2DFD8` | hairlines, field borders |
 | 9 | custom | `Cream` | `#F4F1EB` | hero bands, warm ground |
+| 10 | custom | `Edge` | `#71736A` | form-field and control borders |
+
+`Muted` was `#71736A`. At that value it failed WCAG AA for normal text on `Panel` (4.08),
+`Cream` (4.27) and `Sage` (3.30), and only just cleared it on `Ivory` (4.54). `#5C5E56`
+clears 4.5:1 on all four grounds — `Sage` is the tightest at 4.51. **Do not lighten it.**
+
+`Edge` is the old `Muted` value, kept for **form-field and control borders only**. WCAG 1.4.11
+holds a UI component to 3:1 against its ground and `Line` (`#E2DFD8`) manages 1.26, so `Line`
+stays decorative — hairlines, rules, dividers — and never outlines an input.
 
 ## Global Fonts
 
@@ -28,7 +37,7 @@ Elementor → Site Settings → Global Fonts. Both are Google Fonts; no upload n
 |---|---|---|---|---|---|---|
 | Primary | `Display` | EB Garamond | 400 | `clamp(40px, 5vw, 64px)` | 1.15 | -0.01em |
 | Secondary | `Heading` | EB Garamond | 400 | `clamp(28px, 3.2vw, 40px)` | 1.25 | 0 |
-| Text | `Body` | Inter | 400 | 16px | 1.75 | 0 |
+| Text | `Body` | Inter | 400 | 17px | 1.7 | 0 |
 | Accent | `Label` | Inter | 500 | 12px | 1.4 | 0.08em, uppercase |
 
 Fallbacks, for the custom CSS: `Georgia, "Times New Roman", serif` after EB Garamond;
@@ -46,6 +55,7 @@ Fallbacks, for the custom CSS: `Georgia, "Times New Roman", serif` after EB Gara
 | Border radius | 2px |
 | Hairline | 1px solid `Line` |
 | Mobile breakpoint | 860px |
+| Panel padding, focal beats | `clamp(88px, 12vw, 184px)` |
 | Hero band min height | `clamp(400px, 40vw, 560px)` |
 | Hero photo split | starts at 44% of the band |
 
@@ -98,6 +108,9 @@ via the widget's Advanced → CSS Classes field.
 | `p-card` | the top rule that replaced the box |
 | `p-post__frame` | `overflow: hidden`, so the image can scale inside it on hover |
 | `p-reveal`, `p-reveal-group` | the reveal-on-scroll states and the `nth-child` stagger |
+| `p-panel--tall` | the deeper padding on the focal beats |
+| `p-rings` | the growth-rings backdrop, bled off the right edge |
+| `p-grid--steps` | the five-across step sequence above 1100px |
 | `p-todo` | dashed placeholder block, remove before launch |
 | type scale | the `clamp()` values above, if Elementor's own responsive controls prove too coarse |
 
@@ -200,3 +213,46 @@ The reveal animates the independent `translate` property, not `transform`. Its r
 (`translate: none`) would otherwise out-specify hover rules that use `transform` — such as
 `.p-post`'s lift — and silently cancel them. If you add a hover transform to anything inside
 a `.p-reveal`, use `transform` and leave `translate` to the reveal.
+
+## Accessibility
+
+These are not nice-to-haves; three of them were failures found and fixed, and the numbers are
+reproducible from `tokens.css`.
+
+| Requirement | How it is met |
+|---|---|
+| **1.4.3** text contrast | every text colour clears 4.5:1 on all four grounds. See the `Muted` note above |
+| **1.4.11** non-text contrast | form fields use `Edge` (4.54:1 on `Ivory`); the focus ring is `Ink` (15.6:1) |
+| **2.4.7** focus visible | one `:focus-visible` ring on every focusable element, `Ivory` on the dark grounds. The UA default was invisible on these colours |
+| **2.5.8** target size | icon-only controls — the footer socials, the article share row, the burger — are 44×44. Text links rely on the inline/spacing exception |
+| **2.3.3** animation from interactions | `prefers-reduced-motion: reduce` zeroes every duration and delay and forces the revealed state |
+| **1.3.4** orientation / reflow | no horizontal overflow at 390, 768, 1024, 1440 or 1920 |
+
+In Elementor, the focus ring and the target sizes come from the global stylesheet, so they
+apply automatically. **The contrast values depend on Global Colors being entered exactly as
+the table above** — a widget with a hand-typed near-miss will silently fail.
+
+## Performance and head
+
+| Practice | Detail |
+|---|---|
+| Stylesheets in parallel | `tokens.css` and `site.css` are two `<link>` elements. An `@import` inside `site.css` serialises the second request behind the first being parsed |
+| No layout shift | every `<img>` carries `width` and `height` |
+| Deferred images | everything below the hero is `loading="lazy" decoding="async"`; the hero image is eager with `fetchpriority="high"` |
+| Fonts | `preconnect` to both Google Fonts hosts, `display=swap` on the request |
+| Head | `canonical`, Open Graph (`type`, `site_name`, `locale`, `url`, `title`, `description`), `twitter:card`, `color-scheme`, `theme-color`, and an SVG favicon |
+
+`theme-color` is the one hex allowed outside `tokens.css` — an HTML meta cannot reference a
+custom property. Keep it equal to `Olive`. `tests/check_site.py` exempts that one line and
+fails on any other literal.
+
+## What the checker covers
+
+`python3 tests/check_site.py` — twelve checks over fourteen pages. Two were added after bugs
+got through:
+
+- **`assets_resolve`** — stylesheet, script, icon and image URLs, not just `<a href>`. A
+  mangled relative path in a `<link>` is invisible until a page renders unstyled, which is
+  exactly how it happened.
+- **`below_fold_images_lazy`** — every image outside a hero band defers, and no hero image
+  does.

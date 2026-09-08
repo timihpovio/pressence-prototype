@@ -31,6 +31,7 @@ class PageParser(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
         self.links = []
+        self.assets = []
         self.imgs = []
         self.headings = []
         self.sections = []
@@ -51,14 +52,19 @@ class PageParser(HTMLParser):
             self.has_desc = bool(a.get("content", "").strip())
         elif tag == "a" and a.get("href"):
             self.links.append(a["href"])
+        elif tag == "link" and a.get("href"):
+            self.assets.append(a["href"])
         elif tag == "img":
             self.imgs.append(a)
+            if a.get("src"):
+                self.assets.append(a["src"])
         elif tag in ("h1", "h2", "h3", "h4", "h5", "h6"):
             self.headings.append(int(tag[1]))
         elif tag == "section":
             self.sections.append(a)
         elif tag == "script" and a.get("src"):
             self.scripts.append(a["src"])
+            self.assets.append(a["src"])
 
 
 def parse(rel):
@@ -97,6 +103,35 @@ def check_links_resolve():
                 fail("links_resolve", "%s -> %s" % (rel, href))
 
 
+def check_assets_resolve():
+    """Stylesheets, scripts, images and icons - not just <a href>.
+    A mangled relative path here is invisible until a page renders unstyled."""
+    for rel in all_pages():
+        p, _ = parse(rel)
+        base = os.path.dirname(os.path.join(SITE, rel))
+        for href in p.assets:
+            if href.startswith(("http://", "https://", "data:", "//")):
+                continue
+            target = os.path.normpath(os.path.join(base, href.split("?")[0]))
+            if not os.path.exists(target):
+                fail("assets_resolve", "%s -> %s" % (rel, href))
+
+
+def check_below_fold_images_lazy():
+    """Every image but the one in the hero band should defer."""
+    for rel in all_pages():
+        _, text = parse(rel)
+        for m in re.finditer(r"<img\b[^>]*>", text):
+            tag = m.group(0)
+            in_hero = text.rfind("p-hero__media", 0, m.start()) > text.rfind("</section>", 0, m.start())
+            if in_hero:
+                if 'loading="lazy"' in tag:
+                    fail("below_fold_images_lazy", "%s: hero image should not be lazy" % rel)
+            elif 'loading="lazy"' not in tag:
+                fail("below_fold_images_lazy",
+                     "%s: %s is not lazy" % (rel, re.search(r'src="([^"]*)"', tag).group(1)))
+
+
 def check_no_hardcoded_hex():
     hexre = re.compile(r"#[0-9a-fA-F]{3,8}\b")
     targets = [os.path.join(SITE, "assets/css/site.css")] + [
@@ -108,6 +143,11 @@ def check_no_hardcoded_hex():
         with open(path, encoding="utf-8") as fh:
             for n, line in enumerate(fh, 1):
                 if "href=" in line or "id=" in line:
+                    continue
+                # <meta name="theme-color"> cannot reference a CSS custom
+                # property. It is the one sanctioned literal; keep it equal to
+                # Olive in tokens.css.
+                if 'name="theme-color"' in line:
                     continue
                 if hexre.search(line):
                     fail("no_hardcoded_hex", "%s:%d" % (os.path.relpath(path, ROOT), n))
@@ -189,6 +229,8 @@ def check_chrome_included():
 CHECKS = [
     check_pages_exist,
     check_links_resolve,
+    check_assets_resolve,
+    check_below_fold_images_lazy,
     check_no_hardcoded_hex,
     check_head_metadata,
     check_img_alt,

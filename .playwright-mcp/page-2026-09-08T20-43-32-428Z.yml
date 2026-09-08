@@ -1,0 +1,128 @@
+- generic [active] [ref=f14e1]:
+  - link "Preskoči na vsebino" [ref=f14e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f14e3]:
+    - link "Pressence" [ref=f14e4] [cursor=pointer]:
+      - /url: ./index.html
+    - navigation "Glavna navigacija" [ref=f14e5]:
+      - link "Domov" [ref=f14e6] [cursor=pointer]:
+        - /url: ./index.html
+      - link "Coaching" [ref=f14e7] [cursor=pointer]:
+        - /url: ./coaching.html
+      - link "O meni" [ref=f14e8] [cursor=pointer]:
+        - /url: ./o-meni.html
+      - link "Zapisi" [ref=f14e9] [cursor=pointer]:
+        - /url: ./zapisi.html
+      - link "Kontakt" [ref=f14e10] [cursor=pointer]:
+        - /url: ./kontakt.html
+  - main [ref=f14e11]:
+    - generic [ref=f14e12]:
+      - generic [ref=f14e14]:
+        - heading "Za branje, ko potrebujete nekaj prostora za razmislek." [level=1] [ref=f14e15]
+        - paragraph [ref=f14e16]: Zapisi o coachingu, samozavedanju, spremembah, odločitvah in odnosu do sebe.
+        - paragraph [ref=f14e17]: Ne kot navodila za življenje. Kot vprašanja in perspektive, ki lahko odprejo nekaj novega.
+      - figure [ref=f14e18]:
+        - img "Vaza s posušenimi cvetovi ob keramični skledi" [ref=f14e19]
+    - generic [ref=f14e21]:
+      - heading "Seznam zapisov" [level=2] [ref=f14e22]
+      - tablist "Kategorije zapisov" [ref=f14e23]:
+        - button "Vsi zapisi" [ref=f14e24] [cursor=pointer]
+        - button "Samozavedanje" [ref=f14e25] [cursor=pointer]
+        - button "Spremembe" [ref=f14e26] [cursor=pointer]
+        - button "Vzorci" [ref=f14e27] [cursor=pointer]
+        - button "Odločitve" [ref=f14e28] [cursor=pointer]
+        - button "Coaching" [ref=f14e29] [cursor=pointer]
+        - button "Vodenje in odnosi" [ref=f14e30] [cursor=pointer]
+      - generic [ref=f14e31]:
+        - article [ref=f14e32]:
+          - img "Gorska pot v jutranji svetlobi" [ref=f14e34]
+          - generic [ref=f14e35]:
+            - heading [level=3] [ref=f14e36]:
+              - link "Ko to, kar je nekoč delovalo, ne deluje več" [ref=f14e37] [cursor=pointer]:
+                - /url: zapisi/ko-to-kar-je-nekoc-delovalo-ne-deluje-vec.html
+            - paragraph [ref=f14e38]: 18. maj 2024 · Vzorci
+            - link "Preberi zapis →" [ref=f14e39] [cursor=pointer]:
+              - /url: zapisi/ko-to-kar-je-nekoc-delovalo-ne-deluje-vec.html
+        - article [ref=f14e40]:
+          - img "Sence listov na svetli steni" [ref=f14e42]
+          - generic [ref=f14e43]:
+            - heading [level=3] [ref=f14e44]:
+              - link "Zakaj zavedanje vzorca še ni sprememba" [ref=f14e45] [cursor=pointer]:
+                - /url: zapisi/zakaj-zavedanje-vzorca-se-ni-sprememba.html
+            - paragraph [ref=f14e46]: 5. maj 2024 · Vzorci
+            - link "Preberi zapis →" [ref=f14e47] [cursor=pointer]:
+              - /url: zapisi/zakaj-zavedanje-vzorca-se-ni-sprememba.html
+        - article [ref=f14e48]:
+          - img "Zloženo laneno platno ob keramični skodelici" [ref=f14e50]
+          - generic [ref=f14e51]:
+            - heading [level=3] [ref=f14e52]:
+              - link "Ni vam treba takoj vedeti, kaj sledi" [ref=f14e53] [cursor=pointer]:
+                - /url: zapisi/ni-vam-treba-takoj-vedeti-kaj-sledi.html
+            - paragraph [ref=f14e54]: 22. april 2024 · Spremembe
+            - link "Preberi zapis →" [ref=f14e55] [cursor=pointer]:
+              - /url: zapisi/ni-vam-treba-takoj-vedeti-kaj-sledi.html
+        - article [ref=f14e56]:
+          - img "Dva stola ob nizki mizi v mirnem prostoru" [ref=f14e58]
+          - generic [ref=f14e59]:
+            - heading [level=3] [ref=f14e60]:
+              - link "Coaching ni prostor, kjer dobite nasvet" [ref=f14e61] [cursor=pointer]:
+                - /url: zapisi/coaching-ni-prostor-kjer-dobite-nasvet.html
+            - paragraph [ref=f14e62]: 8. april 2024 · Coaching
+            - link "Preberi zapis →" [ref=f14e63] [cursor=pointer]:
+              - /url: zapisi/coaching-ni-prostor-kjer-dobite-nasvet.html
+        - article [ref=f14e64]:
+          - img "Odprt zvezek in svinčnik na leseni mizi" [ref=f14e66]
+          - generic [ref=f14e67]:
+            - heading [level=3] [ref=f14e68]:
+              - link "Kaj pomeni zares poslušati" [ref=f14e69] [cursor=pointer]:
+                - /url: zapisi/kaj-pomeni-zares-poslusati.html
+            - paragraph [ref=f14e70]: 25. marec 2024 · Vodenje in odnosi
+            - link "Preberi zapis →" [ref=f14e71] [cursor=pointer]:
+              - /url: zapisi/kaj-pomeni-zares-poslusati.html
+        - article [ref=f14e72]:
+          - img "Razcep gozdne poti med bukvami" [ref=f14e74]
+          - generic [ref=f14e75]:
+            - heading [level=3] [ref=f14e76]:
+              - link "Kdo ste, ko odložite »moram«?" [ref=f14e77] [cursor=pointer]:
+                - /url: zapisi/kdo-ste-ko-odlozite-moram.html
+            - paragraph [ref=f14e78]: 11. marec 2024 · Odločitve
+            - link "Preberi zapis →" [ref=f14e79] [cursor=pointer]:
+              - /url: zapisi/kdo-ste-ko-odlozite-moram.html
+    - generic [ref=f14e81]:
+      - heading "Če je zapis odprl nekaj, kar bi želeli raziskati v pogovoru, mi lahko pišete." [level=2] [ref=f14e82]
+      - paragraph [ref=f14e83]:
+        - link "Začnimo pogovor" [ref=f14e84] [cursor=pointer]:
+          - /url: kontakt.html
+  - contentinfo [ref=f14e85]:
+    - generic [ref=f14e86]:
+      - generic [ref=f14e87]:
+        - generic [ref=f14e88]: Pressence
+        - paragraph [ref=f14e89]: Prostor za jasnejši stik s sabo.
+      - navigation "Navigacija v nogi" [ref=f14e90]:
+        - link "Domov" [ref=f14e91] [cursor=pointer]:
+          - /url: ./index.html
+        - link "Coaching" [ref=f14e92] [cursor=pointer]:
+          - /url: ./coaching.html
+        - link "O meni" [ref=f14e93] [cursor=pointer]:
+          - /url: ./o-meni.html
+        - link "Zapisi" [ref=f14e94] [cursor=pointer]:
+          - /url: ./zapisi.html
+        - link "Kontakt" [ref=f14e95] [cursor=pointer]:
+          - /url: ./kontakt.html
+      - generic [ref=f14e96]:
+        - link "Instagram" [ref=f14e97] [cursor=pointer]:
+          - /url: https://www.instagram.com/
+        - link "LinkedIn" [ref=f14e102] [cursor=pointer]:
+          - /url: https://www.linkedin.com/
+      - generic [ref=f14e105]:
+        - paragraph [ref=f14e106]: © Pressence 2026
+        - paragraph [ref=f14e107]:
+          - link "Politika zasebnosti" [ref=f14e108] [cursor=pointer]:
+            - /url: ./politika-zasebnosti.html
+          - text: ·
+          - link "Piškotki" [ref=f14e109] [cursor=pointer]:
+            - /url: ./politika-piskotkov.html
+          - text: ·
+          - link "Pravno obvestilo" [ref=f14e110] [cursor=pointer]:
+            - /url: ./pravno-obvestilo.html
+        - paragraph [ref=f14e111]: Coaching ni nadomestilo za psihoterapijo, zdravstveno obravnavo ali drugo ustrezno strokovno pomoč.

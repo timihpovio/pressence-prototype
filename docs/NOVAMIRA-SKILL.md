@@ -36,8 +36,10 @@ plain CSS in the global stylesheet and needs no per-widget setting at all.
 ## Rules
 
 1. **Never write a hex value into a widget.** Reference the Global Color by label:
-   `Ink`, `Olive`, `Body`, `Sage`, `Ivory`, `Panel`, `Muted`, `Line`. Same for the Global
-   Fonts `Display`, `Heading`, `Body`, `Label`. See `docs/DESIGN-SYSTEM.md`.
+   `Ink`, `Olive`, `Body`, `Sage`, `Ivory`, `Panel`, `Muted`, `Line`, `Cream`, `Edge`. Same
+   for the Global Fonts `Display`, `Heading`, `Body`, `Label`. See `docs/DESIGN-SYSTEM.md`.
+   The contrast the design relies on assumes those exact values — a hand-typed near-miss
+   fails WCAG silently.
 2. **One prototype `<section>` becomes one Elementor container.** The section's `data-el`
    attribute names the intended widget or container. Read it; do not improvise.
 3. **Edit the existing header and footer templates.** Do not create new ones — templates 36
@@ -56,6 +58,16 @@ plain CSS in the global stylesheet and needs no per-widget setting at all.
    neutral underscore forms (`povedal_a`) are wrong and must not be reproduced.
 9. **Copy is final.** Take it verbatim from the prototype HTML. Do not paraphrase,
    re-order, or "improve" the Slovenian.
+
+## Per page, in the head
+
+Blocksy or an SEO plugin can emit most of this, but confirm each page ends up with:
+`canonical`, `og:type` / `og:site_name` / `og:locale` / `og:url` / `og:title` /
+`og:description`, `twitter:card`, `color-scheme`, `theme-color` (equal to `Olive`), and the
+SVG favicon. The prototype's `<head>` is the reference.
+
+Set every image below the hero to **lazy** in the Image widget's Advanced settings, and leave
+the hero image eager. Every image needs its width and height so nothing shifts on load.
 
 ## Build order
 

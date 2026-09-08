@@ -8,7 +8,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
 <link rel="stylesheet" href="../assets/css/site.css">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#3A4032">
+<link rel="icon" href="../assets/svg/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://pressence.si/ni-vam-treba-takoj-vedeti-kaj-sledi/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Pressence">
+<meta property="og:locale" content="sl_SI">
+<meta property="og:url" content="https://pressence.si/ni-vam-treba-takoj-vedeti-kaj-sledi/">
+<meta property="og:title" content="Ni vam treba takoj vedeti, kaj sledi — Pressence">
+<meta property="og:description" content="Prehodna obdobja so neprijetna prav zato, ker staro ni več pravo, novo pa še nima jasne oblike. Morda naloga tega obdobja ni, da čim prej najdemo odgovor.">
+<meta name="twitter:card" content="summary_large_image">
 <script>document.documentElement.className += " js";</script>
 </head>
 <body data-page="zapisi">
@@ -26,7 +38,7 @@
     <figure class="p-hero__media" data-el="image">
       <img src="../assets/img/zapis-03-hero.jpg" alt="Gorska pot, ki se vije med sončnimi griči"
            width="1400" height="620" data-placeholder="true"
-           data-brief="mountain road winding through golden hills at low sun, wide crop">
+           data-brief="mountain road winding through golden hills at low sun, wide crop" fetchpriority="high" decoding="async">
     </figure>
   </section>
 
@@ -78,7 +90,9 @@
     </div>
   </section>
 
-  <section class="p-panel p-panel--olive" data-el="container:cta">
+  <section class="p-panel p-panel--olive p-panel--tall p-panel--deco" data-el="container:cta">
+    <img class="p-rings" src="../assets/svg/pressence-letnice.svg" alt="" aria-hidden="true"
+         width="1100" height="1100" loading="lazy" decoding="async">
     <div class="p-container p-narrow p-reveal">
       <h2>Če je zapis odprl nekaj, kar bi želeli raziskati v pogovoru, mi lahko pišete.</h2>
       <p><a class="p-btn p-btn--ghost" href="../kontakt.html" data-el="xpro-button">Začnimo pogovor</a></p>

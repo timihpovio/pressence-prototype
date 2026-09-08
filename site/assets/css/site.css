@@ -1,4 +1,5 @@
-@import url("tokens.css");
+/* tokens.css is linked separately in each <head> - an @import here would
+   serialise the two requests behind site.css being parsed. */
 
 /* --- reset ------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -18,11 +19,14 @@ h1, h2, h3, h4 {
   font-weight: 400;
   color: var(--p-ink);
   margin: 0 0 0.6em;
+  /* even out the rag rather than leaving a one-word last line */
+  text-wrap: balance;
+  font-optical-sizing: auto;
 }
 h1 { font-size: var(--p-h1); line-height: var(--p-lh-tight); letter-spacing: var(--p-ls-h1); }
-h2 { font-size: var(--p-h2); line-height: var(--p-lh-heading); }
+h2 { font-size: var(--p-h2); line-height: var(--p-lh-heading); letter-spacing: -0.005em; }
 h3 { font-size: var(--p-h3); line-height: var(--p-lh-heading); }
-p { margin: 0 0 1.1em; max-width: var(--p-measure); }
+p { margin: 0 0 1.1em; max-width: var(--p-measure); text-wrap: pretty; }
 .p-lead { font-size: var(--p-lead); color: var(--p-body); }
 .p-label {
   font: 500 var(--p-label)/1.4 var(--p-font-body);
@@ -175,6 +179,7 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
 .p-grid { display: grid; gap: var(--p-gap); }
 .p-grid--2 { grid-template-columns: repeat(2, 1fr); }
 .p-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.p-grid + p { margin-top: clamp(28px, 3vw, 44px); }
 .p-split { display: grid; gap: var(--p-gap); align-items: center; grid-template-columns: 1fr 1fr; }
 /* contact: intro and contact details beside the form, as in panel 06 */
 .p-split--form {
@@ -185,6 +190,30 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
 .p-split--form h1 { margin-bottom: 0.5em; }
 .p-split--form .p-contact-list { margin-top: clamp(28px, 4vw, 48px); }
 @media (max-width: 860px) { .p-split--form { grid-template-columns: 1fr; } }
+
+
+/* Focal beats get more room than a body panel, so the rhythm is not metronomic. */
+.p-panel--tall { padding-block: var(--p-panel-y-tall); }
+
+/* Growth rings, bled off the right edge, behind a statement. Decorative:
+   aria-hidden in the markup, and it never intercepts a pointer. */
+.p-rings {
+  position: absolute;
+  right: clamp(-260px, -14vw, -120px);
+  top: 50%;
+  translate: 0 -50%;
+  width: clamp(420px, 46vw, 760px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.p-panel--olive .p-rings { opacity: 0.16; }
+@media (max-width: 860px) { .p-rings { display: none; } }
+
+/* The five steps read as one sequence, not a 3 + 2 grid with two orphans. */
+@media (min-width: 1100px) {
+  .p-grid--steps { grid-template-columns: repeat(5, 1fr); gap: clamp(20px, 2vw, 32px); }
+  .p-grid--steps .p-card p { font-size: var(--p-small); }
+}
 
 /* --- cards -------------------------------------------------------
    Editorial index items, not boxes: a hairline rule on top, the type doing
@@ -198,6 +227,7 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
 }
 .p-card__num {
   font: 400 clamp(34px, 3.4vw, 46px)/1 var(--p-font-display);
+  font-variant-numeric: lining-nums tabular-nums;
   letter-spacing: 0;
   text-transform: none;
   color: var(--p-sage);
@@ -288,7 +318,13 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
 }
 .p-nav a:hover, .p-nav a:focus-visible { color: var(--p-ink); background-size: 100% 1px; }
 .p-nav a[aria-current="page"] { color: var(--p-ink); font-weight: 500; background-size: 100% 1px; }
-.p-burger { display: none; background: none; border: 0; padding: 8px; cursor: pointer; }
+.p-burger {
+  display: none; background: none; border: 0; cursor: pointer;
+  width: 44px; height: 44px;
+  align-items: center; justify-content: center;
+  margin-right: -10px;
+  color: var(--p-ink);
+}
 
 /* --- footer ------------------------------------------------------
    One row, not a stack: brand | serif nav | socials | legal. The band is
@@ -314,8 +350,11 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
   font-family: var(--p-font-display); font-size: 18px;
   justify-content: center;
 }
-.p-footer__social { display: flex; gap: 18px; }
-.p-footer__social a { display: inline-flex; }
+.p-footer__social { display: flex; gap: 4px; margin-inline: -10px; }
+.p-footer__social a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+}
 .p-footer__social svg { width: 18px; height: 18px; }
 .p-footer__legal { font-size: var(--p-small); line-height: 1.6; opacity: 0.8; }
 .p-footer__legal p { margin: 0 0 0.2em; max-width: none; }
@@ -389,6 +428,20 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
   }
 }
 
+/* --- focus -------------------------------------------------------
+   Every focusable thing had to rely on the UA default ring, which all but
+   disappears on these grounds. One token-coloured ring, shown only for
+   keyboard users. */
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--p-ink);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+.p-panel--olive :where(a, button):focus-visible,
+.p-footer :where(a, button):focus-visible { outline-color: var(--p-ivory); }
+/* Never remove the ring without replacing it. */
+:where(a, button, input, textarea, summary):focus:not(:focus-visible) { outline: none; }
+
 /* --- utilities --------------------------------------------------- */
 .p-sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -403,7 +456,7 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
    and desaturates it so the prototype still reads in the mockup's palette.
    Remove this rule once the real, on-brief shots are in. */
 [data-placeholder="true"] { background: var(--p-panel); }
-img[data-placeholder="true"] { filter: saturate(0.42) sepia(0.16) contrast(0.94) brightness(1.04); }
+img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.09) contrast(0.9); }
 
 /* --- decorative line art ----------------------------------------- */
 .p-deco {
@@ -422,7 +475,7 @@ img[data-placeholder="true"] { filter: saturate(0.42) sepia(0.16) contrast(0.94)
 /* --- responsive -------------------------------------------------- */
 @media (max-width: 860px) {
   .p-grid--3, .p-grid--2, .p-split, .p-footer__grid { grid-template-columns: 1fr; }
-  .p-burger { display: block; }
+  .p-burger { display: inline-flex; }
   .p-nav {
     position: absolute; top: 100%; left: 0; right: 0;
     flex-direction: column; gap: 0;
@@ -532,10 +585,10 @@ img[data-placeholder="true"] { filter: saturate(0.42) sepia(0.16) contrast(0.94)
 .p-faq details[open] summary::after { transform: rotate(135deg); }
 .p-faq details p { padding-bottom: 20px; margin: 0; }
 
-.p-filter { display: flex; flex-wrap: wrap; gap: clamp(12px, 2vw, 28px); border-bottom: var(--p-hairline); padding-bottom: 14px; margin-bottom: var(--p-gap); }
+.p-filter { display: flex; flex-wrap: wrap; gap: clamp(12px, 2vw, 28px); border-bottom: var(--p-hairline); margin-bottom: var(--p-gap); }
 .p-filter button {
   position: relative;
-  background: none; border: 0; padding: 6px 0 12px; cursor: pointer;
+  background: none; border: 0; padding: 13px 0; cursor: pointer;
   font: 400 var(--p-small)/1 var(--p-font-body); color: var(--p-muted);
   transition: color var(--p-dur) var(--p-ease);
 }
@@ -595,8 +648,13 @@ img[data-placeholder="true"] { filter: saturate(0.42) sepia(0.16) contrast(0.94)
   margin: 0 0 8px;
 }
 .p-aside p { margin: 0 0 1.4em; }
-.p-share { display: flex; gap: 16px; }
-.p-share a { display: inline-flex; color: var(--p-muted); }
+.p-share { display: flex; gap: 2px; margin-inline: -11px; }
+.p-share a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  color: var(--p-muted);
+  transition: color var(--p-dur) var(--p-ease);
+}
 .p-share a:hover { color: var(--p-ink); }
 .p-share svg { width: 18px; height: 18px; }
 .p-pull { font-family: var(--p-font-display); font-size: var(--p-h3); color: var(--p-ink);
@@ -624,14 +682,15 @@ img[data-placeholder="true"] { filter: saturate(0.42) sepia(0.16) contrast(0.94)
 .p-field label { display: block; font: 400 var(--p-small)/1.4 var(--p-font-body); color: var(--p-body); margin-bottom: 8px; }
 .p-field input, .p-field textarea {
   width: 100%; padding: 12px 14px;
-  border: var(--p-hairline); border-radius: var(--p-radius);
+  /* Edge, not Line: a form control is a UI component and WCAG 1.4.11 wants 3:1. */
+  border: 1px solid var(--p-edge); border-radius: var(--p-radius);
   background: var(--p-ivory); color: var(--p-ink);
   font: var(--p-base)/1.5 var(--p-font-body);
   transition: border-color var(--p-dur) var(--p-ease);
 }
-.p-field input:hover, .p-field textarea:hover { border-color: var(--p-muted); }
+.p-field input:hover, .p-field textarea:hover { border-color: var(--p-ink); }
 .p-field textarea { min-height: 132px; resize: vertical; }
-.p-field input:focus, .p-field textarea:focus { outline: 2px solid var(--p-muted); outline-offset: 1px; }
+.p-consent input { accent-color: var(--p-olive); }
 .p-field__hint { font-size: var(--p-small); color: var(--p-muted); margin: 6px 0 0; }
 .p-consent { display: flex; gap: 12px; align-items: flex-start; margin-bottom: var(--p-gap-sm); }
 .p-consent input { width: auto; margin-top: 4px; flex: none; }

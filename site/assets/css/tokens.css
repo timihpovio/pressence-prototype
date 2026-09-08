@@ -10,7 +10,14 @@
   --p-sage:   #D7D6CC;  /* Elementor Accent    | label "Sage"   | accent panels, active */
   --p-ivory:  #FAF8F5;  /* custom              | label "Ivory"  | page ground, cards */
   --p-panel:  #EEECE8;  /* custom              | label "Panel"  | secondary panels, rails */
-  --p-muted:  #71736A;  /* custom              | label "Muted"  | meta, labels, captions */
+  --p-muted:  #5C5E56;  /* custom              | label "Muted"  | meta, labels, captions
+                            Darkened from #71736A: the old value failed WCAG AA for
+                            normal text on Panel (4.08), Cream (4.27) and Sage (3.30).
+                            This clears 4.5:1 on all four grounds - Sage is the
+                            tightest at 4.51. */
+  --p-edge:   #71736A;  /* custom              | label "Edge"   | form-field and control borders,
+                            which WCAG 1.4.11 holds to 3:1 against their ground.
+                            Line (#E2DFD8) manages only 1.26 and stays decorative. */
   --p-line:   #E2DFD8;  /* custom              | label "Line"   | hairlines, field borders */
   --p-cream:  #F4F1EB;  /* custom              | label "Cream"  | hero bands, warm ground */
 
@@ -31,13 +38,13 @@
   --p-h2: clamp(28px, 3.2vw, 40px);
   --p-h3: clamp(20px, 2vw, 24px);
   --p-lead: clamp(17px, 1.4vw, 20px);
-  --p-base: 16px;
+  --p-base: 17px;      /* measured off the mockup at ~17-18px; 16px read small */
   --p-small: 14px;
   --p-label: 12px;
 
-  --p-lh-tight: 1.15;
+  --p-lh-tight: 1.08;
   --p-lh-heading: 1.25;
-  --p-lh-body: 1.75;
+  --p-lh-body: 1.7;
   --p-ls-label: 0.08em;
   --p-ls-h1: -0.01em;
 
@@ -45,6 +52,7 @@
   --p-container: 1160px;
   --p-measure: 62ch;
   --p-panel-y: clamp(64px, 9vw, 128px);
+  --p-panel-y-tall: clamp(88px, 12vw, 184px);   /* the focal beats */
   --p-gutter: clamp(20px, 4vw, 40px);
   --p-gap: clamp(24px, 3vw, 48px);
   --p-gap-sm: 16px;

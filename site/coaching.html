@@ -8,7 +8,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/site.css">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#3A4032">
+<link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://pressence.si/coaching/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pressence">
+<meta property="og:locale" content="sl_SI">
+<meta property="og:url" content="https://pressence.si/coaching/">
+<meta property="og:title" content="Coaching — Pressence">
+<meta property="og:description" content="Coaching je prostor za raziskovanje tega, kar je trenutno pomembno za vas. Kako delam, kako poteka sodelovanje in kaj lahko pričakujete.">
+<meta name="twitter:card" content="summary_large_image">
 <script>document.documentElement.className += " js";</script>
 </head>
 <body data-page="coaching">
@@ -25,7 +37,7 @@
     <figure class="p-hero__media" data-el="image">
       <img src="assets/img/skodelica-lan.jpg" alt="Keramična skodelica na lanenem prtu"
            width="1200" height="900" data-placeholder="true"
-           data-brief="stoneware cup on linen cloth with dried gypsophila, soft daylight">
+           data-brief="stoneware cup on linen cloth with dried gypsophila, soft daylight" fetchpriority="high" decoding="async">
     </figure>
   </section>
 
@@ -137,7 +149,7 @@
         <section class="p-block p-reveal p-block--panel" data-el="container:steps-5">
         <p class="p-label">Potek sodelovanja</p>
         <h2 id="potek">Pet korakov, en proces.</h2>
-        <div class="p-grid p-grid--3 p-reveal-group">
+        <div class="p-grid p-grid--3 p-grid--steps p-reveal-group">
           <article class="p-card" data-el="container:step">
             <span class="p-card__num">01</span>
             <h3>Uvodni pogovor</h3>
@@ -294,7 +306,9 @@
     </div>
   </section>
 
-  <section class="p-panel p-panel--olive" data-el="container:cta">
+  <section class="p-panel p-panel--olive p-panel--tall p-panel--deco" data-el="container:cta">
+    <img class="p-rings" src="assets/svg/pressence-letnice.svg" alt="" aria-hidden="true"
+         width="1100" height="1100" loading="lazy" decoding="async">
     <div class="p-container p-narrow p-reveal p-statement">
       <h2>Začetek je lahko samo pogovor.</h2>
       <p>Ni vam treba vedeti, koliko srečanj potrebujete ali natančno poimenovati, kaj želite spremeniti.</p>

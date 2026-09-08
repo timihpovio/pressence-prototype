@@ -8,7 +8,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/site.css">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#3A4032">
+<link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://pressence.si/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pressence">
+<meta property="og:locale" content="sl_SI">
+<meta property="og:url" content="https://pressence.si/">
+<meta property="og:title" content="Pressence — Prostor za jasnejši stik s sabo">
+<meta property="og:description" content="Coaching za trenutke, ko veste, da se nekaj spreminja, vendar še ne veste povsem, kam vas to vodi. V Mariboru ali na spletu.">
+<meta name="twitter:card" content="summary_large_image">
 <script>document.documentElement.className += " js";</script>
 </head>
 <body data-page="domov">
@@ -30,12 +42,12 @@
     <figure class="p-hero__media" data-el="image">
       <img src="assets/img/hero-oljka.jpg" alt="Oljčna vejica v topli popoldanski svetlobi"
            width="1200" height="900" data-placeholder="true"
-           data-brief="backlit olive branch, warm late-afternoon light, shallow depth of field">
+           data-brief="backlit olive branch, warm late-afternoon light, shallow depth of field" fetchpriority="high" decoding="async">
     </figure>
   </section>
 
   <section class="p-panel p-panel--ivory p-panel--deco" data-el="container:statement">
-    <img class="p-deco" src="assets/svg/pressence-vejica.svg" alt="" aria-hidden="true" width="320" height="340">
+    <img class="p-deco" src="assets/svg/pressence-vejica.svg" alt="" aria-hidden="true" width="320" height="340" loading="lazy" decoding="async">
     <div class="p-container p-narrow p-reveal p-statement">
       <h2>Kaj bi lahko slišali, če bi si zares dovolili prisluhniti sebi?</h2>
       <p>V vsakdanjem tempu pogosto iščemo odgovore zunaj sebe.</p>
@@ -159,7 +171,7 @@
       <figure class="p-figure--bleed" data-el="image">
         <img src="assets/img/portret-o-meni.jpg" alt="Portret coachinje ob naravni svetlobi"
              width="1000" height="1250" data-placeholder="true"
-             data-brief="warm editorial portrait, cream cardigan, natural window light, looking off-camera">
+             data-brief="warm editorial portrait, cream cardigan, natural window light, looking off-camera" loading="lazy" decoding="async">
       </figure>
       <div>
         <p class="p-label">O meni</p>
@@ -178,7 +190,7 @@
     <div class="p-container p-reveal">
       <p class="p-label">Kako poteka</p>
       <h2>En proces. Vaš tempo.</h2>
-      <div class="p-grid p-grid--3 p-reveal-group">
+      <div class="p-grid p-grid--3 p-grid--steps p-reveal-group">
         <article class="p-card" data-el="container:step">
           <span class="p-card__num">01</span>
           <h3>Spoznava se</h3>
@@ -209,7 +221,9 @@
     </div>
   </section>
 
-  <section class="p-panel p-panel--sage" data-el="container:statement">
+  <section class="p-panel p-panel--sage p-panel--tall p-panel--deco" data-el="container:statement">
+    <img class="p-rings" src="assets/svg/pressence-letnice.svg" alt="" aria-hidden="true"
+         width="1100" height="1100" loading="lazy" decoding="async">
     <div class="p-container p-narrow p-reveal p-prose-split">
       <div class="p-prose-split__head">
         <p class="p-label">Zaupanje</p>
@@ -225,16 +239,22 @@
   </section>
 
   <section class="p-panel p-panel--ivory" data-el="xpro-post-grid:latest-3">
-    <div class="p-container p-reveal">
-      <p class="p-label">Zapisi</p>
-      <h2>Misli za trenutke, ko želite pogledati nekoliko globlje.</h2>
-      <p class="p-lead">Pišem o coachingu, spremembah, samozavedanju, notranjih vzorcih, odločitvah in odnosu, ki ga gradimo sami s sabo.</p>
-      <p>Ne kot seznam pravil. Bolj kot povabilo k razmisleku.</p>
-      <p><a class="p-link-arrow" href="zapisi.html">Preberite zapise</a></p>
+    <div class="p-container p-reveal p-prose-split">
+      <div class="p-prose-split__head">
+        <p class="p-label">Zapisi</p>
+        <h2>Misli za trenutke, ko želite pogledati nekoliko globlje.</h2>
+      </div>
+      <div class="p-prose-split__body">
+        <p class="p-lead">Pišem o coachingu, spremembah, samozavedanju, notranjih vzorcih, odločitvah in odnosu, ki ga gradimo sami s sabo.</p>
+        <p>Ne kot seznam pravil. Bolj kot povabilo k razmisleku.</p>
+        <p><a class="p-link-arrow" href="zapisi.html">Preberite zapise</a></p>
+      </div>
     </div>
   </section>
 
-  <section class="p-panel p-panel--olive" data-el="container:cta">
+  <section class="p-panel p-panel--olive p-panel--tall p-panel--deco" data-el="container:cta">
+    <img class="p-rings" src="assets/svg/pressence-letnice.svg" alt="" aria-hidden="true"
+         width="1100" height="1100" loading="lazy" decoding="async">
     <div class="p-container p-narrow p-reveal p-statement">
       <h2>Morda ne potrebujete odgovora. Morda najprej potrebujete prostor.</h2>
       <p>Prvi pogovor je namenjen temu, da se spoznava in ugotoviva, ali vam moj način dela lahko koristi.</p>

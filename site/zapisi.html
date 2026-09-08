@@ -8,7 +8,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/site.css">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#3A4032">
+<link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://pressence.si/zapisi/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pressence">
+<meta property="og:locale" content="sl_SI">
+<meta property="og:url" content="https://pressence.si/zapisi/">
+<meta property="og:title" content="Zapisi — Pressence">
+<meta property="og:description" content="Zapisi o coachingu, samozavedanju, spremembah, odločitvah in odnosu do sebe. Ne kot navodila za življenje, ampak kot vprašanja in perspektive.">
+<meta name="twitter:card" content="summary_large_image">
 <script>document.documentElement.className += " js";</script>
 </head>
 <body data-page="zapisi">
@@ -26,7 +38,7 @@
     <figure class="p-hero__media" data-el="image">
       <img src="assets/img/vaza-susene-roze.jpg" alt="Vaza s posušenimi cvetovi ob keramični skledi"
            width="1200" height="900" data-placeholder="true"
-           data-brief="still life, vase with dried flowers beside a stoneware bowl, cream wall, soft side light">
+           data-brief="still life, vase with dried flowers beside a stoneware bowl, cream wall, soft side light" fetchpriority="high" decoding="async">
     </figure>
   </section>
 
@@ -47,7 +59,7 @@
         <article class="p-post" data-cat="vzorci" data-el="container:post-card">
           <div class="p-post__frame">
             <img src="assets/img/zapis-01.jpg" alt="Gorska pot v jutranji svetlobi" width="834" height="626"
-                 data-placeholder="true" data-brief="mountain road curving through golden hills, morning light">
+                 data-placeholder="true" data-brief="mountain road curving through golden hills, morning light" loading="lazy" decoding="async">
           </div>
           <div class="p-post__body">
             <h3><a href="zapisi/ko-to-kar-je-nekoc-delovalo-ne-deluje-vec.html">Ko to, kar je nekoč delovalo, ne deluje več</a></h3>
@@ -59,7 +71,7 @@
         <article class="p-post" data-cat="vzorci" data-el="container:post-card">
           <div class="p-post__frame">
             <img src="assets/img/zapis-02.jpg" alt="Sence listov na svetli steni" width="834" height="626"
-                 data-placeholder="true" data-brief="leaf shadows on a pale wall, high-contrast afternoon light">
+                 data-placeholder="true" data-brief="leaf shadows on a pale wall, high-contrast afternoon light" loading="lazy" decoding="async">
           </div>
           <div class="p-post__body">
             <h3><a href="zapisi/zakaj-zavedanje-vzorca-se-ni-sprememba.html">Zakaj zavedanje vzorca še ni sprememba</a></h3>
@@ -71,7 +83,7 @@
         <article class="p-post" data-cat="spremembe" data-el="container:post-card">
           <div class="p-post__frame">
             <img src="assets/img/zapis-03.jpg" alt="Zloženo laneno platno ob keramični skodelici" width="834" height="626"
-                 data-placeholder="true" data-brief="folded linen beside a stoneware cup, warm neutral still life">
+                 data-placeholder="true" data-brief="folded linen beside a stoneware cup, warm neutral still life" loading="lazy" decoding="async">
           </div>
           <div class="p-post__body">
             <h3><a href="zapisi/ni-vam-treba-takoj-vedeti-kaj-sledi.html">Ni vam treba takoj vedeti, kaj sledi</a></h3>
@@ -83,7 +95,7 @@
         <article class="p-post" data-cat="coaching" data-el="container:post-card">
           <div class="p-post__frame">
             <img src="assets/img/zapis-04.jpg" alt="Dva stola ob nizki mizi v mirnem prostoru" width="834" height="626"
-                 data-placeholder="true" data-brief="two chairs facing each other in a calm neutral room">
+                 data-placeholder="true" data-brief="two chairs facing each other in a calm neutral room" loading="lazy" decoding="async">
           </div>
           <div class="p-post__body">
             <h3><a href="zapisi/coaching-ni-prostor-kjer-dobite-nasvet.html">Coaching ni prostor, kjer dobite nasvet</a></h3>
@@ -95,7 +107,7 @@
         <article class="p-post" data-cat="vodenje-in-odnosi" data-el="container:post-card">
           <div class="p-post__frame">
             <img src="assets/img/zapis-05.jpg" alt="Odprt zvezek in svinčnik na leseni mizi" width="834" height="626"
-                 data-placeholder="true" data-brief="open notebook and pencil on a wooden table, quiet morning light">
+                 data-placeholder="true" data-brief="open notebook and pencil on a wooden table, quiet morning light" loading="lazy" decoding="async">
           </div>
           <div class="p-post__body">
             <h3><a href="zapisi/kaj-pomeni-zares-poslusati.html">Kaj pomeni zares poslušati</a></h3>
@@ -107,7 +119,7 @@
         <article class="p-post" data-cat="odlocitve" data-el="container:post-card">
           <div class="p-post__frame">
             <img src="assets/img/zapis-06.jpg" alt="Razcep gozdne poti med bukvami" width="834" height="626"
-                 data-placeholder="true" data-brief="forked path in a beech forest, soft diffused light">
+                 data-placeholder="true" data-brief="forked path in a beech forest, soft diffused light" loading="lazy" decoding="async">
           </div>
           <div class="p-post__body">
             <h3><a href="zapisi/kdo-ste-ko-odlozite-moram.html">Kdo ste, ko odložite »moram«?</a></h3>
@@ -119,7 +131,9 @@
     </div>
   </section>
 
-  <section class="p-panel p-panel--olive" data-el="container:cta">
+  <section class="p-panel p-panel--olive p-panel--tall p-panel--deco" data-el="container:cta">
+    <img class="p-rings" src="assets/svg/pressence-letnice.svg" alt="" aria-hidden="true"
+         width="1100" height="1100" loading="lazy" decoding="async">
     <div class="p-container p-narrow p-reveal p-statement">
       <h2>Če je zapis odprl nekaj, kar bi želeli raziskati v pogovoru, mi lahko pišete.</h2>
       <p><a class="p-btn p-btn--ghost" href="kontakt.html" data-el="xpro-button">Začnimo pogovor</a></p>

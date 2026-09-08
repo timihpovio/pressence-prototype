@@ -1,0 +1,108 @@
+- generic [active] [ref=f13e1]:
+  - link "Preskoči na vsebino" [ref=f13e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f13e3]:
+    - link "Pressence" [ref=f13e4] [cursor=pointer]:
+      - /url: ../index.html
+    - navigation "Glavna navigacija" [ref=f13e5]:
+      - link "Domov" [ref=f13e6] [cursor=pointer]:
+        - /url: ../index.html
+      - link "Coaching" [ref=f13e7] [cursor=pointer]:
+        - /url: ../coaching.html
+      - link "O meni" [ref=f13e8] [cursor=pointer]:
+        - /url: ../o-meni.html
+      - link "Zapisi" [ref=f13e9] [cursor=pointer]:
+        - /url: ../zapisi.html
+      - link "Kontakt" [ref=f13e10] [cursor=pointer]:
+        - /url: ../kontakt.html
+  - main [ref=f13e11]:
+    - generic [ref=f13e12]:
+      - generic [ref=f13e14]:
+        - paragraph [ref=f13e15]:
+          - link "Zapisi" [ref=f13e16] [cursor=pointer]:
+            - /url: ../zapisi.html
+          - text: /
+          - link "Spremembe" [ref=f13e17] [cursor=pointer]:
+            - /url: ../zapisi.html
+        - heading "Ni vam treba takoj vedeti, kaj sledi" [level=1] [ref=f13e18]
+        - paragraph [ref=f13e19]: 22. april 2024
+      - figure [ref=f13e20]:
+        - img "Gorska pot, ki se vije med sončnimi griči" [ref=f13e21]
+    - generic [ref=f13e23]:
+      - generic [ref=f13e24]:
+        - paragraph [ref=f13e25]: Prehodna obdobja so neprijetna prav zato, ker staro ni več pravo, novo pa še nima jasne oblike.
+        - paragraph [ref=f13e26]: Morda naloga tega obdobja ni, da čim prej najdemo odgovor.
+        - heading "Prostor med starim in novim" [level=2] [ref=f13e27]
+        - paragraph [ref=f13e28]: Včasih imamo občutek, da bi morali vedeti, kam gremo.
+        - paragraph [ref=f13e29]: Da bi morali imeti načrt. Odločitev. Jasno smer.
+        - paragraph [ref=f13e30]: In vendar je edino, kar je na voljo, prostor med dvema točkama.
+        - paragraph [ref=f13e31]: Ta prostor je pogosto neprijeten, ker ga ne moremo pojasniti drugim. Ko nas kdo vpraša, kaj sledi, nimamo dobrega odgovora. In ker ga nimamo, se nam zdi, da nekaj delamo narobe.
+        - paragraph [ref=f13e32]: Morda pa ne delamo nič narobe.
+        - paragraph [ref=f13e33]: Morda smo samo sredi nečesa, kar še ni dobilo oblike.
+        - paragraph [ref=f13e34]: Kaj v tej situaciji opazite pri sebi, ko odgovora ni?
+        - heading "Zakaj hitimo k odgovoru" [level=2] [ref=f13e35]
+        - paragraph [ref=f13e36]: Negotovost je neprijetna, zato jo pogosto poskušamo zapreti.
+        - paragraph [ref=f13e37]: Sprejmemo prvo možnost, ki se zdi dovolj razumna. Vrnemo se k nečemu znanemu. Ali pa se zaposlimo tako, da o tem ni več časa razmišljati.
+        - paragraph [ref=f13e38]: Vse to deluje, ampak samo za nekaj časa.
+        - paragraph [ref=f13e39]: Odločitev, sprejeta zato, da se negotovost konča, običajno ni odločitev, ki bi zares odgovarjala na vprašanje.
+        - paragraph [ref=f13e40]: Zato se isto vprašanje pogosto vrne, le v drugačni obleki.
+        - heading "Kaj lahko naredimo namesto tega" [level=2] [ref=f13e41]
+        - paragraph [ref=f13e42]: Ni treba, da prehodno obdobje takoj razrešimo.
+        - paragraph [ref=f13e43]: Lahko ga samo opazujemo dovolj dolgo, da začnemo prepoznavati, kaj se v njem pravzaprav dogaja.
+        - paragraph [ref=f13e44]: Kaj se je izteklo. Kaj še ni. Kaj nas privlači, tudi če tega še ne znamo pojasniti.
+        - paragraph [ref=f13e45]: To ni pasivnost. Je pozornost.
+        - heading "Nekaj za razmislek" [level=2] [ref=f13e46]
+        - paragraph [ref=f13e47]: Na koncu ni treba ponuditi petih korakov ali univerzalne rešitve.
+        - paragraph [ref=f13e48]: Dovolj je eno dobro vprašanje.
+        - paragraph [ref=f13e49]: Kaj bi se spremenilo, če vam v tem obdobju ne bi bilo treba že vedeti, kaj sledi?
+      - complementary [ref=f13e50]:
+        - heading "Kategorija" [level=3] [ref=f13e51]
+        - paragraph [ref=f13e52]:
+          - link "Spremembe" [ref=f13e53] [cursor=pointer]:
+            - /url: ../zapisi.html
+        - heading "Deli zapis" [level=3] [ref=f13e54]
+        - generic [ref=f13e55]:
+          - link "Deli na Facebooku" [ref=f13e56] [cursor=pointer]:
+            - /url: "#"
+          - link "Deli na LinkedInu" [ref=f13e59] [cursor=pointer]:
+            - /url: "#"
+          - link "Deli po e-pošti" [ref=f13e62] [cursor=pointer]:
+            - /url: mailto:?subject=Ni%20vam%20treba%20takoj%20vedeti%2C%20kaj%20sledi
+    - generic [ref=f13e67]:
+      - heading "Če je zapis odprl nekaj, kar bi želeli raziskati v pogovoru, mi lahko pišete." [level=2] [ref=f13e68]
+      - paragraph [ref=f13e69]:
+        - link "Začnimo pogovor" [ref=f13e70] [cursor=pointer]:
+          - /url: ../kontakt.html
+  - contentinfo [ref=f13e71]:
+    - generic [ref=f13e72]:
+      - generic [ref=f13e73]:
+        - generic [ref=f13e74]: Pressence
+        - paragraph [ref=f13e75]: Prostor za jasnejši stik s sabo.
+      - navigation "Navigacija v nogi" [ref=f13e76]:
+        - link "Domov" [ref=f13e77] [cursor=pointer]:
+          - /url: ../index.html
+        - link "Coaching" [ref=f13e78] [cursor=pointer]:
+          - /url: ../coaching.html
+        - link "O meni" [ref=f13e79] [cursor=pointer]:
+          - /url: ../o-meni.html
+        - link "Zapisi" [ref=f13e80] [cursor=pointer]:
+          - /url: ../zapisi.html
+        - link "Kontakt" [ref=f13e81] [cursor=pointer]:
+          - /url: ../kontakt.html
+      - generic [ref=f13e82]:
+        - link "Instagram" [ref=f13e83] [cursor=pointer]:
+          - /url: https://www.instagram.com/
+        - link "LinkedIn" [ref=f13e88] [cursor=pointer]:
+          - /url: https://www.linkedin.com/
+      - generic [ref=f13e91]:
+        - paragraph [ref=f13e92]: © Pressence 2026
+        - paragraph [ref=f13e93]:
+          - link "Politika zasebnosti" [ref=f13e94] [cursor=pointer]:
+            - /url: ../politika-zasebnosti.html
+          - text: ·
+          - link "Piškotki" [ref=f13e95] [cursor=pointer]:
+            - /url: ../politika-piskotkov.html
+          - text: ·
+          - link "Pravno obvestilo" [ref=f13e96] [cursor=pointer]:
+            - /url: ../pravno-obvestilo.html
+        - paragraph [ref=f13e97]: Coaching ni nadomestilo za psihoterapijo, zdravstveno obravnavo ali drugo ustrezno strokovno pomoč.
