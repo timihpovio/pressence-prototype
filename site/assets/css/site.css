@@ -206,3 +206,19 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
 .p-pull { font-family: var(--p-font-display); font-size: var(--p-h3); color: var(--p-ink);
   border-left: 2px solid var(--p-sage); padding-left: 20px; margin: 1.8em 0; max-width: 40ch; }
 @media (max-width: 860px) { .p-article { grid-template-columns: 1fr; } .p-aside { position: static; } }
+
+.p-todo {
+  border: 1px dashed var(--p-muted);
+  background: var(--p-panel);
+  padding: var(--p-gap);
+  max-width: var(--p-measure);
+}
+.p-todo p:last-child { margin-bottom: 0; }
+.p-todo__tag {
+  font: 500 var(--p-label)/1 var(--p-font-body);
+  letter-spacing: var(--p-ls-label);
+  text-transform: uppercase;
+  color: var(--p-muted);
+  display: block;
+  margin-bottom: 10px;
+}
