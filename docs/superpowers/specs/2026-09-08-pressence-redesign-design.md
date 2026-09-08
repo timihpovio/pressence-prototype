@@ -260,12 +260,31 @@ the redesign.
 4. **Novamira cannot run against production.** It deactivates on live URLs by design. A
    staging or local WordPress install is required to build on, with a separate push to
    production afterwards.
-5. **Novamira Pro is required for Elementor**, at $100/year. The free tier is Gutenberg
-   only.
-6. **Existing decorative SVGs are keyed to the old palette.** `pressence-znak.svg`,
+5. **Existing decorative SVGs are keyed to the old palette.** `pressence-znak.svg`,
    `pressence-korenina.svg`, `pressence-korenina-zbir.svg` and `pressence-letnice.svg`
    hardcode gold `#C9A54E` and cream at 28% opacity, tuned for the dark theme. They need
    recolouring for the ivory palette — trivial, but not automatic.
+
+## How the Elementor build actually happens
+
+**Novamira free is sufficient.** The current site was built this way already. Novamira's
+free tier ships PHP execution with WordPress loaded, direct database access and WP-CLI,
+which is enough to write Elementor's `_elementor_data` post meta directly. Novamira Pro
+adds Elementor-*aware* tooling — element schema validation, atomic v4 widgets, global
+style migration — but it is not the only route to an Elementor page.
+
+The consequence is that this documentation matters **more**, not less. Without Pro's schema
+validation there is nothing to catch a malformed widget, so the build depends on:
+
+- `DESIGN-SYSTEM.md` naming the exact global colour and font labels, so values are
+  referenced rather than hardcoded as hex.
+- The `data-el` mapping table above, so only widgets present on the free stack are emitted.
+- Opening every generated page in the Elementor editor and confirming it renders and stays
+  editable before moving to the next one. A page whose `_elementor_data` is subtly wrong
+  can look correct on the front end and still be broken in the editor.
+
+Novamira still **deactivates on production URLs** by design, so the build happens on a
+staging or local install regardless of tier.
 
 ## Existing media library
 
