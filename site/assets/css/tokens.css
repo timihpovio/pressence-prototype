@@ -12,6 +12,13 @@
   --p-panel:  #EEECE8;  /* custom              | label "Panel"  | secondary panels, rails */
   --p-muted:  #71736A;  /* custom              | label "Muted"  | meta, labels, captions */
   --p-line:   #E2DFD8;  /* custom              | label "Line"   | hairlines, field borders */
+  --p-cream:  #F4F1EB;  /* custom              | label "Cream"  | hero bands, warm ground */
+
+  /* Triplets of the three hero-band tints, so the photo-to-colour fade in
+     .p-hero__media can be built from rgba() without a second hex. */
+  --p-cream-rgb: 244, 241, 235;
+  --p-sage-rgb:  215, 214, 204;
+  --p-panel-rgb: 238, 236, 232;
 
   /* --- Global Fonts ------------------------------------------------- */
   /* Elementor "Display" and "Heading" */
@@ -41,6 +48,8 @@
   --p-gutter: clamp(20px, 4vw, 40px);
   --p-gap: clamp(24px, 3vw, 48px);
   --p-gap-sm: 16px;
+  --p-hero-min: clamp(400px, 40vw, 560px);
+  --p-hero-split: 44%;
 
   /* --- Other ------------------------------------------------------- */
   --p-radius: 2px;

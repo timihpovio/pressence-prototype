@@ -39,6 +39,81 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
   max-width: 30ch;
 }
 
+/* --- hero band ---------------------------------------------------
+   One full-bleed band per page. The photograph bleeds to the right and to
+   both edges of the band; the tint carries the left half and fades into the
+   photograph. Mirrors panels 01-06 of the mockup. */
+.p-hero {
+  --p-hero-tint: var(--p-cream-rgb);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: var(--p-hero-min);
+  background: rgb(var(--p-hero-tint));
+  border-bottom: var(--p-hairline);
+  overflow: hidden;
+}
+.p-hero--sage  { --p-hero-tint: var(--p-sage-rgb); }
+.p-hero--panel { --p-hero-tint: var(--p-panel-rgb); }
+
+/* Padding on the band, measure on the inner block, so hero copy lands on the
+   same left edge as every .p-container below it. */
+.p-hero { padding-inline: var(--p-gutter); }
+.p-hero__inner {
+  width: 100%;
+  max-width: var(--p-container);
+  margin-inline: auto;
+  padding-block: clamp(56px, 6vw, 96px);
+}
+/* 540px is the measure the mockup's hero headings break at: "Prostor, kjer
+   lahko / za trenutek odložite / vse odgovore." over three lines. */
+.p-hero__text { max-width: min(100%, 540px); }
+.p-hero__text > :last-child { margin-bottom: 0; }
+.p-hero__text h1, .p-hero__text p { max-width: 100%; }
+.p-hero__note { font-size: var(--p-small); color: var(--p-muted); margin: 0; }
+.p-hero__cta { margin: 0 0 1.4em; }
+
+.p-hero__media {
+  position: absolute;
+  inset: 0 0 0 var(--p-hero-split);
+  margin: 0;
+  z-index: -1;
+}
+.p-hero__media img { width: 100%; height: 100%; object-fit: cover; }
+/* the photo dissolving into the tint, rather than butting against it */
+.p-hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgb(var(--p-hero-tint)) 0%,
+    rgba(var(--p-hero-tint), 0.68) 14%,
+    rgba(var(--p-hero-tint), 0.14) 28%,
+    rgba(var(--p-hero-tint), 0) 40%);
+}
+
+/* article hero: same band, breadcrumb and date instead of a lead */
+.p-hero .p-crumb { margin-bottom: clamp(24px, 4vw, 48px); }
+.p-hero .p-post__meta { margin: 0; }
+.p-hero--article .p-hero__text h1 { max-width: 18ch; margin-bottom: 0.8em; }
+
+@media (max-width: 860px) {
+  .p-hero { display: block; min-height: 0; }
+  .p-hero__media {
+    position: static;
+    z-index: auto;
+    aspect-ratio: 3 / 2;
+  }
+  .p-hero__media::after {
+    background: linear-gradient(0deg,
+      rgba(var(--p-hero-tint), 0) 55%,
+      rgba(var(--p-hero-tint), 0.55) 100%);
+  }
+  .p-hero__text { max-width: none; }
+  .p-hero__text h1, .p-hero__text .p-lead { max-width: none; }
+}
+
 /* --- panels ------------------------------------------------------ */
 .p-panel { padding: var(--p-panel-y) var(--p-gutter); border-bottom: var(--p-hairline); }
 .p-panel--ivory { background: var(--p-ivory); }
@@ -47,14 +122,31 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
 .p-panel--olive { background: var(--p-olive); color: var(--p-ivory); }
 .p-panel--olive h1, .p-panel--olive h2, .p-panel--olive h3 { color: var(--p-ivory); }
 .p-panel--flush { padding-left: 0; padding-right: 0; }
+/* The Zapisi filter reads as a toolbar attached to the hero in the mockup,
+   not as a section of its own, so it does not take the full panel rhythm. */
+.p-panel--attached { padding-top: clamp(40px, 4vw, 56px); }
 .p-container { max-width: var(--p-container); margin-inline: auto; }
-.p-narrow { max-width: 72ch; margin-inline: auto; }
+/* Left-aligned, not centred: every panel in the mockup hangs off the same
+   container edge as the hero heading. .p-narrow therefore caps the measure of
+   the prose inside the container rather than shrinking (and re-centring) it. */
+.p-narrow { max-width: var(--p-container); }
+.p-narrow > h2, .p-narrow > h3 { max-width: 16em; }
+.p-narrow > ul, .p-narrow > ol { max-width: var(--p-measure); }
 
 /* --- grids ------------------------------------------------------- */
 .p-grid { display: grid; gap: var(--p-gap); }
 .p-grid--2 { grid-template-columns: repeat(2, 1fr); }
 .p-grid--3 { grid-template-columns: repeat(3, 1fr); }
 .p-split { display: grid; gap: var(--p-gap); align-items: center; grid-template-columns: 1fr 1fr; }
+/* contact: intro and contact details beside the form, as in panel 06 */
+.p-split--form {
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 4vw, 64px);
+  align-items: start;
+}
+.p-split--form h1 { margin-bottom: 0.5em; }
+.p-split--form .p-contact-list { margin-top: clamp(28px, 4vw, 48px); }
+@media (max-width: 860px) { .p-split--form { grid-template-columns: 1fr; } }
 
 /* --- cards ------------------------------------------------------- */
 .p-card { background: var(--p-ivory); border: var(--p-hairline); padding: var(--p-gap); }
@@ -113,17 +205,46 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
   color: var(--p-body);
   text-decoration: none;
 }
-.p-nav a[aria-current="page"] { color: var(--p-ink); font-weight: 500; }
+.p-nav a[aria-current="page"] {
+  color: var(--p-ink); font-weight: 500;
+  border-bottom: 1px solid var(--p-ink); padding-bottom: 5px;
+}
 .p-burger { display: none; background: none; border: 0; padding: 8px; cursor: pointer; }
 
-/* --- footer ------------------------------------------------------ */
-.p-footer { background: var(--p-olive); color: var(--p-ivory); padding: var(--p-panel-y) var(--p-gutter); }
+/* --- footer ------------------------------------------------------
+   One row, not a stack: brand | serif nav | socials | legal. The band is
+   shallow in the mockup, so it does not take the full panel rhythm. */
+.p-footer {
+  background: var(--p-olive);
+  color: var(--p-ivory);
+  padding: clamp(40px, 4.5vw, 64px) var(--p-gutter);
+}
 .p-footer a { color: var(--p-ivory); text-decoration: none; }
-.p-footer__grid { display: grid; gap: var(--p-gap); grid-template-columns: 1.2fr 1.4fr 1fr; }
+.p-footer a:hover { opacity: 0.75; }
+.p-footer__grid {
+  display: grid;
+  gap: clamp(20px, 2.6vw, 38px);
+  grid-template-columns: minmax(160px, 1fr) auto auto minmax(300px, 344px);
+  align-items: center;
+}
 .p-footer__logo { font: 400 28px/1 var(--p-font-display); margin-bottom: 0.5em; display: block; }
-.p-footer__nav { display: flex; flex-wrap: wrap; gap: clamp(16px, 2vw, 32px); font-family: var(--p-font-display); font-size: 18px; }
-.p-footer__legal { font-size: var(--p-small); opacity: 0.8; }
-.p-footer__disclaimer { font-size: var(--p-small); opacity: 0.8; max-width: 46ch; margin-top: 1.5em; }
+.p-footer__brand p { font-size: var(--p-small); margin: 0; opacity: 0.85; }
+.p-footer__nav {
+  display: flex; flex-wrap: nowrap;
+  gap: clamp(14px, 1.9vw, 30px);
+  font-family: var(--p-font-display); font-size: 18px;
+  justify-content: center;
+}
+.p-footer__social { display: flex; gap: 18px; }
+.p-footer__social a { display: inline-flex; }
+.p-footer__social svg { width: 18px; height: 18px; }
+.p-footer__legal { font-size: var(--p-small); line-height: 1.6; opacity: 0.8; }
+.p-footer__legal p { margin: 0 0 0.2em; max-width: none; }
+.p-footer__disclaimer { margin-top: 1.2em; }
+@media (max-width: 1024px) {
+  .p-footer__grid { grid-template-columns: 1fr 1fr; row-gap: var(--p-gap); }
+  .p-footer__nav { justify-content: flex-start; flex-wrap: wrap; }
+}
 
 /* --- utilities --------------------------------------------------- */
 .p-sr-only {
@@ -135,7 +256,23 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
   background: var(--p-ink); color: var(--p-ivory); padding: 12px 20px; z-index: 50;
 }
 .p-skip:focus { left: 12px; top: 12px; }
+/* Placeholder photography is unmatched stock (see docs/ASSETS.md). This warms
+   and desaturates it so the prototype still reads in the mockup's palette.
+   Remove this rule once the real, on-brief shots are in. */
 [data-placeholder="true"] { background: var(--p-panel); }
+img[data-placeholder="true"] { filter: saturate(0.42) sepia(0.16) contrast(0.94) brightness(1.04); }
+
+/* --- decorative line art ----------------------------------------- */
+.p-deco {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: clamp(180px, 22vw, 320px);
+  opacity: 0.85;
+  pointer-events: none;
+}
+.p-panel--deco { position: relative; overflow-x: clip; }
+@media (max-width: 860px) { .p-deco { display: none; } }
 .p-figure--bleed { margin: 0; }
 .p-figure--bleed img { width: 100%; object-fit: cover; }
 
@@ -154,11 +291,69 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
   .p-nav a { padding: 12px 0; border-bottom: var(--p-hairline); }
 }
 
-.p-rail-layout { display: grid; gap: var(--p-gap); grid-template-columns: 220px 1fr; align-items: start; }
-.p-rail { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 14px; }
-.p-rail a { font: 400 var(--p-small)/1.3 var(--p-font-body); color: var(--p-muted); text-decoration: none; }
+/* --- section rail ------------------------------------------------
+   The rail is a tinted column that runs the full height of the section and
+   bleeds off the left edge of the page, with a hairline against the prose.
+   overflow-x: clip rather than hidden, so position: sticky still works. */
+.p-panel--rail { overflow-x: clip; padding-top: 0; padding-bottom: 0; }
+.p-rail-layout {
+  --p-rail-w: 220px;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: clamp(32px, 5vw, 72px);
+  grid-template-columns: var(--p-rail-w) 1fr;
+  align-items: start;
+}
+.p-rail-layout::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: calc(50% - 50vw);
+  width: calc(50vw - 50% + var(--p-rail-w));
+  background: var(--p-panel);
+  border-right: var(--p-hairline);
+  z-index: -1;
+}
+.p-rail { position: sticky; top: 96px; display: flex; flex-direction: column; }
+
+/* Content blocks inside the rail column. The mockup runs one continuous ivory
+   prose column beside the rail, so these are blocks with hairline rules rather
+   than the full-bleed alternating bands used elsewhere. */
+.p-rail-content > .p-block { padding-block: var(--p-panel-y); border-bottom: var(--p-hairline); }
+.p-rail-content > .p-block:first-child { padding-top: var(--p-panel-y); }
+.p-rail-content > .p-block:last-child { border-bottom: 0; }
+.p-rail-content > .p-block--panel,
+.p-rail-content > .p-block--sage {
+  padding: var(--p-gap);
+  margin-block: var(--p-gap);
+  border-bottom: 0;
+}
+.p-rail-content > .p-block--panel { background: var(--p-panel); }
+.p-rail-content > .p-block--sage { background: var(--p-sage); }
+.p-rail-content > .p-block > :last-child { margin-bottom: 0; }
+.p-rail a {
+  font: 400 var(--p-small)/1.3 var(--p-font-body);
+  color: var(--p-muted);
+  text-decoration: none;
+  padding: 22px 16px 22px 0;
+  transition: color 0.2s var(--p-ease);
+}
 .p-rail a:hover { color: var(--p-ink); }
-@media (max-width: 860px) { .p-rail-layout { grid-template-columns: 1fr; } .p-rail { position: static; } }
+/* The active row is a lighter band running the whole width of the rail,
+   bleed included. box-shadow paints the bleed; the section clips it. */
+.p-rail a[aria-current="true"] {
+  color: var(--p-ink);
+  font-weight: 500;
+  background: var(--p-ivory);
+  box-shadow: -100vw 0 0 0 var(--p-ivory);
+}
+@media (max-width: 860px) {
+  .p-panel--rail { padding-top: var(--p-panel-y); padding-bottom: var(--p-panel-y); }
+  .p-rail-layout { grid-template-columns: 1fr; padding-block: 0; }
+  .p-rail-layout::before { display: none; }
+  .p-rail { position: static; }
+}
 
 .p-compare { display: grid; gap: var(--p-gap); grid-template-columns: 1fr 1fr; }
 .p-compare__col { border: var(--p-hairline); padding: var(--p-gap); background: var(--p-ivory); }
@@ -199,10 +394,17 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
 .p-crumb { font: 400 var(--p-small)/1 var(--p-font-body); color: var(--p-muted); margin: 0 0 var(--p-gap); }
 .p-crumb a { text-decoration: none; }
 .p-aside { position: sticky; top: 96px; background: var(--p-panel); padding: var(--p-gap); }
-.p-aside h3 { font-size: var(--p-label); font-family: var(--p-font-body); font-weight: 500;
-  letter-spacing: var(--p-ls-label); text-transform: uppercase; color: var(--p-muted); margin: 0 0 8px; }
+/* Sentence case, not a tracked label: panel 05 sets these as plain small text. */
+.p-aside h3 {
+  font: 500 var(--p-small)/1.4 var(--p-font-body);
+  color: var(--p-ink);
+  margin: 0 0 8px;
+}
 .p-aside p { margin: 0 0 1.4em; }
-.p-share { display: flex; gap: 14px; }
+.p-share { display: flex; gap: 16px; }
+.p-share a { display: inline-flex; color: var(--p-muted); }
+.p-share a:hover { color: var(--p-ink); }
+.p-share svg { width: 18px; height: 18px; }
 .p-pull { font-family: var(--p-font-display); font-size: var(--p-h3); color: var(--p-ink);
   border-left: 2px solid var(--p-sage); padding-left: 20px; margin: 1.8em 0; max-width: 40ch; }
 @media (max-width: 860px) { .p-article { grid-template-columns: 1fr; } .p-aside { position: static; } }
@@ -238,6 +440,12 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
 .p-consent { display: flex; gap: 12px; align-items: flex-start; margin-bottom: var(--p-gap-sm); }
 .p-consent input { width: auto; margin-top: 4px; flex: none; }
 .p-consent label { font-size: var(--p-small); color: var(--p-body); margin: 0; }
-.p-contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--p-gap-sm); }
-.p-contact-list h3 { font: 500 var(--p-small)/1.3 var(--p-font-body); color: var(--p-ink); margin: 0 0 2px; }
-.p-contact-list p { margin: 0; color: var(--p-muted); }
+.p-contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: clamp(18px, 2vw, 26px); }
+.p-contact-list li { display: grid; grid-template-columns: 24px 1fr; gap: 14px; align-items: start; }
+.p-contact-list svg { width: 18px; height: 18px; color: var(--p-muted); margin-top: 3px; }
+.p-contact-list h2, .p-contact-list h3 {
+  font: 500 var(--p-small)/1.3 var(--p-font-body);
+  color: var(--p-ink);
+  margin: 0 0 2px;
+}
+.p-contact-list p { margin: 0; color: var(--p-muted); max-width: none; }

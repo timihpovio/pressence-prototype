@@ -20,6 +20,36 @@
     syncNav();
   }
 
+  /* Section rail: mark the entry whose section is currently in view. */
+  var rail = document.querySelector("[data-rail]");
+  if (rail && "IntersectionObserver" in window) {
+    var links = Array.prototype.slice.call(rail.querySelectorAll("a[href^='#']"));
+    var targets = links
+      .map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); })
+      .filter(Boolean);
+
+    if (targets.length) {
+      var visible = [];
+      var spy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var i = visible.indexOf(entry.target);
+          if (entry.isIntersecting && i === -1) { visible.push(entry.target); }
+          if (!entry.isIntersecting && i !== -1) { visible.splice(i, 1); }
+        });
+        if (!visible.length) { return; }
+        var top = visible.slice().sort(function (a, b) {
+          return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+        })[0];
+        links.forEach(function (a) {
+          var on = a.getAttribute("href") === "#" + top.id;
+          if (on) { a.setAttribute("aria-current", "true"); }
+          else { a.removeAttribute("aria-current"); }
+        });
+      }, { rootMargin: "-96px 0px -55% 0px" });
+      targets.forEach(function (t) { spy.observe(t); });
+    }
+  }
+
   var filter = document.querySelector("[data-filter]");
   if (filter) {
     var cards = Array.prototype.slice.call(document.querySelectorAll("[data-cat]"));

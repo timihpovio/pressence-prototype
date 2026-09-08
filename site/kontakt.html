@@ -14,39 +14,41 @@
 
 <main id="main">
 
-  <section class="p-panel p-panel--ivory" data-el="container:hero">
-    <div class="p-container p-narrow">
-      <h1>Začniva s pogovorom.</h1>
-      <p class="p-lead">Ni vam treba že vedeti, kaj točno potrebujete.</p>
-      <p>Za prvi stik je dovolj, da veste, da bi se o nečem želeli pogovoriti.</p>
-    </div>
-  </section>
-
-  <section class="p-panel p-panel--panel" data-el="container:split-form">
-    <div class="p-container p-split">
+  <section class="p-panel p-panel--panel" data-el="container:hero-form">
+    <div class="p-container p-split p-split--form">
       <div>
-        <p class="p-label">Uvodni pogovor</p>
-        <h2>Prvi pogovor je namenjen temu, da se spoznava.</h2>
-        <p>Poveste mi lahko, kaj vas je pripeljalo do coachinga, jaz pa vam predstavim svoj način dela.</p>
-        <p>Skupaj preveriva, ali je coaching prava oblika podpore za vas in ali si želiva nadaljevati sodelovanje.</p>
-        <p>Brez pritiska in brez obveznosti nadaljevanja.</p>
+        <h1>Začniva s pogovorom.</h1>
+        <p class="p-lead">Ni vam treba že vedeti, kaj točno potrebujete.</p>
+        <p>Za prvi stik je dovolj, da veste, da bi se o nečem želeli pogovoriti.</p>
 
         <ul class="p-contact-list" data-el="icon-list">
           <li>
-            <h3>E-pošta</h3>
-            <p><a href="mailto:info@pressence.si">info@pressence.si</a></p>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.5h15v11h-15z"/><path d="m2.5 6.5 7.5 5.5 7.5-5.5"/></svg>
+            <div>
+              <h2>E-pošta</h2>
+              <p><a href="mailto:info@pressence.si">info@pressence.si</a></p>
+            </div>
           </li>
           <li>
-            <h3>Lokacija</h3>
-            <p>Maribor</p>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 18s6-5.2 6-9.5A6 6 0 0 0 4 8.5C4 12.8 10 18 10 18Z"/><circle cx="10" cy="8.5" r="2.2"/></svg>
+            <div>
+              <h2>Lokacija</h2>
+              <p>Maribor</p>
+            </div>
           </li>
           <li>
-            <h3>Srečanja</h3>
-            <p>V živo v Mariboru ali na spletu.</p>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 5.6V10l3 1.8"/></svg>
+            <div>
+              <h2>Srečanja</h2>
+              <p>V živo v Mariboru ali na spletu.</p>
+            </div>
           </li>
           <li>
-            <h3>Jezik</h3>
-            <p>Slovenščina / angleščina</p>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.6" cy="13.4" r="3.1"/><path d="m8.9 11.1 7.6-7.6M13.6 6.4l2 2M11.6 8.4l2 2"/></svg>
+            <div>
+              <h2>Jezik</h2>
+              <p>Slovenščina / angleščina</p>
+            </div>
           </li>
         </ul>
       </div>
@@ -62,8 +64,8 @@
         </div>
         <div class="p-field">
           <label for="sporocilo">Kaj vas je pripeljalo sem?</label>
-          <textarea id="sporocilo" name="sporocilo" required></textarea>
-          <p class="p-field__hint">Ni treba pisati veliko. Nekaj stavkov je povsem dovolj.</p>
+          <textarea id="sporocilo" name="sporocilo" required
+                    placeholder="Ni treba pisati veliko. Nekaj stavkov je povsem dovolj."></textarea>
         </div>
         <div class="p-consent">
           <input type="checkbox" id="privolitev" name="privolitev" required>
@@ -72,6 +74,16 @@
         <p><button class="p-btn" type="submit" data-el="wpforms:submit">Pošlji sporočilo</button></p>
         <p class="p-field__hint">Sporočilo in osebne podatke bom obravnavala zaupno.</p>
       </form>
+    </div>
+  </section>
+
+  <section class="p-panel p-panel--ivory" data-el="container:prose">
+    <div class="p-container p-narrow">
+      <p class="p-label">Uvodni pogovor</p>
+      <h2>Prvi pogovor je namenjen temu, da se spoznava.</h2>
+      <p>Poveste mi lahko, kaj vas je pripeljalo do coachinga, jaz pa vam predstavim svoj način dela.</p>
+      <p>Skupaj preveriva, ali je coaching prava oblika podpore za vas in ali si želiva nadaljevati sodelovanje.</p>
+      <p>Brez pritiska in brez obveznosti nadaljevanja.</p>
     </div>
   </section>
 

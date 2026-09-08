@@ -15,6 +15,12 @@ random-photo API). These are **real JPEGs at the correct crop and size for their
 they are **not matched to their `data-brief`** — expect generic photography (landscapes,
 textures, portraits of unrelated subjects), not the warm editorial/still-life mood described.
 
+Because the unmatched stock (a red barrel, a saturated street scene, an orange sunset) fought
+the warm neutral palette badly enough to misrepresent the design, `site.css` applies a
+desaturating warm filter to every `img[data-placeholder="true"]`. It is a review aid, not part
+of the design: **delete that rule once the real, on-brief photographs are in.** It is marked
+in `site.css` directly above the `[data-placeholder="true"]` block.
+
 **Before client review:** either swap these for real Unsplash matches (search each
 `data-brief` manually — Unsplash's own site works fine for a human, the block is only on
 automated fetching) or treat this as confirmation that a real shoot is needed. The `data-brief`
@@ -69,6 +75,7 @@ and `Muted` tokens. Not yet placed on any page — prepared for the Elementor bu
 | `pressence-znak.svg` | `#C9A54E` | `#71736A` (Muted) | Redrawn per spec (root/sprout mark) |
 | `pressence-korenina.svg` | `rgba(240,237,229,0.28)` | `#D7D6CC` (Sage) | Redrawn per spec (root lines) |
 | `pressence-korenina-zbir.svg` | `rgba(240,237,229,0.28)` | `#D7D6CC` (Sage) | Redrawn per spec (converging roots) |
+| `pressence-vejica.svg` | — (new) | `#D7D6CC` (Sage) | Drawn for the Domov statement panel, which the mockup shows with a line-art sprig at its right edge. The only brand SVG currently placed on a page. |
 | `pressence-letnice.svg` | `rgba(201,165,78,0.5)` ×9 | `#D7D6CC` (Sage) ×9 | Downloaded from the live site (`pressence.si/wp-content/uploads/2026/07/pressence-letnice.svg`, read-only fetch) and recoloured — 9 gold strokes replaced |
 
 ## The shoot brief, if one happens
