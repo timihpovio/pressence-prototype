@@ -174,3 +174,17 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
 .p-faq summary::after { content: "+"; color: var(--p-muted); font-family: var(--p-font-body); }
 .p-faq details[open] summary::after { content: "–"; }
 .p-faq details p { padding-bottom: 20px; margin: 0; }
+
+.p-filter { display: flex; flex-wrap: wrap; gap: clamp(12px, 2vw, 28px); border-bottom: var(--p-hairline); padding-bottom: 14px; margin-bottom: var(--p-gap); }
+.p-filter button {
+  background: none; border: 0; padding: 6px 0; cursor: pointer;
+  font: 400 var(--p-small)/1 var(--p-font-body); color: var(--p-muted);
+  border-bottom: 2px solid transparent;
+}
+.p-filter button[aria-selected="true"] { color: var(--p-ink); border-bottom-color: var(--p-ink); }
+.p-post { border: var(--p-hairline); background: var(--p-ivory); display: flex; flex-direction: column; }
+.p-post img { aspect-ratio: 4 / 3; object-fit: cover; }
+.p-post__body { padding: var(--p-gap-sm) var(--p-gap-sm) var(--p-gap); display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.p-post__body h3 { font-size: var(--p-h3); margin: 0; }
+.p-post__meta { font: 400 var(--p-small)/1 var(--p-font-body); color: var(--p-muted); }
+.p-post__body .p-link-arrow { margin-top: auto; align-self: flex-start; }
