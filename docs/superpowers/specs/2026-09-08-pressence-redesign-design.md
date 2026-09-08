@@ -33,6 +33,27 @@ Existing URLs, all of which the redesign preserves:
 /politika-zasebnosti/  /politika-piskotkov/  /pravno-obvestilo/
 ```
 
+### The WordPress stack (verified on the live site)
+
+Elementor is on the **free** tier — no Elementor Pro assets are loaded anywhere. Every gap
+that would normally force Pro is already covered by plugins that are installed and in use:
+
+| Need | Elementor free | What the site actually uses |
+|---|---|---|
+| Header / footer templates | Pro only | **Xpro Theme Builder** (`data-elementor-type="xpro-themer"`, template IDs 36 and 37, sticky header already enabled) |
+| Navigation menu | Pro only | `xpro-horizontal-menu` |
+| Contact form | Pro only | **WPForms Lite**, embedded via the `wpforms` widget |
+| Blog listing | Pro only | `xpro-post-grid` |
+| Buttons | core has one | `xpro-button` |
+| Global colours and fonts | **free** | Elementor Site Settings — the token strategy is unaffected |
+
+Theme: **Blocksy** + blocksy-companion. Addons: **Xpro Elementor Addons** (free tier).
+Core free widgets already in use: `heading`, `text-editor`, `image`, `icon-list`,
+`divider`, `social-icons`.
+
+No design change follows from the free tier. What changes is the widget vocabulary the
+Elementor build must use, recorded below and in `NOVAMIRA-SKILL.md`.
+
 ### Design inputs
 
 - `source/Zasnova strani.png` — six-screen mockup: Domov, Coaching, O meni, Zapisi
@@ -60,7 +81,7 @@ doc's plain bulleted list), the *Pogosta področja* topic tags, and the SI/EN la
 
 | Decision | Choice | Reason |
 |---|---|---|
-| Build approach | Plain static multi-page HTML, one tokenised stylesheet, shared `chrome.js` for header/footer | Opens by double-clicking; no build step or toolchain for the client; nine pages does not justify Astro/11ty |
+| Build approach | Plain static multi-page HTML, one tokenised stylesheet, shared `chrome.js` for header/footer | Opens by double-clicking; no build step or toolchain for the client; fourteen pages does not justify Astro/11ty |
 | Content scope | Restore formats, practical details and FAQ | Site otherwise has no offer structure and no reassurance layer |
 | Imagery | Free stock matching the mockup's mood, every slot tagged as placeholder, inventoried in `ASSETS.md` | Real assets do not cover the mockup's still lifes or its warm editorial portrait |
 | Typography | EB Garamond (display/headings) + Inter (body/UI) | Matches the mockup; the mockup's serif is Garamond-style, not the Fraunces currently configured |
@@ -118,7 +139,38 @@ first thing to protect if something has to give.
 ### Elementor mapping
 
 Each prototype section carries a `data-el` attribute naming its intended Elementor
-container or widget, so the mapping survives out of my head and into the markup.
+container or widget, so the mapping survives out of my head and into the markup. The
+attribute values name **widgets available on this site's free stack**, never Pro widgets:
+
+| Prototype element | Elementor target |
+|---|---|
+| Site header, footer | Xpro Theme Builder templates 36 / 37 — edit in place, do not rebuild |
+| Main navigation | `xpro-horizontal-menu` |
+| Page section | Elementor container (flex), free |
+| `h1`–`h4` | core `heading` |
+| Paragraphs | core `text-editor` |
+| Bulleted lists (Kako delam, Coaching ni) | core `icon-list` |
+| Images | core `image` |
+| Panel hairlines | core `divider` |
+| CTAs | `xpro-button` |
+| FAQ, 11 items | **core Elementor Accordion** — Xpro's Advance Accordion is Pro |
+| Zapisi index + category filter | `xpro-post-grid` |
+| Single article | Xpro Theme Builder single template |
+| Contact form | WPForms Lite form, embedded via the `wpforms` widget |
+| Footer social links | core `social-icons` |
+
+Two consequences of the free tier for the build:
+
+- **Per-element Custom CSS is Pro only.** Anything needing hand-written CSS — the sticky
+  side-rail on the Coaching page, panel edge bleeds, the `clamp()` type scale — gets a CSS
+  class on the element and a rule in one global stylesheet (Blocksy's Additional CSS), not
+  an inline Custom CSS field.
+- **Sticky is a Pro motion effect.** The Coaching side-rail uses `position: sticky` from
+  that global stylesheet instead. The header's stickiness already comes from Xpro, not
+  Elementor.
+- `xpro-post-grid` loads cubeportfolio, which suggests taxonomy filtering is available on
+  the free tier. To be verified during the build; if it is not, the Zapisi category filter
+  falls back to linking each tab to its `/category/<slug>/` archive.
 
 ## Sitemap
 
