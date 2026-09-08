@@ -222,3 +222,22 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); }
   display: block;
   margin-bottom: 10px;
 }
+
+.p-form { background: var(--p-ivory); border: var(--p-hairline); padding: var(--p-gap); }
+.p-field { margin-bottom: var(--p-gap-sm); }
+.p-field label { display: block; font: 400 var(--p-small)/1.4 var(--p-font-body); color: var(--p-body); margin-bottom: 8px; }
+.p-field input, .p-field textarea {
+  width: 100%; padding: 12px 14px;
+  border: var(--p-hairline); border-radius: var(--p-radius);
+  background: var(--p-ivory); color: var(--p-ink);
+  font: var(--p-base)/1.5 var(--p-font-body);
+}
+.p-field textarea { min-height: 132px; resize: vertical; }
+.p-field input:focus, .p-field textarea:focus { outline: 2px solid var(--p-muted); outline-offset: 1px; }
+.p-field__hint { font-size: var(--p-small); color: var(--p-muted); margin: 6px 0 0; }
+.p-consent { display: flex; gap: 12px; align-items: flex-start; margin-bottom: var(--p-gap-sm); }
+.p-consent input { width: auto; margin-top: 4px; flex: none; }
+.p-consent label { font-size: var(--p-small); color: var(--p-body); margin: 0; }
+.p-contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--p-gap-sm); }
+.p-contact-list h3 { font: 500 var(--p-small)/1.3 var(--p-font-body); color: var(--p-ink); margin: 0 0 2px; }
+.p-contact-list p { margin: 0; color: var(--p-muted); }

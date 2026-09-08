@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="sl" data-root="./">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt — Pressence</title>
+<meta name="description" content="Začniva s pogovorom. Ni vam treba že vedeti, kaj točno potrebujete. Coaching v Mariboru ali na spletu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="kontakt">
+
+<main id="main">
+
+  <section class="p-panel p-panel--ivory" data-el="container:hero">
+    <div class="p-container p-narrow">
+      <h1>Začniva s pogovorom.</h1>
+      <p class="p-lead">Ni vam treba že vedeti, kaj točno potrebujete.</p>
+      <p>Za prvi stik je dovolj, da veste, da bi se o nečem želeli pogovoriti.</p>
+    </div>
+  </section>
+
+  <section class="p-panel p-panel--panel" data-el="container:split-form">
+    <div class="p-container p-split">
+      <div>
+        <p class="p-label">Uvodni pogovor</p>
+        <h2>Prvi pogovor je namenjen temu, da se spoznava.</h2>
+        <p>Poveste mi lahko, kaj vas je pripeljalo do coachinga, jaz pa vam predstavim svoj način dela.</p>
+        <p>Skupaj preveriva, ali je coaching prava oblika podpore za vas in ali si želiva nadaljevati sodelovanje.</p>
+        <p>Brez pritiska in brez obveznosti nadaljevanja.</p>
+
+        <ul class="p-contact-list" data-el="icon-list">
+          <li>
+            <h3>E-pošta</h3>
+            <p><a href="mailto:info@pressence.si">info@pressence.si</a></p>
+          </li>
+          <li>
+            <h3>Lokacija</h3>
+            <p>Maribor</p>
+          </li>
+          <li>
+            <h3>Srečanja</h3>
+            <p>V živo v Mariboru ali na spletu.</p>
+          </li>
+          <li>
+            <h3>Jezik</h3>
+            <p>Slovenščina / angleščina</p>
+          </li>
+        </ul>
+      </div>
+
+      <form class="p-form" data-el="wpforms:contact" action="#" method="post" novalidate>
+        <div class="p-field">
+          <label for="ime">Ime in priimek</label>
+          <input type="text" id="ime" name="ime" autocomplete="name" required>
+        </div>
+        <div class="p-field">
+          <label for="email">E-naslov</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div class="p-field">
+          <label for="sporocilo">Kaj vas je pripeljalo sem?</label>
+          <textarea id="sporocilo" name="sporocilo" required></textarea>
+          <p class="p-field__hint">Ni treba pisati veliko. Nekaj stavkov je povsem dovolj.</p>
+        </div>
+        <div class="p-consent">
+          <input type="checkbox" id="privolitev" name="privolitev" required>
+          <label for="privolitev">Strinjam se, da se moje sporočilo in osebni podatki shranijo in uporabijo za odgovor, kot je opisano v <a href="politika-zasebnosti.html">politiki zasebnosti</a>.</label>
+        </div>
+        <p><button class="p-btn" type="submit" data-el="wpforms:submit">Pošlji sporočilo</button></p>
+        <p class="p-field__hint">Sporočilo in osebne podatke bom obravnavala zaupno.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="p-panel p-panel--olive" data-el="container:cta">
+    <div class="p-container p-narrow">
+      <h2>Ni treba, da je prvi korak velik.</h2>
+      <p>Včasih je dovolj en pogovor, da začutite, ali je to prostor za vas.</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/ui.js"></script>
+</body>
+</html>
