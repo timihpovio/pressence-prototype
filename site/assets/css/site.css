@@ -526,6 +526,9 @@ img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.0
 .p-rail {
   position: sticky;
   top: calc(var(--p-header-h) + 28px);
+  /* The prose column gets its top air from .p-rail-content > .p-block:first-child.
+     The rail needs the same, or the label sits flush against the hero above. */
+  margin-top: var(--p-panel-y);
   display: flex;
   flex-direction: column;
 }
@@ -585,6 +588,9 @@ img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.0
   height: 0;
   background: var(--p-ink);
   pointer-events: none;
+  /* The links are positioned and come later in the DOM, so without this the
+     active row's ivory band paints straight over the marker. */
+  z-index: 1;
 }
 .p-rail.is-ready .p-rail__marker {
   transition: transform var(--p-dur-slow) var(--p-ease),
@@ -602,6 +608,7 @@ img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.0
   .p-rail {
     position: sticky;
     top: var(--p-header-h);
+    margin-top: 0;
     z-index: 10;
     margin-inline: calc(var(--p-gutter) * -1);
     background: var(--p-panel);
