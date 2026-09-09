@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Prototype hosted for review only. The live site is pressence.si; the canonical
+     link below points there. Remove this when the prototype is retired. -->
+<meta name="robots" content="noindex, nofollow">
 <title>Coaching — Pressence</title>
 <meta name="description" content="Coaching je prostor za raziskovanje tega, kar je trenutno pomembno za vas. Kako delam, kako poteka sodelovanje in kaj lahko pričakujete.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,17 +46,18 @@
 
   <section class="p-panel p-panel--ivory p-panel--rail" data-el="container:rail-content">
     <div class="p-container p-rail-layout p-reveal">
-      <nav class="p-rail" aria-label="Na tej strani" data-rail data-el="container:anchor-nav">
-        <a href="#kaj-je-coaching" aria-current="true">Kaj je coaching</a>
-        <a href="#filozofija">Moja filozofija</a>
-        <a href="#kaj-ni">Kaj coaching ni</a>
-        <a href="#kako-delam">Kako delam</a>
-        <a href="#prisotnost">Prisotnost in poslušanje</a>
-        <a href="#potek">Potek sodelovanja</a>
-        <a href="#oblike">Oblike sodelovanja</a>
-        <a href="#prakticno">Praktično</a>
-        <a href="#vprasanja">Pogosta vprašanja</a>
-        <a href="#zaupnost">Zaupnost in etika</a>
+      <nav class="p-rail" aria-labelledby="p-rail-title" data-rail data-el="container:anchor-nav">
+        <p class="p-rail__label" id="p-rail-title">Na tej strani</p>
+        <div class="p-rail__list" data-rail-list>
+          <span class="p-rail__marker" data-rail-marker aria-hidden="true"></span>
+          <a href="#kaj-je-coaching" aria-current="location">Kaj je coaching</a>
+          <a href="#filozofija">Moja filozofija</a>
+          <a href="#kaj-ni">Kaj coaching ni</a>
+          <a href="#kako-delam">Kako delam</a>
+          <a href="#prisotnost">Prisotnost in poslušanje</a>
+          <a href="#potek">Potek sodelovanja</a>
+          <a href="#zaupnost">Zaupnost in etika</a>
+        </div>
       </nav>
       <div class="p-rail-content">
         <section class="p-block p-reveal" data-el="container:intro">
@@ -86,33 +90,18 @@
         <p>In ko imamo drugačen odnos, dobimo tudi več možnosti za izbiro.</p>
         </section>
 
-        <section class="p-block p-reveal" data-el="container:compare">
-        <h2 id="kaj-ni">Kaj coaching je in kaj ni</h2>
+        <section class="p-block p-reveal" data-el="container:text-list">
+        <h2 id="kaj-ni">Kaj coaching ni</h2>
         <p class="p-lead">Ne svetujem vam, kako živeti svoje življenje.</p>
-        <div class="p-compare p-reveal-group">
-          <div class="p-compare__col" data-el="icon-list">
-            <h3>Coaching je</h3>
-            <ul>
-              <li>sodelovalen</li>
-              <li>usmerjen naprej</li>
-              <li>reflektiven</li>
-              <li>podpora dejanju</li>
-              <li>voden z vaše strani</li>
-              <li>zaupen</li>
-            </ul>
-          </div>
-          <div class="p-compare__col" data-el="icon-list">
-            <h3>Coaching ni</h3>
-            <ul>
-              <li>svetovanje</li>
-              <li>mentorstvo</li>
-              <li>terapija</li>
-              <li>diagnosticiranje</li>
-              <li>dajanje pripravljenih rešitev</li>
-              <li>prepričevanje, kaj je za vas prav</li>
-            </ul>
-          </div>
-        </div>
+        <p>Coaching ni:</p>
+        <ul data-el="icon-list">
+          <li>svetovanje,</li>
+          <li>mentorstvo,</li>
+          <li>terapija,</li>
+          <li>diagnosticiranje,</li>
+          <li>dajanje pripravljenih rešitev,</li>
+          <li>prepričevanje, kaj je za vas prav.</li>
+        </ul>
         <p>Kot coach ne prevzemam vloge nekoga, ki vaše življenje pozna bolje od vas.</p>
         <p>Lahko pa sem ob vas tako, da skupaj ustvariva prostor, v katerem ga lahko jasneje vidite vi.</p>
         </section>
@@ -147,8 +136,7 @@
         </section>
 
         <section class="p-block p-reveal p-block--panel" data-el="container:steps-5">
-        <p class="p-label">Potek sodelovanja</p>
-        <h2 id="potek">Pet korakov, en proces.</h2>
+        <h2 id="potek">Potek sodelovanja</h2>
         <div class="p-grid p-grid--3 p-grid--steps p-reveal-group">
           <article class="p-card" data-el="container:step">
             <span class="p-card__num">01</span>
@@ -175,121 +163,6 @@
             <h3>Refleksija procesa</h3>
             <p>Sproti preverjava, kaj se spreminja, kaj vam koristi in kaj potrebuje drugačno pozornost. Proces prilagajava vam, ne obratno.</p>
           </article>
-        </div>
-        </section>
-
-        <section class="p-block p-reveal" data-el="container:cards-4">
-        <p class="p-label">Oblike sodelovanja</p>
-        <h2 id="oblike">Načini, na katere lahko sodelujeva.</h2>
-        <p class="p-lead">To niso paketi. So različne oblike, ki jih izbereva glede na to, na čem delate.</p>
-        <div class="p-grid p-grid--2 p-reveal-group">
-          <article class="p-card" data-el="container:card">
-            <h3>Uvodni pogovor</h3>
-            <p class="p-label">Na spletu ali v Mariboru · brez stroška in obveznosti</p>
-            <p>Prvo srečanje, na katerem se spoznava in preveriva, ali vam moj način dela ustreza.</p>
-          </article>
-          <article class="p-card" data-el="container:card">
-            <h3>Posamezno srečanje</h3>
-            <p class="p-label">Eno srečanje</p>
-            <p>Osredotočen pogovor za eno odločitev, eno situacijo, en vozel.</p>
-          </article>
-          <article class="p-card" data-el="container:card">
-            <h3>Coaching pot</h3>
-            <p class="p-label">Več srečanj v dogovorjenem ritmu</p>
-            <p>Običajna oblika dela. Dovolj kontinuitete, da vzorci pridejo na površje in se lahko začnejo spreminjati.</p>
-          </article>
-          <article class="p-card" data-el="container:card">
-            <h3>Dolgoročno sodelovanje</h3>
-            <p class="p-label">Za ljudi z več odgovornosti</p>
-            <p>Stalen pogovor za tiste, katerih odločitve nosijo težo tudi za druge.</p>
-          </article>
-        </div>
-        <p>O naložbi se odkrito pogovoriva v uvodnem pogovoru, pred kakršno koli zavezo. Cene tukaj niso objavljene, ker je prava oblika odvisna od tega, na čem delate.</p>
-        </section>
-
-        <section class="p-block p-reveal p-block--panel" data-el="container:cards-7">
-        <p class="p-label">Praktično</p>
-        <h2 id="prakticno">Kaj lahko pričakujete.</h2>
-        <div class="p-grid p-grid--3 p-reveal-group">
-          <article class="p-card" data-el="container:card">
-            <h3>Trajanje srečanja</h3>
-            <p>Srečanje traja približno eno uro.</p>
-          </article>
-          <article class="p-card" data-el="container:card">
-            <h3>Kje se srečava</h3>
-            <p>V živo v Mariboru ali po video povezavi.</p>
-          </article>
-          <article class="p-card" data-el="container:card">
-            <h3>Pogostost</h3>
-            <p>Ritem določiva skupaj in ga prilagajava vašemu tempu.</p>
-          </article>
-          <article class="p-card" data-el="container:card">
-            <h3>Zaupnost</h3>
-            <p>Vse, kar je izrečeno na srečanju, ostane med nama, z običajnimi zakonskimi izjemami ob tveganju za škodo.</p>
-          </article>
-          <article class="p-card" data-el="container:card">
-            <h3>Priprava</h3>
-            <p>Ni potrebna. Če želite kaj zapisati vnaprej, je tudi to dobrodošlo.</p>
-          </article>
-          <article class="p-card" data-el="container:card">
-            <h3>Po prvem pogovoru</h3>
-            <p>Vzamete si čas. Če vam ustreza, se dogovoriva za obliko. Če ne, je tudi to povsem v redu.</p>
-          </article>
-          <article class="p-card" data-el="container:card">
-            <h3>Jezik</h3>
-            <p>Srečanja potekajo v slovenščini ali angleščini. Izberite tistega, v katerem mislite brez prevajanja sebe.</p>
-          </article>
-        </div>
-        </section>
-
-        <section class="p-block p-reveal" data-el="elementor-core:accordion">
-        <p class="p-label">Pogosta vprašanja</p>
-        <h2 id="vprasanja">Preden se odločite.</h2>
-        <div class="p-faq">
-          <details>
-            <summary>Kako vem, ali je coaching pravi zame?</summary>
-            <p>Če nekaj vedno znova premlevate in sami ne pridete nikamor, coaching običajno pomaga. Uvodni pogovor obstaja prav zato, da to skupaj ugotoviva, brez obveznosti.</p>
-          </details>
-          <details>
-            <summary>Kaj se zgodi na uvodnem pogovoru?</summary>
-            <p>Opišete, kaj vas zaposluje. Zastavim nekaj vprašanj. Obe se iskreno odločiva, ali nadaljujeva. Na koncu ni prodajnega nagovora.</p>
-          </details>
-          <details>
-            <summary>Ali je coaching zaupen?</summary>
-            <p>Da. Nič izrečenega se ne deli, z običajnimi zakonskimi izjemami ob tveganju resne škode.</p>
-          </details>
-          <details>
-            <summary>Ali ponujate spletna srečanja?</summary>
-            <p>Da, po video povezavi. Veliko ljudi dela povsem na spletu in globina zaradi tega ni manjša.</p>
-          </details>
-          <details>
-            <summary>Se lahko srečava v živo v Mariboru?</summary>
-            <p>Da, srečanja v živo potekajo v Mariboru.</p>
-          </details>
-          <details>
-            <summary>Koliko srečanj bom potrebovala ali potreboval?</summary>
-            <p>Odvisno od tega, na čem delate. Nekaterim zadostujejo tri srečanja, drugim koristi daljša pot. Obliko določiva skupaj in jo sproti pregledujeva.</p>
-          </details>
-          <details>
-            <summary>V čem je razlika med coachingom in terapijo?</summary>
-            <p>Terapija pogosto dela s celjenjem in preteklostjo. Coaching dela z jasnostjo, izbiro in tem, kar sledi. Nista v nasprotju in eno ne nadomešča drugega.</p>
-          </details>
-          <details>
-            <summary>Lahko coaching pokriva poklicne in osebne teme?</summary>
-            <p>Skoraj vedno oboje. Oseba, ki odloča v službi, je ista oseba, ki gre domov.</p>
-          </details>
-          <details>
-            <summary>V katerih jezikih poteka?</summary>
-            <p>V slovenščini in angleščini.</p>
-          </details>
-          <details>
-            <summary>Kaj, če ugotoviva, da si ne ustrezava?</summary>
-            <p>Potem to jasno poveva, in kjer lahko, vas usmerim k nekomu primernejšemu. Jasen ne je koristen izid.</p>
-          </details>
-          <details>
-            <summary>Kaj pa odpovedi srečanja?</summary>
-            <p>Če srečanja ne morete opraviti, mi to sporočite čim prej in poiščeva nov termin.</p>
-          </details>
         </div>
         </section>
 

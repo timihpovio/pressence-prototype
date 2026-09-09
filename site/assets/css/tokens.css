@@ -58,6 +58,8 @@
   --p-gap-sm: 16px;
   --p-hero-min: clamp(400px, 40vw, 560px);
   --p-hero-split: 44%;
+  --p-header-h: 65px;        /* sticky header; site.css raises it under 861px */
+  --p-anchor-offset: 96px;   /* html scroll-padding-top, and the rail's read line */
 
   /* --- Other ------------------------------------------------------- */
   --p-radius: 2px;

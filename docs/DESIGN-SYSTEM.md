@@ -79,7 +79,6 @@ Advance Accordion.
 | `<img>` | core `image` |
 | Panel hairline | core `divider` |
 | `.p-btn` | `xpro-button` |
-| `.p-faq` `<details>` | **core Accordion** |
 | Zapisi grid, filter | `xpro-post-grid` |
 | Article pages | Xpro Theme Builder single template |
 | Contact form | WPForms Lite via the `wpforms` widget |
@@ -93,14 +92,15 @@ via the widget's Advanced → CSS Classes field.
 
 | Class | Why it needs CSS |
 |---|---|
-| `p-rail` | `position: sticky` — Elementor sticky is a Pro motion effect |
+| `p-rail` | `position: sticky` — Elementor sticky is a Pro motion effect. Sticky in both layouts: a 220px column on desktop, a horizontally scrollable strip under the header below 861px |
 | `p-aside` | `position: sticky` |
 | `p-figure--bleed` | image bleeding past the container edge |
-| `p-faq` | `<details>` marker replacement and the +/− affordance |
-| `p-compare` | two-column comparison with hairline rows |
 | `p-hero__media` | photo bleeding off the band edge, plus the gradient that fades it into the band tint |
 | `p-rail-layout` | the tinted rail column that bleeds off the left page edge (`calc(50% - 50vw)`), and `overflow-x: clip` so the bleed is trimmed without breaking `position: sticky` |
-| `p-rail a[aria-current]` | the active rail row, whose lighter band is painted into the bleed with `box-shadow: -100vw` |
+| `p-rail a[aria-current]` | the active rail row, whose lighter band is painted into the bleed with `box-shadow: -100vw`; under 861px this becomes an inset underline on the active chip instead |
+| `p-rail__marker` | the 2px ink rule in the active row's left margin. `ui.js` sets its `height` and `translateY`; it slides between rows. Hidden on the mobile strip |
+| `p-rail__list` | the rail's scroll container. `min-width: 0` is load-bearing — a grid item's `min-width: auto` is min-content, which is the whole row of nowrap chips, so without it the mobile strip grows instead of scrolling |
+| `p-rail__label` | the rail's visible title, and the nav's accessible name via `aria-labelledby` |
 | `p-narrow` | caps the prose measure **inside** the container; it must not re-centre the block, because every panel in the mockup hangs off the same left edge as the hero |
 | `p-prose-split` | the two-column grid and its `860px` collapse |
 | `p-statement` | the enlarged heading and lead-size body of the short beats |
@@ -173,7 +173,6 @@ elements. **Nothing has to be set per widget.** Timings come from the `--p-dur` 
 | `.p-btn--ghost` | fills to `Ivory` with `Ink` text |
 | `.p-post` | lifts 3px, border → `Muted`, image scales 1.04 inside `.p-post__frame`, title underlines |
 | `.p-filter button` | underline scales in from the left |
-| `.p-faq summary` | one glyph rotates 135° — a plus becoming a cross — rather than swapping `+` for `−` |
 | `.p-field input`, `textarea` | border → `Muted` |
 | `.p-rail a` | colour → `Ink` |
 

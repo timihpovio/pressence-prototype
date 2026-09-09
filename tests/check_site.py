@@ -174,12 +174,36 @@ def check_img_alt():
                 fail("img_alt", "%s: img %s has no alt" % (rel, a.get("src")))
 
 
+# Photographs that are the real, final asset. Everything else under /img/ must
+# still carry data-placeholder="true" so docs/ASSETS.md and the review filter in
+# site.css stay honest about what has not been shot yet.
+REAL_PHOTOGRAPHY = {
+    # The coach's own studio portrait from her media library, background removed
+    # and composited onto the palette grounds. Not the mockup's warm editorial
+    # portrait -- that shows a different person entirely -- but it is really her.
+    "portret-hero.jpg",
+    "portret-o-meni.jpg",
+}
+
+
 def check_placeholders_tagged():
+    """Placeholders must be tagged; real photography must not be.
+
+    Tagging a real photo would apply the desaturating review filter to it, and
+    leaving a placeholder untagged would hide it from the asset inventory.
+    """
     for rel in all_pages():
         p, _ = parse(rel)
         for a in p.imgs:
             src = a.get("src", "")
-            if "/img/" in src and a.get("data-placeholder") != "true":
+            if "/img/" not in src:
+                continue
+            real = os.path.basename(src) in REAL_PHOTOGRAPHY
+            tagged = a.get("data-placeholder") == "true"
+            if real and tagged:
+                fail("placeholders_tagged",
+                     "%s: %s is real photography but is tagged as a placeholder" % (rel, src))
+            elif not real and not tagged:
                 fail("placeholders_tagged", "%s: %s not tagged" % (rel, src))
 
 
@@ -226,6 +250,91 @@ def check_chrome_included():
             fail("chrome_included", "%s does not load chrome.js" % rel)
 
 
+COPY_DOC = os.path.join(ROOT, "source", "copy.txt")
+
+# Pages whose prose must come from the copy doc, sentence for sentence.
+# The six Zapisi articles and the three legal pages are acknowledged scaffolds
+# (see README) and are exempt.
+PROVENANCE_PAGES = [
+    "index.html", "coaching.html", "o-meni.html", "zapisi.html", "kontakt.html",
+]
+
+# Sentences that are deliberately not from the copy doc. Keep this list short and
+# justify every entry -- it is the only sanctioned escape hatch.
+PROVENANCE_ALLOWED = [
+    # GDPR consent wording for the contact form. Needs the client's legal
+    # adviser to confirm; tracked in docs/LAUNCH-BLOCKERS.md.
+    "strinjam se da se moje sporocilo in osebni podatki shranijo in uporabijo"
+    " za odgovor kot je opisano v",
+    "politiki zasebnosti",
+    # Article dates and category chips on the Zapisi cards; the copy doc supplies
+    # neither. Placeholder metadata until real posts exist.
+    "maj 2024", "april 2024", "marec 2024",
+    # She confirmed on 2026-09-09 that she also coaches in Czech. The source docx
+    # predates that and lists only Slovenian and English. See docs/MULTILINGUAL.md.
+    "slovenscina anglescina cescina",
+]
+
+_FOLD = {
+    "\u010d": "c", "\u0107": "c", "\u0161": "s", "\u017e": "z",
+    "\u010c": "c", "\u0106": "c", "\u0160": "s", "\u017d": "z",
+}
+
+
+def _norm(text):
+    """Lowercase, fold Slovenian diacritics, drop punctuation, collapse space."""
+    text = text.lower()
+    for k, v in _FOLD.items():
+        text = text.replace(k, v)
+    text = re.sub(r"[^0-9a-z\s]", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _visible_sentences(raw):
+    """Prose inside <main>, split into sentences, plus input placeholders."""
+    body = re.search(r"<main\b.*?</main>", raw, re.S | re.I)
+    chunk = body.group(0) if body else raw
+    extra = re.findall(r'placeholder="([^"]*)"', chunk)
+    chunk = re.sub(r"<(script|style)\b.*?</\1>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<!--.*?-->", " ", chunk, flags=re.S)
+    chunk = re.sub(r"<[^>]+>", "\n", chunk)
+    chunk = (chunk.replace("&nbsp;", " ").replace("&amp;", "&")
+                  .replace("&lt;", "<").replace("&gt;", ">").replace("&#39;", "'")
+                  .replace("&quot;", '"'))
+    out = []
+    for line in chunk.split("\n") + extra:
+        for sentence in re.split(r"(?<=[.?!])\s+", line):
+            if len(_norm(sentence)) > 18:
+                out.append(sentence.strip())
+    return out
+
+
+def check_copy_provenance():
+    """Every sentence of prose must be traceable to source/copy.txt.
+
+    This is what stops copy from the live pressence.si -- or invented copy --
+    reappearing in the client's voice. See the reverted 'Content restored from
+    the live site' section of the design spec.
+    """
+    if not os.path.isfile(COPY_DOC):
+        fail("copy_provenance", "missing source/copy.txt")
+        return
+    with open(COPY_DOC, encoding="utf-8") as fh:
+        doc = _norm(fh.read())
+    allowed = [_norm(a) for a in PROVENANCE_ALLOWED]
+    for rel in PROVENANCE_PAGES:
+        path = os.path.join(SITE, rel)
+        if not os.path.isfile(path):
+            continue
+        with open(path, encoding="utf-8") as fh:
+            raw = fh.read()
+        for sentence in _visible_sentences(raw):
+            n = _norm(sentence)
+            if n in doc or any(a and a in n for a in allowed):
+                continue
+            fail("copy_provenance", "%s: not in copy.txt: %r" % (rel, sentence[:90]))
+
+
 CHECKS = [
     check_pages_exist,
     check_links_resolve,
@@ -239,6 +348,7 @@ CHECKS = [
     check_heading_order,
     check_no_unrendered_placeholders,
     check_chrome_included,
+    check_copy_provenance,
 ]
 
 

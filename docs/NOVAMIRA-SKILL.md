@@ -75,7 +75,7 @@ the hero image eager. Every image needs its width and height so nothing shifts o
 2. The global stylesheet in Additional CSS.
 3. Header template 36, footer template 37.
 4. `/` — the widest range of section patterns; get these right and the rest reuse them.
-5. `/coaching/` — includes the accordion and the sticky rail, the two hardest sections.
+5. `/coaching/` — includes the sticky side-rail nav, the hardest section on the site.
 6. `/o-meni/`, `/kontakt/`.
 7. The Xpro Theme Builder single-post template, then the six posts.
 8. `/zapisi/` with `xpro-post-grid`. **Verify free-tier taxonomy filtering.** If it is
@@ -95,7 +95,7 @@ The `data-el` values used across the prototype, and what each means:
 | `container:card` | inner container, **no border, no background**, a 2px `Line` rule on top only |
 | `container:step` | as card, with the step number above the heading in the `Display` font at `clamp(34px, 3.4vw, 46px)`, coloured `Sage` — not a small `Label` |
 | `container:compare` | two-column grid, each column an `icon-list` with hairline rows |
-| `container:rail-content` | two columns, 220px sticky anchor nav plus body |
+| `container:rail-content` | two columns, 220px sticky anchor nav plus body. Under 861px the nav becomes a sticky horizontal strip; the active-state marker is driven by `ui.js`, not by Elementor |
 | `container:cta` | full-width container, `Olive` background, `Ivory` text, ghost button, `.p-statement` heading size |
 | `container:split-form` | two columns, contact details left, WPForms right |
 | `container:article-hero` | the same band as `container:hero`, carrying breadcrumb, `h1` and date |

@@ -4,3 +4,8 @@ node_modules/
 .idea/
 .vscode/
 .claude/
+
+# Client source materials: kept locally, never published.
+# The extracted text in source/copy.txt is what the build and the checker use.
+source/Pressence Coaching Website Copy.docx
+source/Zasnova strani.png

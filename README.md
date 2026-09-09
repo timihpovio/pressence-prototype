@@ -10,7 +10,7 @@ open site/index.html
 ```
 
 No server, no build step, no dependencies. Every page is a real file; the nav works; the
-Zapisi category filter and the FAQ accordion work.
+Zapisi category filter works.
 
 ## Check it
 

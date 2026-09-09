@@ -21,18 +21,47 @@ desaturating warm filter to every `img[data-placeholder="true"]`. It is a review
 of the design: **delete that rule once the real, on-brief photographs are in.** It is marked
 in `site.css` directly above the `[data-placeholder="true"]` block.
 
-**Before client review:** either swap these for real Unsplash matches (search each
-`data-brief` manually — Unsplash's own site works fine for a human, the block is only on
-automated fetching) or treat this as confirmation that a real shoot is needed. The `data-brief`
-values are unchanged and remain the correct shot list either way.
+**Before client review:** either swap these for real matches sourced by a human, or treat
+this as confirmation that a real shoot is needed. The `data-brief` values are unchanged and
+remain the correct shot list either way.
+
+### Source reachability, verified 2026-09-09
+
+| Source | Result | Usable without a human? |
+|---|---|---|
+| `source.unsplash.com/featured/?…` | **503** — the keyless random endpoint was retired | No |
+| `unsplash.com/s/photos/…` | **307** into a bot challenge | No |
+| Pexels API | **401** — requires a free developer key | Only with a key |
+| Openverse API (`api.openverse.org`) | **200**, no key needed | Yes, but see below |
+
+Openverse is reachable and needs no key, but it **cannot serve this art direction**. Probing
+all nine photographic briefs against the CC0 pool:
+
+- `stoneware cup on linen` — **0 results**. Same for `folded linen beside a cup`.
+- `mountain road through golden hills` — **0 results**.
+- `two chairs in a calm room` — 91 nominal hits, but the top matches are *girl with coffee*,
+  *MCLI Server Farm* and *painted fireplace*. Semantically noisy.
+- `olive branch` — 240 nominal hits; the CC0 top matches are a line-art SVG, a Flickr photo
+  of people "extending the olive branch", and a marble relief in St Peter's Basilica.
+- Only `dried flowers vase` (6 CC0) and `beech forest path` (7 CC0) return plausible frames.
+
+Widening to CC BY / BY-SA raises volume but adds per-image attribution, and BY-SA is a
+share-alike obligation that does not belong on a commercial client site. The warm editorial
+still-life register the mockup is built on — stoneware, linen, dried gypsophila, soft
+directional daylight — is essentially absent from open-licensed pools. It is commissioned or
+premium-stock work.
+
+**The two portrait slots must not be filled from stock at all**, at any licence. Putting a
+stranger's face on a named coach's site misrepresents her. The options are her real headshot
+(below) or a shoot.
 
 ## Photography slots
 
 | File | Used on | Ratio | Brief | Current placeholder | Real asset available? |
 |---|---|---|---|---|---|
 | `hero-oljka.jpg` | Domov hero | 4:3 | backlit olive branch, warm late-afternoon light, shallow DOF | Lorem Picsum (generic, unmatched) | No |
-| `portret-hero.jpg` | O meni hero | ~10:11 | editorial portrait, warm knitwear, window light, three-quarter view | Lorem Picsum (generic, unmatched) | **Partly** — a real studio headshot exists (see below) but is the wrong register |
-| `portret-o-meni.jpg` | Domov, O meni teaser | 4:5 | warm editorial portrait, cream cardigan, natural window light | Lorem Picsum (generic, unmatched) | **Partly** — as above |
+| `portret-hero.jpg` | O meni hero | 10:11 | editorial portrait, warm knitwear, window light, three-quarter view | **Real — her own portrait.** See *Portraits* below | **Yes** |
+| `portret-o-meni.jpg` | Domov, O meni teaser | 4:5 | warm editorial portrait, cream cardigan, natural window light | **Real — her own portrait.** See *Portraits* below | **Yes** |
 | `skodelica-lan.jpg` | Coaching hero | 4:3 | stoneware cup on linen with dried gypsophila, soft daylight | Lorem Picsum (generic, unmatched) | No |
 | `vaza-susene-roze.jpg` | Zapisi hero | 4:3 | vase with dried flowers beside a stoneware bowl, cream wall | Lorem Picsum (generic, unmatched) | No |
 | `zapis-01.jpg` / `-hero.jpg` | Zapisi card, article | 4:3 / 21:9 | mountain road through golden hills, morning light | Lorem Picsum (generic, unmatched) | No |
@@ -46,6 +75,39 @@ All seventeen files are real JPEGs, verified under 400 KB, at the exact width/he
 `<img>` tag declares. License: Lorem Picsum photos are drawn from Unsplash's free-to-use
 pool — no attribution required, free for commercial use — but per-photo photographer credit
 isn't exposed through the seeded API, so none is recorded here.
+
+`tests/check_site.py` holds the authoritative list in `REAL_PHOTOGRAPHY`. It fails the build
+both ways: a placeholder left untagged, and a real photograph wrongly tagged (which would
+apply the desaturating review filter to it).
+
+## Portraits — done, 2026-09-09
+
+Built from her own asset, not stock. Source:
+`pressence.si/wp-content/uploads/2026/09/MG_5753-copy-scaled.png` — 2560×2560 PNG with a
+**real alpha channel**, already background-removed. That transparency is what made this
+workable: she could be placed on the palette instead of on clinical studio white.
+
+| Output | Size | Ground | Framing |
+|---|---|---|---|
+| `portret-hero.jpg` | 1000×1100 | `Cream` #F4F1EB, soft vertical gradient | head and shoulders, face at 60% width |
+| `portret-o-meni.jpg` | 1000×1250 | `Panel` #EEECE8, soft vertical gradient | head and shoulders, face at 52% width |
+
+Decisions worth keeping:
+
+- **The crossed arms are cropped out.** The original is arms-folded, straight to camera — a
+  closed posture that works against copy about not having to have the answers.
+- **Face sits at 60% width on the hero** because `.p-hero__media` fades its left 40% into the
+  band tint; centring her would push her face into the fade.
+- **A gentle warm grade** (saturation ×0.88, R ×1.022, B ×0.966) settles the cool lilac shirt
+  into the warm neutral palette. Applied to the file, not via CSS, so the images are not
+  affected by the placeholder review filter.
+- **Ground is a vertical gradient**, not a flat fill, so a cutout on a solid colour does not
+  read as a sticker.
+
+Still true: **this is not the mockup's portrait.** The mockup shows a different, younger woman
+in a cream cardigan looking off-camera — that frame is itself stock and can never be matched,
+because it is not her. A daylight session in warm knitwear is the only route to the mockup's
+register. The shot brief below stands.
 
 ## Already in the WordPress media library
 
@@ -62,7 +124,7 @@ Needs replacing:
 
 | Asset | Problem |
 |---|---|
-| `2026/07/pressence-coach-izrez-v2.webp`, `2026/09/MG_5753-copy-scaled.png` | Real headshot of the coach, but a white-background studio shot in a business shirt. The design calls for warm editorial light. Usable at launch if a shoot is out of scope; it will read as a different brand. |
+| `2026/07/pressence-coach-izrez-v2.webp`, `2026/09/MG_5753-copy-scaled.png` | Real headshot of the coach, white-background studio in a business shirt. **Now in use** — see *Portraits* above — cropped and composited onto the palette. Still a different register from the mockup; a shoot remains the upgrade. |
 | `2026/09/ChatGPT-Image-*.png` | AI-generated. Avoid on a trust-led coaching site. |
 
 ## Brand SVGs

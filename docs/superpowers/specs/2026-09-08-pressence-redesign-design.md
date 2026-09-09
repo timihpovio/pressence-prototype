@@ -62,27 +62,34 @@ Elementor build must use, recorded below and in `NOVAMIRA-SKILL.md`.
   six proposed blog categories, six proposed article titles with teasers, a single-article
   template, and footer copy.
 
-### Content restored from the live site
+### Content restored from the live site — REVERTED
 
-The new copy doc is better written than the live site but drops several strong sections.
-These are restored, rewritten in the new copy's warmer voice, on the Coaching page:
+An earlier revision of this spec restored three sections from the live pressence.si onto the
+Coaching page, on the grounds that the copy doc dropped them. **That decision has been
+reversed. The copy doc is the sole source of copy.** Do not re-add these in Elementor:
 
-1. **Oblike sodelovanja** — the four formats (uvodni pogovor, posamezno srečanje, coaching
-   pot, dolgoročno partnerstvo). Without these a visitor never learns how to work with her.
-2. **Praktično / Kaj pričakovati** — session length, location, frequency, confidentiality,
-   preparation, progress reviews, cancellation policy.
-3. **Pogosta vprašanja** — 11 questions. The largest single loss in the new copy, and the
-   most valuable for both conversion and search.
+1. **Oblike sodelovanja** — four formats plus a pricing stance ("O naložbi se odkrito
+   pogovoriva…"). Not in the copy doc.
+2. **Praktično / Kaj pričakovati** — asserted session length, frequency, cancellation policy
+   and preparation. These filled the live site's `{{TRAJANJE}}`, `{{LOKACIJA_PLACEHOLDER}}`,
+   `{{RITEM}}` and `{{POLITIKA_ODPOVEDI}}` slots with invented answers.
+3. **Pogosta vprašanja** — 12 invented Q&As, including a confidentiality carve-out written
+   on the client's behalf.
 
-Also carried over: the *Coaching je / Coaching ni* two-column comparison (stronger than the
-doc's plain bulleted list), the *Pogosta področja* topic tags, and the SI/EN language note.
+Also reverted: the *Coaching je / Coaching ni* two-column comparison is back to the copy
+doc's heading **Kaj coaching ni** and its single bulleted list.
+
+The mockup agrees with the copy doc: its Coaching side-rail lists six items, not ten.
+
+If an offer or FAQ layer is wanted later, collect the client's real answers first and add it
+as a `p-todo`-tagged block — never as finished prose in her voice.
 
 ## Decisions
 
 | Decision | Choice | Reason |
 |---|---|---|
 | Build approach | Plain static multi-page HTML, one tokenised stylesheet, shared `chrome.js` for header/footer | Opens by double-clicking; no build step or toolchain for the client; fourteen pages does not justify Astro/11ty |
-| Content scope | Restore formats, practical details and FAQ | Site otherwise has no offer structure and no reassurance layer |
+| Content scope | Copy doc only; no sections carried over from the live site | Every sentence on the site must be traceable to the copy doc, in the client's own voice |
 | Imagery | Free stock matching the mockup's mood, every slot tagged as placeholder, inventoried in `ASSETS.md` | Real assets do not cover the mockup's still lifes or its warm editorial portrait |
 | Typography | EB Garamond (display/headings) + Inter (body/UI) | Matches the mockup; the mockup's serif is Garamond-style, not the Fraunces currently configured |
 | Blog depth | One full article, five structured stubs | Doc supplies teasers only; writing her personal reflections wholesale would be rewritten anyway |
@@ -199,7 +206,6 @@ Zaupanje · Zapisi · Zaključni CTA
 
 **Coaching** — Hero · sticky side-rail nav alongside Kaj je coaching · Moja filozofija ·
 Kaj coaching ni · Kako delam · Prisotnost in poslušanje · Potek sodelovanja (5) ·
-Oblike sodelovanja (4) · Praktično (7) · Pogosta vprašanja (11, accordion) ·
 Etičnost in zaupnost · CTA
 
 **O meni** — Hero with portrait · Moja zgodba · Ko začneš drugače gledati nase ·

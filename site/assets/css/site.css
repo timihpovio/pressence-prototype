@@ -3,7 +3,11 @@
 
 /* --- reset ------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 96px; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--p-anchor-offset);
+}
 body {
   margin: 0;
   background: var(--p-ivory);
@@ -459,12 +463,20 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); text-wrap: pretty; }
 img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.09) contrast(0.9); }
 
 /* --- decorative line art ----------------------------------------- */
+/* The sprig beside a statement panel. It hangs off the container's right edge,
+   not the viewport's, so it reads as placed beside the prose rather than stuck
+   to the window, and it is centred on the text mass rather than dropped into
+   the panel's bottom padding. Opacity matches .p-rings: this is a watermark,
+   not an illustration. */
 .p-deco {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: clamp(180px, 22vw, 320px);
-  opacity: 0.85;
+  right: max(var(--p-gutter), calc(50% - var(--p-container) / 2));
+  top: 50%;
+  translate: 0 -50%;
+  width: clamp(170px, 19vw, 280px);
+  /* The stroke is the Edge token, so this is what sets the final tone: ~2.8:1
+     against Ivory. Present as a drawing, still clearly decorative. */
+  opacity: 0.7;
   pointer-events: none;
 }
 .p-panel--deco { position: relative; overflow-x: clip; }
@@ -511,7 +523,22 @@ img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.0
   border-right: var(--p-hairline);
   z-index: -1;
 }
-.p-rail { position: sticky; top: 96px; display: flex; flex-direction: column; }
+.p-rail {
+  position: sticky;
+  top: calc(var(--p-header-h) + 28px);
+  display: flex;
+  flex-direction: column;
+}
+/* The rail reads as a component, not a loose list, because it is titled. The
+   title is also the nav's accessible name via aria-labelledby. */
+.p-rail__label {
+  font: 500 var(--p-label)/1.4 var(--p-font-body);
+  letter-spacing: var(--p-ls-label);
+  text-transform: uppercase;
+  color: var(--p-muted);
+  margin: 0 0 18px;
+}
+.p-rail__list { position: relative; display: flex; flex-direction: column; }
 
 /* Content blocks inside the rail column. The mockup runs one continuous ivory
    prose column beside the rail, so these are blocks with hairline rules rather
@@ -529,26 +556,89 @@ img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.0
 .p-rail-content > .p-block--sage { background: var(--p-sage); }
 .p-rail-content > .p-block > :last-child { margin-bottom: 0; }
 .p-rail a {
-  font: 400 var(--p-small)/1.3 var(--p-font-body);
+  position: relative;
+  font: 400 var(--p-small)/1.35 var(--p-font-body);
   color: var(--p-muted);
   text-decoration: none;
-  padding: 22px 16px 22px 0;
-  transition: color 0.2s var(--p-ease);
+  /* the left inset is the marker's gutter */
+  padding: 17px 20px 17px 20px;
+  transition: color var(--p-dur) var(--p-ease),
+              background-color var(--p-dur) var(--p-ease);
 }
 .p-rail a:hover { color: var(--p-ink); }
 /* The active row is a lighter band running the whole width of the rail,
    bleed included. box-shadow paints the bleed; the section clips it. */
-.p-rail a[aria-current="true"] {
+.p-rail a[aria-current] {
   color: var(--p-ink);
   font-weight: 500;
   background: var(--p-ivory);
   box-shadow: -100vw 0 0 0 var(--p-ivory);
 }
+/* An ink rule in the row's left margin, the way a passage gets marked in a
+   book margin. ui.js sets its height and offset; it slides between rows.
+   The transition waits for .is-ready so it does not fly in from zero on load. */
+.p-rail__marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 0;
+  background: var(--p-ink);
+  pointer-events: none;
+}
+.p-rail.is-ready .p-rail__marker {
+  transition: transform var(--p-dur-slow) var(--p-ease),
+              height var(--p-dur) var(--p-ease);
+}
+
+/* Under the breakpoint the rail becomes a sticky, horizontally scrollable
+   strip beneath the header - seven stacked links pushed the prose most of a
+   screen down. The marker is replaced by an underline on the active chip. */
 @media (max-width: 860px) {
-  .p-panel--rail { padding-top: var(--p-panel-y); padding-bottom: var(--p-panel-y); }
+  :root { --p-header-h: 85px; }
+  .p-panel--rail { padding-top: 0; padding-bottom: var(--p-panel-y); }
   .p-rail-layout { grid-template-columns: 1fr; padding-block: 0; }
   .p-rail-layout::before { display: none; }
-  .p-rail { position: static; }
+  .p-rail {
+    position: sticky;
+    top: var(--p-header-h);
+    z-index: 10;
+    margin-inline: calc(var(--p-gutter) * -1);
+    background: var(--p-panel);
+    border-bottom: var(--p-hairline);
+    /* a grid item's min-width:auto is min-content, which here is the full row
+       of nowrap chips - without this the strip grows instead of scrolling */
+    min-width: 0;
+  }
+  .p-rail__label { display: none; }
+  .p-rail__list {
+    min-width: 0;
+    flex-direction: row;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x proximity;
+    padding-inline: var(--p-gutter);
+    /* the strip fades at both ends, so it reads as scrollable */
+    mask-image: linear-gradient(to right, transparent 0,
+                black var(--p-gutter), black calc(100% - 28px), transparent 100%);
+  }
+  .p-rail__list::-webkit-scrollbar { display: none; }
+  .p-rail__marker { display: none; }
+  .p-rail a {
+    padding: 15px 0;
+    margin-right: 26px;
+    white-space: nowrap;
+    scroll-snap-align: start;
+    box-shadow: inset 0 -2px 0 0 transparent;
+    transition: color var(--p-dur) var(--p-ease),
+                box-shadow var(--p-dur) var(--p-ease);
+  }
+  .p-rail a:last-child { margin-right: var(--p-gutter); }
+  .p-rail a[aria-current] {
+    background: none;
+    box-shadow: inset 0 -2px 0 0 var(--p-ink);
+  }
 }
 
 .p-compare { display: grid; gap: var(--p-gap); grid-template-columns: 1fr 1fr; }
