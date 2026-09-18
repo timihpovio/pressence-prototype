@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="340" viewBox="0 0 320 340" fill="none" role="presentation">
+  <!-- Pressence rootlets: the counterpart to pressence-vejica.svg. The sprig
+       reaches up and to the right; this descends and to the left, so the two
+       opening panels on Domov mirror each other rather than repeat.
+       Same drawing language on purpose - one main line carrying finer ones,
+       single weight, round caps - but open curves rather than the sprig's
+       closed leaf shapes, so it reads as a sibling and not a copy.
+       Three things this drawing needs that a free-hand version does not get.
+       Every rootlet starts at a point computed on the taproot curve, or they
+       cross it instead of leaving it. They have to reach most of the width of
+       the box, or it reads as a wisp beside the sprig, which fans out to fill
+       it. And there have to be enough of them: the sprig gets its mass from
+       nine closed leaf shapes, and open curves only match that by density -
+       fourteen rootlets and six splits, widest through the middle where a
+       root system actually is.
+       Stroke is the Edge token (#71736A) at the same 1.4 as the sprig, left
+       to .p-deco's opacity to soften into a watermark. Keep in sync with
+       tokens.css. -->
+  <g stroke="#71736A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- taproot -->
+    <path d="M244 10 C 226 80 200 118 184 168 C 168 218 128 258 72 330"/>
+    <!-- rootlets, alternating, each leaving the taproot and turning down -->
+    <path d="M235 39 Q 256 50 262 72"/>
+    <path d="M223 74 Q 200 82 188 102"/>
+    <path d="M213 97 Q 242 108 252 136"/>
+    <path d="M204 118 Q 176 128 160 150"/>
+    <path d="M195 139 Q 226 152 246 184"/>
+    <path d="M178 183 Q 210 196 228 228"/>
+    <path d="M172 197 Q 142 208 116 234"/>
+    <path d="M163 211 Q 194 226 210 258"/>
+    <path d="M154 226 Q 124 238 100 264"/>
+    <path d="M143 241 Q 172 256 178 284"/>
+    <path d="M131 256 Q 104 268 90 290"/>
+    <path d="M118 273 Q 146 288 150 314"/>
+    <path d="M104 290 Q 78 300 64 320"/>
+    <path d="M88 309 Q 112 322 118 340"/>
+    <!-- terminal splits, where a rootlet divides rather than simply ending -->
+    <path d="M247 125 Q 258 140 258 160"/>
+    <path d="M238 172 Q 250 187 250 208"/>
+    <path d="M127 224 Q 112 237 108 256"/>
+    <path d="M110 254 Q 95 267 91 286"/>
+    <path d="M96 282 Q 82 294 80 312"/>
+    <path d="M147 304 Q 158 318 158 338"/>
+  </g>
+</svg>

@@ -180,7 +180,7 @@
         b.setAttribute("aria-selected", String(b === btn));
       });
       cards.forEach(function (card) {
-        card.hidden = want !== "vsi" && card.getAttribute("data-cat") !== want;
+        card.hidden = want !== "all" && card.getAttribute("data-cat") !== want;
       });
     });
   }

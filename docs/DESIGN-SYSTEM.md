@@ -66,9 +66,9 @@ Advance Accordion.
 
 | Prototype | Elementor |
 |---|---|
-| Header, footer | Xpro Theme Builder templates 36 / 37 — **edit in place, do not rebuild** |
+| Header, footer | Xpro Theme Builder templates 36 / 37 — **edit in place, do not rebuild**. Each holds one boxed 1160px container; the template's own container stays full width so the ground and the hairline reach both window edges |
 | Main nav | `xpro-horizontal-menu` |
-| `<section class="p-hero">` | Elementor container, full width, min-height set, background image positioned right with a left-to-right gradient overlay in the band tint |
+| `<section class="p-hero">` | Elementor container, full width, min-height set. The photo is **not** a background on this container — it is held to the 1160px container line, so it is an inner container pinned to the right of the boxed width, with the left-to-right gradient overlay in the band tint |
 | `<section class="p-panel">` | Elementor container, flex, full width |
 | `<div class="p-container">` | Elementor container, boxed, 1160px |
 | `.p-prose-split` | boxed container, **two columns** — heading column then body column |
@@ -84,6 +84,13 @@ Advance Accordion.
 | Contact form | WPForms Lite via the `wpforms` widget |
 | Footer socials | core `social-icons` |
 
+**Footer, revised 2026-09-16.** The mockup's single `brand | serif nav | socials | legal`
+row does not survive the real Slovenian labels: at 1512px the wordmark's tagline ran under
+*Domov* and *Kontakt* collided with the Instagram icon, because the Xpro menu renders wider
+than the prototype's plain flex nav. The built footer is two shallow bands split by a
+hairline — wordmark and tagline left / nav right, then © and legal links left / socials
+right, with the disclaimer beneath. Same parts, same restraint, room for each.
+
 ## Custom CSS
 
 Per-element Custom CSS is an Elementor Pro feature. Everything below goes in **one** global
@@ -94,8 +101,11 @@ via the widget's Advanced → CSS Classes field.
 |---|---|
 | `p-rail` | `position: sticky` — Elementor sticky is a Pro motion effect. Sticky in both layouts: a 220px column on desktop, a horizontally scrollable strip under the header below 861px |
 | `p-aside` | `position: sticky` |
+| `p-header__inner` | the boxed 1160px strip inside the full-bleed header band |
+| `p-hero` height | every band is `--p-hero-min`, one value across all pages, so the photo is the same size everywhere. The floor is set by the tallest hero — Domov, whose copy carries a CTA button and a note line the others do not. Measured across 880–1920px |
+| `p-lang` | the language switch, hard right in the header. Two-letter code visible, endonym in a `.p-sr-only` span. Polylang's own switcher replaces it on the live site |
 | `p-figure--bleed` | image bleeding past the container edge |
-| `p-hero__media` | photo bleeding off the band edge, plus the gradient that fades it into the band tint |
+| `p-hero__media` | the photo held to the container's right edge inside a full-bleed band, plus the gradient that fades it into the band tint |
 | `p-rail-layout` | the tinted rail column that bleeds off the left page edge (`calc(50% - 50vw)`), and `overflow-x: clip` so the bleed is trimmed without breaking `position: sticky` |
 | `p-rail a[aria-current]` | the active rail row, whose lighter band is painted into the bleed with `box-shadow: -100vw`; under 861px this becomes an inset underline on the active chip instead |
 | `p-rail__marker` | the 2px ink rule in the active row's left margin. `ui.js` sets its `height` and `translateY`; it slides between rows. Hidden on the mobile strip |
@@ -145,14 +155,22 @@ two-column split:
 | `zapisi/<slug>.html` | `.p-hero .p-hero--article` | `Cream` |
 | `kontakt.html` | — | opens straight into the `Panel` two-column form section |
 
-The photograph is absolutely positioned from 44% to the right edge of the band and covers its
-full height. A `linear-gradient` in the band tint fades it in from the left, so the copy sits
-on flat colour and the photo never butts against a hard edge. Tint triplets for that gradient
+The photograph is absolutely positioned, covers the band's full height, and **bleeds to the
+right window edge** — not to the container line. Holding it to the container was tried on
+2026-09-18 and reverted the same day: it made the photo both narrower and re-cropped, and it
+read worse. Only the copy rides `.p-container` in this band. `--p-hero-split` is `44%` of the
+band, which is the viewport.
+
+Every hero band is the same height, `--p-hero-min`, so the photo is the same size on every
+page. That floor is set by the tallest hero, Domov, whose copy carries a CTA button and a
+note line the others do not; anything lower clips it.
+
+A `linear-gradient` in the band tint fades the photo in from the left, so the copy sits on
+flat colour and the photo never butts against a hard edge. Tint triplets for that gradient
 live in `tokens.css` as `--p-cream-rgb`, `--p-sage-rgb` and `--p-panel-rgb`.
 
-In Elementor: one full-width container, min-height set, the photo as the container background
-positioned `right center` with `background-size: cover`, and the gradient as a second
-background layer above it.
+In Elementor: one full-width container, min-height set, the photo positioned right with the
+gradient as a second layer above it.
 
 ## Motion and interaction
 

@@ -18,7 +18,25 @@ EXPECTED_PAGES = [
     "zapisi/coaching-ni-prostor-kjer-dobite-nasvet.html",
     "zapisi/kaj-pomeni-zares-poslusati.html",
     "zapisi/kdo-ste-ko-odlozite-moram.html",
+    # English tree. Slugs per the page-slug table in docs/MULTILINGUAL.md.
+    # The six Zapisi articles have no translated body yet, so en/notes/ is
+    # deliberately absent -- see the note on en/notes.html.
+    "en/index.html", "en/coaching.html", "en/about.html", "en/notes.html",
+    "en/contact.html", "en/privacy-policy.html", "en/cookie-policy.html",
+    "en/legal-notice.html",
 ]
+
+# Which language tree a page belongs to, by path prefix. Slovenian is the
+# default language and sits at the root with no prefix, exactly as Polylang
+# serves it.
+LANG_TREES = [("en/", "en")]
+
+
+def lang_of(rel):
+    for prefix, code in LANG_TREES:
+        if rel.replace(os.sep, "/").startswith(prefix):
+            return code
+    return "sl"
 
 FAILURES = []
 
@@ -160,8 +178,9 @@ def check_head_metadata():
             fail("head_metadata", "%s has no <title>" % rel)
         if not p.has_desc:
             fail("head_metadata", "%s has no meta description" % rel)
-        if p.lang != "sl":
-            fail("head_metadata", "%s lang is %r, expected 'sl'" % (rel, p.lang))
+        want = lang_of(rel)
+        if p.lang != want:
+            fail("head_metadata", "%s lang is %r, expected %r" % (rel, p.lang, want))
         if p.root_attr not in ("./", "../"):
             fail("head_metadata", "%s data-root is %r" % (rel, p.root_attr))
 
@@ -178,11 +197,16 @@ def check_img_alt():
 # still carry data-placeholder="true" so docs/ASSETS.md and the review filter in
 # site.css stay honest about what has not been shot yet.
 REAL_PHOTOGRAPHY = {
-    # The coach's own studio portrait from her media library, background removed
-    # and composited onto the palette grounds. Not the mockup's warm editorial
-    # portrait -- that shows a different person entirely -- but it is really her.
+    # Her own coaching-session photograph, supplied by the client on 2026-09-18.
+    # A real environmental portrait, which replaced the composited studio cutout
+    # that stood here before. Two crops of one frame: landscape for the O meni
+    # hero band, 4:5 for the Domov split.
     "portret-hero.jpg",
     "portret-o-meni.jpg",
+    # Client-supplied imagery for the Domov, Coaching and Zapisi hero bands, same batch.
+    "razgled-koca.jpg",
+    "kamin-koca.jpg",
+    "koca-gore.jpg",
 }
 
 
@@ -251,12 +275,21 @@ def check_chrome_included():
 
 
 COPY_DOC = os.path.join(ROOT, "source", "copy.txt")
+COPY_DOC_EN = os.path.join(ROOT, "source", "copy.en.md")
 
 # Pages whose prose must come from the copy doc, sentence for sentence.
 # The six Zapisi articles and the three legal pages are acknowledged scaffolds
 # (see README) and are exempt.
 PROVENANCE_PAGES = [
     "index.html", "coaching.html", "o-meni.html", "zapisi.html", "kontakt.html",
+]
+
+# The same guard for the English tree, against the English draft. Same rule,
+# same reason: nothing in her voice may appear on the site that a human has not
+# put into a copy doc first.
+PROVENANCE_PAGES_EN = [
+    "en/index.html", "en/coaching.html", "en/about.html", "en/notes.html",
+    "en/contact.html",
 ]
 
 # Sentences that are deliberately not from the copy doc. Keep this list short and
@@ -273,6 +306,45 @@ PROVENANCE_ALLOWED = [
     # She confirmed on 2026-09-09 that she also coaches in Czech. The source docx
     # predates that and lists only Slovenian and English. See docs/MULTILINGUAL.md.
     "slovenscina anglescina cescina",
+    # "O imenu / Zakaj Pressence?" on Domov -- the section explaining the name
+    # as presence + essence. Added 2026-09-16 from a reference design, NOT from
+    # the source docx, so it is not in copy.txt and must not be written into
+    # it: that file is the verbatim docx extraction and this check's only fixed
+    # point. Pending the client's sign-off; see docs/LAUNCH-BLOCKERS.md.
+    "pressence povezuje presence prisotnost in essence bistvo",
+    "med njima je prostor",
+    "prostor ki se odpre ko se za trenutek ustavimo utisamo zunanji hrup in"
+    " odlozimo potrebo po takojsnjih odgovorih",
+    "prav v tem prostoru lahko zacnemo jasneje zaznavati kaj je zares nase kaj"
+    " nam je pomembno in kaj nas vodi",
+    "prisotnost tako postane pot ki nas postopoma priblizuje bistvu",
+]
+
+PROVENANCE_ALLOWED_EN = [
+    # GDPR consent wording for the contact form, as in the Slovenian list above.
+    "i agree that my message and personal details may be stored and used to"
+    " reply to me as described in the",
+    "privacy policy",
+    # Article dates and category chips on the Notes cards. Same placeholder
+    # metadata as the Slovenian page; the copy doc supplies neither.
+    "may 2024", "april 2024", "march 2024",
+    # The English Notes cards are translated but the articles they open are
+    # not, and the page says so rather than dropping the reader into Slovenian
+    # without warning. Remove this line once the six bodies are translated.
+    "the notes themselves are published in slovenian for now",
+    "the links below open the slovenian originals",
+    # "About the name / Why Pressence?" -- the English counterpart of the panel
+    # allowed in the Slovenian list above, and carrying the same caveat: it is
+    # not in the source docx and is pending the client's sign-off. copy.en.md
+    # is a translation of copy.txt, which does not contain it either.
+    "pressence brings together presence and essence",
+    "between them there is a space",
+    "a space that opens when we stop for a moment quieten the noise outside"
+    " and set down the need for immediate answers",
+    "it is in that space that we can begin to perceive more clearly what is"
+    " truly ours what matters to us and what guides us",
+    "presence becomes in this way a path that brings us gradually closer to"
+    " the essence",
 ]
 
 _FOLD = {
@@ -297,6 +369,11 @@ def _visible_sentences(raw):
     extra = re.findall(r'placeholder="([^"]*)"', chunk)
     chunk = re.sub(r"<(script|style)\b.*?</\1>", " ", chunk, flags=re.S | re.I)
     chunk = re.sub(r"<!--.*?-->", " ", chunk, flags=re.S)
+    # Inline emphasis sits *inside* a sentence. Turning it into a line break
+    # would shatter the sentence into fragments short enough to slip under the
+    # 18-character floor below, which would let emphasised prose past this
+    # check unexamined. Drop those tags instead of splitting on them.
+    chunk = re.sub(r"</?(em|strong|i|b)\b[^>]*>", "", chunk, flags=re.I)
     chunk = re.sub(r"<[^>]+>", "\n", chunk)
     chunk = (chunk.replace("&nbsp;", " ").replace("&amp;", "&")
                   .replace("&lt;", "<").replace("&gt;", ">").replace("&#39;", "'")
@@ -310,19 +387,24 @@ def _visible_sentences(raw):
 
 
 def check_copy_provenance():
-    """Every sentence of prose must be traceable to source/copy.txt.
+    """Every sentence of prose must be traceable to its language's copy doc.
 
     This is what stops copy from the live pressence.si -- or invented copy --
     reappearing in the client's voice. See the reverted 'Content restored from
     the live site' section of the design spec.
     """
-    if not os.path.isfile(COPY_DOC):
-        fail("copy_provenance", "missing source/copy.txt")
+    _provenance(COPY_DOC, PROVENANCE_PAGES, PROVENANCE_ALLOWED)
+    _provenance(COPY_DOC_EN, PROVENANCE_PAGES_EN, PROVENANCE_ALLOWED_EN)
+
+
+def _provenance(doc_path, pages, allow):
+    if not os.path.isfile(doc_path):
+        fail("copy_provenance", "missing %s" % os.path.relpath(doc_path, ROOT))
         return
-    with open(COPY_DOC, encoding="utf-8") as fh:
+    with open(doc_path, encoding="utf-8") as fh:
         doc = _norm(fh.read())
-    allowed = [_norm(a) for a in PROVENANCE_ALLOWED]
-    for rel in PROVENANCE_PAGES:
+    allowed = [_norm(a) for a in allow]
+    for rel in pages:
         path = os.path.join(SITE, rel)
         if not os.path.isfile(path):
             continue
@@ -332,7 +414,8 @@ def check_copy_provenance():
             n = _norm(sentence)
             if n in doc or any(a and a in n for a in allowed):
                 continue
-            fail("copy_provenance", "%s: not in copy.txt: %r" % (rel, sentence[:90]))
+            fail("copy_provenance", "%s: not in %s: %r"
+                 % (rel, os.path.basename(doc_path), sentence[:90]))
 
 
 CHECKS = [

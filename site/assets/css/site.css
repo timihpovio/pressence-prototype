@@ -94,6 +94,10 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); text-wrap: pretty; }
 .p-hero__note { font-size: var(--p-small); color: var(--p-muted); margin: 0; }
 .p-hero__cta { margin: 0 0 1.4em; }
 
+/* The photo bleeds to the right window edge, and off the top and bottom of the
+   band. It was briefly held to the container line instead; that made it both
+   narrower and re-cropped, and it read worse, so it is back on the window.
+   Only the copy rides .p-container here. */
 .p-hero__media {
   position: absolute;
   inset: 0 0 0 var(--p-hero-split);
@@ -178,6 +182,25 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); text-wrap: pretty; }
 .p-statement h2 { font-size: clamp(30px, 3.6vw, 46px); max-width: 14em; }
 .p-statement p { font-size: var(--p-lead); max-width: 48ch; }
 .p-statement .p-btn { margin-top: 0.6em; }
+
+/* The two opening panels on Domov are a pair -- the name, then the question it
+   leads to -- so the second one mirrors the first: drawing left, prose hanging
+   off the container's right edge. Only above the deco's own 860px breakpoint;
+   once the drawing is hidden there is nothing to mirror around, and the prose
+   goes back to hanging left like every other panel.
+   The block is capped and pushed right as a whole, rather than each child
+   being right-aligned: the heading and the paragraphs then share one left
+   edge, and the prose stays ragged-right where Slovenian wants it.
+   Both are capped to a share of the container as well as to the measure. A
+   deco panel is really two columns -- prose, and the drawing's own margin --
+   and between 861px, where the drawing appears, and about 1160px, where the
+   container stops growing, prose at the full 62ch measure runs underneath it.
+   .p-statement's own 48ch cap happens to clear; ordinary prose does not. */
+@media (min-width: 861px) {
+  .p-prose-deco > p { max-width: min(var(--p-measure), 62%); }
+  .p-statement--mirror { width: min(var(--p-measure), 62%); margin-left: auto; }
+  .p-statement--mirror h2, .p-statement--mirror p { max-width: none; }
+}
 
 /* --- grids ------------------------------------------------------- */
 .p-grid { display: grid; gap: var(--p-gap); }
@@ -293,14 +316,19 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); text-wrap: pretty; }
 }
 .p-link-arrow:hover::after, .p-link-arrow:focus-visible::after { transform: translateX(5px); }
 
-/* --- header ------------------------------------------------------ */
+/* --- header ------------------------------------------------------
+   The band is full-bleed -- its ground and its hairline reach both window
+   edges -- but the logo and the nav ride .p-container, so they start and end
+   on the same line as the prose below. */
 .p-header {
   position: sticky; top: 0; z-index: 20;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: var(--p-gap);
   padding: 20px var(--p-gutter);
   background: var(--p-ivory);
   border-bottom: var(--p-hairline);
+}
+.p-header__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--p-gap);
 }
 .p-logo {
   font: 400 24px/1 var(--p-font-display);
@@ -322,6 +350,27 @@ p { margin: 0 0 1.1em; max-width: var(--p-measure); text-wrap: pretty; }
 }
 .p-nav a:hover, .p-nav a:focus-visible { color: var(--p-ink); background-size: 100% 1px; }
 .p-nav a[aria-current="page"] { color: var(--p-ink); font-weight: 500; background-size: 100% 1px; }
+/* The logo takes the free space, so the nav and the language switch both sit
+   hard right and only the flex gap separates them. */
+.p-logo { margin-right: auto; }
+
+/* Language switch. Endonyms, never flags - see docs/MULTILINGUAL.md. */
+.p-lang { display: flex; align-items: center; gap: 8px; }
+.p-lang__item {
+  font: 400 var(--p-small)/1 var(--p-font-body);
+  letter-spacing: var(--p-ls-label);
+  color: var(--p-muted);
+  text-decoration: none;
+  transition: color var(--p-dur) var(--p-ease);
+}
+.p-lang__item + .p-lang__item::before {
+  content: "·";
+  color: var(--p-line);
+  margin-right: 8px;
+}
+a.p-lang__item:hover, a.p-lang__item:focus-visible { color: var(--p-ink); }
+.p-lang__item[aria-current="true"] { color: var(--p-ink); font-weight: 500; }
+
 .p-burger {
   display: none; background: none; border: 0; cursor: pointer;
   width: 44px; height: 44px;
@@ -480,6 +529,11 @@ img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.0
   pointer-events: none;
 }
 .p-panel--deco { position: relative; overflow-x: clip; }
+/* Mirrored: same inset off the container edge, measured from the other side. */
+.p-panel--deco-left .p-deco {
+  right: auto;
+  left: max(var(--p-gutter), calc(50% - var(--p-container) / 2));
+}
 @media (max-width: 860px) { .p-deco { display: none; } }
 .p-figure--bleed { margin: 0; }
 .p-figure--bleed img { width: 100%; object-fit: cover; }
@@ -487,7 +541,9 @@ img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.0
 /* --- responsive -------------------------------------------------- */
 @media (max-width: 860px) {
   .p-grid--3, .p-grid--2, .p-split, .p-footer__grid { grid-template-columns: 1fr; }
-  .p-burger { display: inline-flex; }
+  /* The nav leaves the flow below 861px, so without this the burger would sit
+     between the logo and the language switch instead of hard right. */
+  .p-burger { display: inline-flex; order: 1; }
   .p-nav {
     position: absolute; top: 100%; left: 0; right: 0;
     flex-direction: column; gap: 0;
@@ -549,10 +605,17 @@ img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.0
 .p-rail-content > .p-block { padding-block: var(--p-panel-y); border-bottom: var(--p-hairline); }
 .p-rail-content > .p-block:first-child { padding-top: var(--p-panel-y); }
 .p-rail-content > .p-block:last-child { border-bottom: 0; }
+/* A tinted block is a band behind the prose, not a card indenting it: the
+   column runs one continuous left edge, so the band bleeds out by its own
+   padding rather than pushing its text in. The bleed is always smaller than
+   the rail gap (--p-gap maxes at 48px against a 32-72px gap), so the band
+   never reaches the rail's hairline. The right edge stays on the container
+   edge, where every other element on the page ends. */
 .p-rail-content > .p-block--panel,
 .p-rail-content > .p-block--sage {
   padding: var(--p-gap);
   margin-block: var(--p-gap);
+  margin-left: calc(var(--p-gap) * -1);
   border-bottom: 0;
 }
 .p-rail-content > .p-block--panel { background: var(--p-panel); }
@@ -616,6 +679,15 @@ img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.0
     /* a grid item's min-width:auto is min-content, which here is the full row
        of nowrap chips - without this the strip grows instead of scrolling */
     min-width: 0;
+  }
+  /* One column now, so the prose sits on the page gutter and a band bleeding
+     by --p-gap would overhang the screen edge. Bleed it to the gutter instead:
+     the band runs edge to edge like the alternating panels elsewhere, and its
+     text stays on the same line as the untinted blocks'. */
+  .p-rail-content > .p-block--panel,
+  .p-rail-content > .p-block--sage {
+    margin-inline: calc(var(--p-gutter) * -1);
+    padding-inline: var(--p-gutter);
   }
   .p-rail__label { display: none; }
   .p-rail__list {
@@ -701,6 +773,14 @@ img[data-placeholder="true"] { filter: saturate(0.55) sepia(0.24) brightness(1.0
 }
 .p-filter button:hover { color: var(--p-ink); }
 .p-filter button[aria-selected="true"] { color: var(--p-ink); }
+/* Stated on the English Notes page: the cards are translated, the articles they
+   open are not. Honest beats a silent jump into another language. */
+.p-note-lang {
+  font-size: var(--p-small);
+  color: var(--p-muted);
+  margin: calc(var(--p-gap) * -0.5) 0 var(--p-gap);
+  max-width: 62ch;
+}
 .p-filter button[aria-selected="true"]::after, .p-filter button:hover::after { transform: scaleX(1); }
 .p-post {
   border: var(--p-hairline);

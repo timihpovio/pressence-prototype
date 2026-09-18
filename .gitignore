@@ -9,3 +9,6 @@ node_modules/
 # The extracted text in source/copy.txt is what the build and the checker use.
 source/Pressence Coaching Website Copy.docx
 source/Zasnova strani.png
+
+# Brainstorming companion scratch
+.superpowers/

@@ -18,7 +18,7 @@ Zapisi category filter works.
 python3 tests/check_site.py
 ```
 
-Ten structural checks across fourteen pages: link integrity, no hardcoded colours outside
+Thirteen structural checks across twenty-two pages: link integrity, no hardcoded colours outside
 `tokens.css`, `<title>`/description/`lang` on every page, alt text on every image,
 placeholder tagging, `data-el` coverage, heading order, no unrendered `{{TOKEN}}` strings,
 and chrome inclusion. Python 3 standard library only.
@@ -27,7 +27,7 @@ and chrome inclusion. Python 3 standard library only.
 
 | Path | What |
 |---|---|
-| `site/` | The prototype. Fourteen pages. |
+| `site/` | The prototype. Fourteen Slovenian pages at the root, eight English under `site/en/`. |
 | `site/assets/css/tokens.css` | Every design value. Mirrors the Elementor globals. |
 | `source/` | The mockup and the copy doc, plus the extracted `copy.txt`. |
 | `docs/DESIGN-SYSTEM.md` | Token tables in Elementor entry order, and the widget mapping. |
