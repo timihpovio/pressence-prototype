@@ -61,9 +61,10 @@ stranger's face on a named coach's site misrepresents her. The options are her r
 
 | File | Used on | Ratio | Brief | Current placeholder | Real asset available? |
 |---|---|---|---|---|---|
-| `razgled-koca.jpg` | Domov hero | 3:2 | *(was: backlit olive branch)* — **client-supplied, see below** | — | **Yes** |
+| `bukov-gozd.jpg` | Domov hero | 3:2 | a path through tall beeches in warm dappled light — restored 2026-09-18 at the client's request, over the cabin view that briefly stood here. Same file the live site serves as `2026/07/pressence-bukov-gozd.jpg` | — | **Yes** |
+| `razgled-koca.jpg` | *(unused)* | 3:2 | client-supplied, see below. Held the Domov hero for part of 2026-09-18; kept in the repo but no page references it | — | **Yes** |
 | `portret-hero.jpg` | O meni hero | 1.91:1 | editorial portrait, warm knitwear, window light, three-quarter view | **Real — her own photograph.** See *Portraits* below | **Yes** |
-| `portret-o-meni.jpg` | Domov, O meni teaser | 4:5 | warm editorial portrait, cream cardigan, natural window light | **Real — her own photograph.** See *Portraits* below | **Yes** |
+| `portret-o-meni.jpg` | Domov, O meni teaser | 4:5 | the background-removed studio frame on a plain backdrop, restored 2026-09-18 at the client's request over the environmental crop. See *Portraits* below | **Real — her own photograph.** | **Yes** |
 | `kamin-koca.jpg` | Coaching hero | 3:2 | *(was: stoneware cup on linen)* — **client-supplied, see below** | — | **Yes** |
 | `koca-gore.jpg` | Zapisi hero | 3:2 | *(was: vase with dried flowers)* — **client-supplied, see below** | — | **Yes** |
 | `zapis-01.jpg` / `-hero.jpg` | Zapisi card, article | 4:3 / 21:9 | mountain road through golden hills, morning light | Lorem Picsum (generic, unmatched) | No |
@@ -135,9 +136,15 @@ below, which was written about exactly this risk. Her own photograph is plainly 
 `portret-hero.jpg` and `portret-o-meni.jpg` were, until this date, built from
 `pressence.si/wp-content/uploads/2026/09/MG_5753-copy-scaled.png` — a 2560×2560 background-
 removed studio headshot, cropped to head-and-shoulders, warm-graded and composited onto
-`Cream` and `Panel` gradients. That work is in git history if it is ever wanted back. The new
-frame is better on every count the old note complained about: she is in a room rather than on
-a colour, the posture is open rather than arms-folded, and the light is daylight.
+`Cream` and `Panel` gradients. The new frame is better on every count the old note
+complained about: she is in a room rather than on a colour, the posture is open rather than
+arms-folded, and the light is daylight.
+
+**`portret-o-meni.jpg` went back to the studio frame** later the same day, at the client's
+request: on Domov she wants the portrait on a plain backdrop rather than in a room. Only the
+Domov slot reverted — `portret-hero.jpg` on the O meni hero is still the environmental crop,
+so the two portraits on the site are now deliberately different frames. The live WordPress
+homepage carries the same studio frame, as attachment 105.
 
 Still true: **this is not the mockup's portrait.** The mockup shows a different, younger woman
 in a cream cardigan looking off-camera — that frame is itself stock and can never be matched,

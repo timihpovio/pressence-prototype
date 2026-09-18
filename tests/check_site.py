@@ -198,15 +198,21 @@ def check_img_alt():
 # site.css stay honest about what has not been shot yet.
 REAL_PHOTOGRAPHY = {
     # Her own coaching-session photograph, supplied by the client on 2026-09-18.
-    # A real environmental portrait, which replaced the composited studio cutout
-    # that stood here before. Two crops of one frame: landscape for the O meni
-    # hero band, 4:5 for the Domov split.
+    # A real environmental portrait. Landscape crop, on the O meni hero band.
     "portret-hero.jpg",
+    # The Domov split portrait. Reverted on 2026-09-18 at the client's request to
+    # the studio frame on a plain backdrop that the environmental crop had
+    # replaced earlier the same day; the live site carries the same frame.
     "portret-o-meni.jpg",
-    # Client-supplied imagery for the Domov, Coaching and Zapisi hero bands, same batch.
+    # Client-supplied imagery for the Coaching and Zapisi hero bands, same batch.
+    # razgled-koca.jpg came from it too and is kept for the Domov hero's history,
+    # but no page references it since the forest went back up.
     "razgled-koca.jpg",
     "kamin-koca.jpg",
     "koca-gore.jpg",
+    # The Domov hero, restored on 2026-09-18 at the client's request. The same
+    # file the live site serves as 2026/07/pressence-bukov-gozd.jpg.
+    "bukov-gozd.jpg",
 }
 
 
